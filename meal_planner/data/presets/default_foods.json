@@ -1,0 +1,722 @@
+[
+  {
+    "name": "Poulet (blanc, cuit)",
+    "category": "Viandes et poissons",
+    "calories": 165,
+    "proteins": 31,
+    "carbs": 0,
+    "fats": 3.6,
+    "fibers": 0,
+    "tags": ["gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Bœuf haché (5% MG)",
+    "category": "Viandes et poissons",
+    "calories": 137,
+    "proteins": 21,
+    "carbs": 0,
+    "fats": 5,
+    "fibers": 0,
+    "tags": ["gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Saumon (cuit)",
+    "category": "Viandes et poissons",
+    "calories": 206,
+    "proteins": 22,
+    "carbs": 0,
+    "fats": 13,
+    "fibers": 0,
+    "tags": ["gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Thon en conserve (au naturel)",
+    "category": "Viandes et poissons",
+    "calories": 116,
+    "proteins": 26,
+    "carbs": 0,
+    "fats": 0.8,
+    "fibers": 0,
+    "tags": ["gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Œufs entiers",
+    "category": "Viandes et poissons",
+    "calories": 143,
+    "proteins": 13,
+    "carbs": 0.7,
+    "fats": 10,
+    "fibers": 0,
+    "tags": ["vegetarian", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Tofu ferme",
+    "category": "Légumineuses",
+    "calories": 144,
+    "proteins": 17,
+    "carbs": 3,
+    "fats": 9,
+    "fibers": 2,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Riz blanc (cuit)",
+    "category": "Céréales et féculents",
+    "calories": 130,
+    "proteins": 2.7,
+    "carbs": 28,
+    "fats": 0.3,
+    "fibers": 0.4,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Riz basmati (cuit)",
+    "category": "Céréales et féculents",
+    "calories": 121,
+    "proteins": 3,
+    "carbs": 25,
+    "fats": 0.4,
+    "fibers": 0.6,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Pâtes complètes (cuites)",
+    "category": "Céréales et féculents",
+    "calories": 124,
+    "proteins": 5,
+    "carbs": 26,
+    "fats": 0.5,
+    "fibers": 3.5,
+    "tags": ["vegetarian", "vegan", "lactose_free"]
+  },
+  {
+    "name": "Quinoa (cuit)",
+    "category": "Céréales et féculents",
+    "calories": 120,
+    "proteins": 4.4,
+    "carbs": 21,
+    "fats": 1.9,
+    "fibers": 2.8,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Avoine (flocons)",
+    "category": "Céréales et féculents",
+    "calories": 389,
+    "proteins": 17,
+    "carbs": 66,
+    "fats": 7,
+    "fibers": 10,
+    "tags": ["vegetarian", "vegan", "lactose_free"]
+  },
+  {
+    "name": "Pain complet",
+    "category": "Céréales et féculents",
+    "calories": 247,
+    "proteins": 13,
+    "carbs": 41,
+    "fats": 3.4,
+    "fibers": 7,
+    "tags": ["vegetarian", "vegan", "lactose_free"]
+  },
+  {
+    "name": "Patate douce (cuite)",
+    "category": "Céréales et féculents",
+    "calories": 90,
+    "proteins": 2,
+    "carbs": 21,
+    "fats": 0.2,
+    "fibers": 3.3,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Pomme de terre (cuite)",
+    "category": "Céréales et féculents",
+    "calories": 87,
+    "proteins": 1.9,
+    "carbs": 20,
+    "fats": 0.1,
+    "fibers": 1.8,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Brocoli (cuit)",
+    "category": "Légumes",
+    "calories": 35,
+    "proteins": 2.4,
+    "carbs": 7,
+    "fats": 0.4,
+    "fibers": 3.3,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Épinards (cuits)",
+    "category": "Légumes",
+    "calories": 23,
+    "proteins": 3,
+    "carbs": 3.6,
+    "fats": 0.3,
+    "fibers": 2.4,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Haricots verts (cuits)",
+    "category": "Légumes",
+    "calories": 31,
+    "proteins": 1.8,
+    "carbs": 7,
+    "fats": 0.1,
+    "fibers": 3.4,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Carottes (cuites)",
+    "category": "Légumes",
+    "calories": 35,
+    "proteins": 0.8,
+    "carbs": 8,
+    "fats": 0.2,
+    "fibers": 3,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Tomates",
+    "category": "Légumes",
+    "calories": 18,
+    "proteins": 0.9,
+    "carbs": 3.9,
+    "fats": 0.2,
+    "fibers": 1.2,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Concombre",
+    "category": "Légumes",
+    "calories": 15,
+    "proteins": 0.7,
+    "carbs": 3.6,
+    "fats": 0.1,
+    "fibers": 0.5,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Salade verte",
+    "category": "Légumes",
+    "calories": 15,
+    "proteins": 1.4,
+    "carbs": 2.9,
+    "fats": 0.2,
+    "fibers": 1.3,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Courgette (cuite)",
+    "category": "Légumes",
+    "calories": 17,
+    "proteins": 1.2,
+    "carbs": 3.1,
+    "fats": 0.3,
+    "fibers": 1,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Poivron rouge",
+    "category": "Légumes",
+    "calories": 31,
+    "proteins": 1,
+    "carbs": 6,
+    "fats": 0.3,
+    "fibers": 2.1,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Banane",
+    "category": "Fruits",
+    "calories": 89,
+    "proteins": 1.1,
+    "carbs": 23,
+    "fats": 0.3,
+    "fibers": 2.6,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Pomme",
+    "category": "Fruits",
+    "calories": 52,
+    "proteins": 0.3,
+    "carbs": 14,
+    "fats": 0.2,
+    "fibers": 2.4,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Orange",
+    "category": "Fruits",
+    "calories": 47,
+    "proteins": 0.9,
+    "carbs": 12,
+    "fats": 0.1,
+    "fibers": 2.4,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Fraises",
+    "category": "Fruits",
+    "calories": 32,
+    "proteins": 0.7,
+    "carbs": 8,
+    "fats": 0.3,
+    "fibers": 2,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Myrtilles",
+    "category": "Fruits",
+    "calories": 57,
+    "proteins": 0.7,
+    "carbs": 14,
+    "fats": 0.3,
+    "fibers": 2.4,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Avocat",
+    "category": "Fruits",
+    "calories": 160,
+    "proteins": 2,
+    "carbs": 9,
+    "fats": 15,
+    "fibers": 7,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Lentilles (cuites)",
+    "category": "Légumineuses",
+    "calories": 116,
+    "proteins": 9,
+    "carbs": 20,
+    "fats": 0.4,
+    "fibers": 8,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Pois chiches (cuits)",
+    "category": "Légumineuses",
+    "calories": 164,
+    "proteins": 9,
+    "carbs": 27,
+    "fats": 2.6,
+    "fibers": 7.6,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Haricots rouges (cuits)",
+    "category": "Légumineuses",
+    "calories": 127,
+    "proteins": 8.7,
+    "carbs": 23,
+    "fats": 0.5,
+    "fibers": 6.4,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Yaourt grec 0%",
+    "category": "Produits laitiers",
+    "calories": 59,
+    "proteins": 10,
+    "carbs": 3.6,
+    "fats": 0.4,
+    "fibers": 0,
+    "tags": ["vegetarian", "gluten_free"]
+  },
+  {
+    "name": "Fromage blanc 0%",
+    "category": "Produits laitiers",
+    "calories": 47,
+    "proteins": 8,
+    "carbs": 4,
+    "fats": 0.2,
+    "fibers": 0,
+    "tags": ["vegetarian", "gluten_free"]
+  },
+  {
+    "name": "Lait écrémé",
+    "category": "Produits laitiers",
+    "calories": 34,
+    "proteins": 3.4,
+    "carbs": 5,
+    "fats": 0.1,
+    "fibers": 0,
+    "tags": ["vegetarian", "gluten_free"]
+  },
+  {
+    "name": "Lait d'amande (non sucré)",
+    "category": "Produits laitiers",
+    "calories": 17,
+    "proteins": 0.6,
+    "carbs": 1.5,
+    "fats": 1.1,
+    "fibers": 0.4,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Fromage mozzarella",
+    "category": "Produits laitiers",
+    "calories": 280,
+    "proteins": 28,
+    "carbs": 2.2,
+    "fats": 17,
+    "fibers": 0,
+    "tags": ["vegetarian", "gluten_free"]
+  },
+  {
+    "name": "Parmesan",
+    "category": "Produits laitiers",
+    "calories": 392,
+    "proteins": 36,
+    "carbs": 3.2,
+    "fats": 26,
+    "fibers": 0,
+    "tags": ["vegetarian", "gluten_free"]
+  },
+  {
+    "name": "Amandes",
+    "category": "Noix et graines",
+    "calories": 579,
+    "proteins": 21,
+    "carbs": 22,
+    "fats": 50,
+    "fibers": 12,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Noix de cajou",
+    "category": "Noix et graines",
+    "calories": 553,
+    "proteins": 18,
+    "carbs": 30,
+    "fats": 44,
+    "fibers": 3.3,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Noix",
+    "category": "Noix et graines",
+    "calories": 654,
+    "proteins": 15,
+    "carbs": 14,
+    "fats": 65,
+    "fibers": 6.7,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Graines de chia",
+    "category": "Noix et graines",
+    "calories": 486,
+    "proteins": 17,
+    "carbs": 42,
+    "fats": 31,
+    "fibers": 34,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Beurre de cacahuète",
+    "category": "Noix et graines",
+    "calories": 588,
+    "proteins": 25,
+    "carbs": 20,
+    "fats": 50,
+    "fibers": 6,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Graines de lin",
+    "category": "Noix et graines",
+    "calories": 534,
+    "proteins": 18,
+    "carbs": 29,
+    "fats": 42,
+    "fibers": 27,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Huile d'olive",
+    "category": "Huiles et matières grasses",
+    "calories": 884,
+    "proteins": 0,
+    "carbs": 0,
+    "fats": 100,
+    "fibers": 0,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Huile de coco",
+    "category": "Huiles et matières grasses",
+    "calories": 862,
+    "proteins": 0,
+    "carbs": 0,
+    "fats": 100,
+    "fibers": 0,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Beurre",
+    "category": "Huiles et matières grasses",
+    "calories": 717,
+    "proteins": 0.9,
+    "carbs": 0.1,
+    "fats": 81,
+    "fibers": 0,
+    "tags": ["vegetarian", "gluten_free"]
+  },
+  {
+    "name": "Chocolat noir 85%",
+    "category": "Autres",
+    "calories": 598,
+    "proteins": 8,
+    "carbs": 21,
+    "fats": 51,
+    "fibers": 11,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Miel",
+    "category": "Autres",
+    "calories": 304,
+    "proteins": 0.3,
+    "carbs": 82,
+    "fats": 0,
+    "fibers": 0.2,
+    "tags": ["vegetarian", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Dinde (blanc, cuite)",
+    "category": "Viandes et poissons",
+    "calories": 135,
+    "proteins": 30,
+    "carbs": 0,
+    "fats": 1.5,
+    "fibers": 0,
+    "tags": ["gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Crevettes (cuites)",
+    "category": "Viandes et poissons",
+    "calories": 99,
+    "proteins": 24,
+    "carbs": 0.2,
+    "fats": 0.3,
+    "fibers": 0,
+    "tags": ["gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Cabillaud (cuit)",
+    "category": "Viandes et poissons",
+    "calories": 105,
+    "proteins": 23,
+    "carbs": 0,
+    "fats": 0.9,
+    "fibers": 0,
+    "tags": ["gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Blanc d'œuf",
+    "category": "Viandes et poissons",
+    "calories": 52,
+    "proteins": 11,
+    "carbs": 0.7,
+    "fats": 0.2,
+    "fibers": 0,
+    "tags": ["vegetarian", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Jambon blanc (découenné)",
+    "category": "Viandes et poissons",
+    "calories": 107,
+    "proteins": 21,
+    "carbs": 0.5,
+    "fats": 2.6,
+    "fibers": 0,
+    "tags": ["gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Tempeh",
+    "category": "Légumineuses",
+    "calories": 193,
+    "proteins": 19,
+    "carbs": 9,
+    "fats": 11,
+    "fibers": 0,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Edamame",
+    "category": "Légumineuses",
+    "calories": 122,
+    "proteins": 11,
+    "carbs": 10,
+    "fats": 5,
+    "fibers": 5,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Semoule (cuite)",
+    "category": "Céréales et féculents",
+    "calories": 112,
+    "proteins": 3.8,
+    "carbs": 23,
+    "fats": 0.2,
+    "fibers": 1.4,
+    "tags": ["vegetarian", "vegan", "lactose_free"]
+  },
+  {
+    "name": "Pain de mie complet",
+    "category": "Céréales et féculents",
+    "calories": 250,
+    "proteins": 11,
+    "carbs": 43,
+    "fats": 3.5,
+    "fibers": 6,
+    "tags": ["vegetarian", "vegan", "lactose_free"]
+  },
+  {
+    "name": "Aubergine (cuite)",
+    "category": "Légumes",
+    "calories": 35,
+    "proteins": 0.8,
+    "carbs": 8.6,
+    "fats": 0.2,
+    "fibers": 3,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Champignons (cuits)",
+    "category": "Légumes",
+    "calories": 28,
+    "proteins": 2.2,
+    "carbs": 5.3,
+    "fats": 0.5,
+    "fibers": 2.5,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Chou-fleur (cuit)",
+    "category": "Légumes",
+    "calories": 23,
+    "proteins": 1.9,
+    "carbs": 4.1,
+    "fats": 0.5,
+    "fibers": 2.3,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Asperges (cuites)",
+    "category": "Légumes",
+    "calories": 22,
+    "proteins": 2.4,
+    "carbs": 4.1,
+    "fats": 0.2,
+    "fibers": 2,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Kiwi",
+    "category": "Fruits",
+    "calories": 61,
+    "proteins": 1.1,
+    "carbs": 15,
+    "fats": 0.5,
+    "fibers": 3,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Ananas",
+    "category": "Fruits",
+    "calories": 50,
+    "proteins": 0.5,
+    "carbs": 13,
+    "fats": 0.1,
+    "fibers": 1.4,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Mangue",
+    "category": "Fruits",
+    "calories": 60,
+    "proteins": 0.8,
+    "carbs": 15,
+    "fats": 0.4,
+    "fibers": 1.6,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Raisin",
+    "category": "Fruits",
+    "calories": 69,
+    "proteins": 0.7,
+    "carbs": 18,
+    "fats": 0.2,
+    "fibers": 0.9,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Cottage cheese (0%)",
+    "category": "Produits laitiers",
+    "calories": 72,
+    "proteins": 12,
+    "carbs": 3.4,
+    "fats": 1,
+    "fibers": 0,
+    "tags": ["vegetarian", "gluten_free"]
+  },
+  {
+    "name": "Skyr nature",
+    "category": "Produits laitiers",
+    "calories": 63,
+    "proteins": 11,
+    "carbs": 4,
+    "fats": 0.2,
+    "fibers": 0,
+    "tags": ["vegetarian", "gluten_free"]
+  },
+  {
+    "name": "Noisettes",
+    "category": "Noix et graines",
+    "calories": 628,
+    "proteins": 15,
+    "carbs": 17,
+    "fats": 61,
+    "fibers": 9.7,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Pistaches",
+    "category": "Noix et graines",
+    "calories": 560,
+    "proteins": 20,
+    "carbs": 28,
+    "fats": 45,
+    "fibers": 10,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Graines de courge",
+    "category": "Noix et graines",
+    "calories": 559,
+    "proteins": 30,
+    "carbs": 11,
+    "fats": 49,
+    "fibers": 6,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  },
+  {
+    "name": "Graines de tournesol",
+    "category": "Noix et graines",
+    "calories": 584,
+    "proteins": 21,
+    "carbs": 20,
+    "fats": 51,
+    "fibers": 8.6,
+    "tags": ["vegetarian", "vegan", "gluten_free", "lactose_free"]
+  }
+]

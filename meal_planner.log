@@ -1,0 +1,135 @@
+2025-10-02 00:06:18,383 - meal_planner - INFO - ============================================================
+2025-10-02 00:06:18,384 - meal_planner - INFO - Démarrage de Meal Planner Pro
+2025-10-02 00:06:18,384 - meal_planner - INFO - ============================================================
+2025-10-02 00:06:18,404 - meal_planner - INFO - Initialisation de la base de données: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-02 00:06:18,474 - meal_planner.models.database - INFO - Base de données initialisée: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-02 00:06:18,479 - meal_planner - INFO - Base de données: 0 aliments trouvés
+2025-10-02 00:06:18,479 - meal_planner - INFO - Base de données vide, chargement des aliments par défaut...
+2025-10-02 00:06:18,482 - meal_planner.models.database - INFO - Aliment ajouté: Poulet (blanc, cuit) (ID: 1)
+2025-10-02 00:06:18,486 - meal_planner.models.database - INFO - Aliment ajouté: Bœuf haché (5% MG) (ID: 2)
+2025-10-02 00:06:18,490 - meal_planner.models.database - INFO - Aliment ajouté: Saumon (cuit) (ID: 3)
+2025-10-02 00:06:18,493 - meal_planner.models.database - INFO - Aliment ajouté: Thon en conserve (au naturel) (ID: 4)
+2025-10-02 00:06:18,497 - meal_planner.models.database - INFO - Aliment ajouté: Œufs entiers (ID: 5)
+2025-10-02 00:06:18,500 - meal_planner.models.database - INFO - Aliment ajouté: Tofu ferme (ID: 6)
+2025-10-02 00:06:18,504 - meal_planner.models.database - INFO - Aliment ajouté: Riz blanc (cuit) (ID: 7)
+2025-10-02 00:06:18,508 - meal_planner.models.database - INFO - Aliment ajouté: Riz basmati (cuit) (ID: 8)
+2025-10-02 00:06:18,512 - meal_planner.models.database - INFO - Aliment ajouté: Pâtes complètes (cuites) (ID: 9)
+2025-10-02 00:06:18,515 - meal_planner.models.database - INFO - Aliment ajouté: Quinoa (cuit) (ID: 10)
+2025-10-02 00:06:18,519 - meal_planner.models.database - INFO - Aliment ajouté: Avoine (flocons) (ID: 11)
+2025-10-02 00:06:18,523 - meal_planner.models.database - INFO - Aliment ajouté: Pain complet (ID: 12)
+2025-10-02 00:06:18,526 - meal_planner.models.database - INFO - Aliment ajouté: Patate douce (cuite) (ID: 13)
+2025-10-02 00:06:18,530 - meal_planner.models.database - INFO - Aliment ajouté: Pomme de terre (cuite) (ID: 14)
+2025-10-02 00:06:18,534 - meal_planner.models.database - INFO - Aliment ajouté: Brocoli (cuit) (ID: 15)
+2025-10-02 00:06:18,536 - meal_planner.models.database - WARNING - Impossible d'ajouter Épinards (cuits): Aliment invalide: Les macros ne correspondent pas aux calories. Calculé: 29.1 kcal, Fourni: 23.0 kcal
+2025-10-02 00:06:18,538 - meal_planner.models.database - INFO - Aliment ajouté: Haricots verts (cuits) (ID: 16)
+2025-10-02 00:06:18,541 - meal_planner.models.database - INFO - Aliment ajouté: Carottes (cuites) (ID: 17)
+2025-10-02 00:06:18,546 - meal_planner.models.database - INFO - Aliment ajouté: Tomates (ID: 18)
+2025-10-02 00:06:18,550 - meal_planner.models.database - INFO - Aliment ajouté: Concombre (ID: 19)
+2025-10-02 00:06:18,553 - meal_planner.models.database - WARNING - Impossible d'ajouter Salade verte: Aliment invalide: Les macros ne correspondent pas aux calories. Calculé: 19.0 kcal, Fourni: 15.0 kcal
+2025-10-02 00:06:18,554 - meal_planner.models.database - INFO - Aliment ajouté: Courgette (cuite) (ID: 20)
+2025-10-02 00:06:18,559 - meal_planner.models.database - INFO - Aliment ajouté: Poivron rouge (ID: 21)
+2025-10-02 00:06:18,563 - meal_planner.models.database - INFO - Aliment ajouté: Banane (ID: 22)
+2025-10-02 00:06:18,566 - meal_planner.models.database - INFO - Aliment ajouté: Pomme (ID: 23)
+2025-10-02 00:06:18,570 - meal_planner.models.database - INFO - Aliment ajouté: Orange (ID: 24)
+2025-10-02 00:06:18,573 - meal_planner.models.database - INFO - Aliment ajouté: Fraises (ID: 25)
+2025-10-02 00:06:18,577 - meal_planner.models.database - INFO - Aliment ajouté: Myrtilles (ID: 26)
+2025-10-02 00:06:18,581 - meal_planner.models.database - INFO - Aliment ajouté: Avocat (ID: 27)
+2025-10-02 00:06:18,585 - meal_planner.models.database - INFO - Aliment ajouté: Lentilles (cuites) (ID: 28)
+2025-10-02 00:06:18,589 - meal_planner.models.database - INFO - Aliment ajouté: Pois chiches (cuits) (ID: 29)
+2025-10-02 00:06:18,592 - meal_planner.models.database - INFO - Aliment ajouté: Haricots rouges (cuits) (ID: 30)
+2025-10-02 00:06:18,596 - meal_planner.models.database - INFO - Aliment ajouté: Yaourt grec 0% (ID: 31)
+2025-10-02 00:06:18,600 - meal_planner.models.database - INFO - Aliment ajouté: Fromage blanc 0% (ID: 32)
+2025-10-02 00:06:18,603 - meal_planner.models.database - INFO - Aliment ajouté: Lait écrémé (ID: 33)
+2025-10-02 00:06:18,607 - meal_planner.models.database - INFO - Aliment ajouté: Lait d'amande (non sucré) (ID: 34)
+2025-10-02 00:06:18,611 - meal_planner.models.database - INFO - Aliment ajouté: Fromage mozzarella (ID: 35)
+2025-10-02 00:06:18,614 - meal_planner.models.database - INFO - Aliment ajouté: Parmesan (ID: 36)
+2025-10-02 00:06:18,618 - meal_planner.models.database - INFO - Aliment ajouté: Amandes (ID: 37)
+2025-10-02 00:06:18,621 - meal_planner.models.database - INFO - Aliment ajouté: Noix de cajou (ID: 38)
+2025-10-02 00:06:18,625 - meal_planner.models.database - INFO - Aliment ajouté: Noix (ID: 39)
+2025-10-02 00:06:18,629 - meal_planner.models.database - INFO - Aliment ajouté: Graines de chia (ID: 40)
+2025-10-02 00:06:18,632 - meal_planner.models.database - INFO - Aliment ajouté: Beurre de cacahuète (ID: 41)
+2025-10-02 00:06:18,636 - meal_planner.models.database - INFO - Aliment ajouté: Graines de lin (ID: 42)
+2025-10-02 00:06:18,640 - meal_planner.models.database - INFO - Aliment ajouté: Huile d'olive (ID: 43)
+2025-10-02 00:06:18,643 - meal_planner.models.database - INFO - Aliment ajouté: Huile de coco (ID: 44)
+2025-10-02 00:06:18,647 - meal_planner.models.database - INFO - Aliment ajouté: Beurre (ID: 45)
+2025-10-02 00:06:18,651 - meal_planner.models.database - INFO - Aliment ajouté: Chocolat noir 85% (ID: 46)
+2025-10-02 00:06:18,655 - meal_planner.models.database - INFO - Aliment ajouté: Miel (ID: 47)
+2025-10-02 00:06:18,658 - meal_planner.models.database - INFO - Aliment ajouté: Dinde (blanc, cuite) (ID: 48)
+2025-10-02 00:06:18,662 - meal_planner.models.database - INFO - Aliment ajouté: Crevettes (cuites) (ID: 49)
+2025-10-02 00:06:18,666 - meal_planner.models.database - INFO - Aliment ajouté: Cabillaud (cuit) (ID: 50)
+2025-10-02 00:06:18,669 - meal_planner.models.database - INFO - Aliment ajouté: Blanc d'œuf (ID: 51)
+2025-10-02 00:06:18,673 - meal_planner.models.database - INFO - Aliment ajouté: Jambon blanc (découenné) (ID: 52)
+2025-10-02 00:06:18,676 - meal_planner.models.database - INFO - Aliment ajouté: Tempeh (ID: 53)
+2025-10-02 00:06:18,680 - meal_planner.models.database - INFO - Aliment ajouté: Edamame (ID: 54)
+2025-10-02 00:06:18,684 - meal_planner.models.database - INFO - Aliment ajouté: Semoule (cuite) (ID: 55)
+2025-10-02 00:06:18,688 - meal_planner.models.database - INFO - Aliment ajouté: Pain de mie complet (ID: 56)
+2025-10-02 00:06:18,692 - meal_planner.models.database - INFO - Aliment ajouté: Aubergine (cuite) (ID: 57)
+2025-10-02 00:06:18,695 - meal_planner.models.database - INFO - Aliment ajouté: Champignons (cuits) (ID: 58)
+2025-10-02 00:06:18,699 - meal_planner.models.database - INFO - Aliment ajouté: Chou-fleur (cuit) (ID: 59)
+2025-10-02 00:06:18,702 - meal_planner.models.database - WARNING - Impossible d'ajouter Asperges (cuites): Aliment invalide: Les macros ne correspondent pas aux calories. Calculé: 27.8 kcal, Fourni: 22.0 kcal
+2025-10-02 00:06:18,703 - meal_planner.models.database - INFO - Aliment ajouté: Kiwi (ID: 60)
+2025-10-02 00:06:18,708 - meal_planner.models.database - INFO - Aliment ajouté: Ananas (ID: 61)
+2025-10-02 00:06:18,711 - meal_planner.models.database - INFO - Aliment ajouté: Mangue (ID: 62)
+2025-10-02 00:06:18,715 - meal_planner.models.database - INFO - Aliment ajouté: Raisin (ID: 63)
+2025-10-02 00:06:18,719 - meal_planner.models.database - INFO - Aliment ajouté: Cottage cheese (0%) (ID: 64)
+2025-10-02 00:06:18,722 - meal_planner.models.database - INFO - Aliment ajouté: Skyr nature (ID: 65)
+2025-10-02 00:06:18,726 - meal_planner.models.database - INFO - Aliment ajouté: Noisettes (ID: 66)
+2025-10-02 00:06:18,730 - meal_planner.models.database - INFO - Aliment ajouté: Pistaches (ID: 67)
+2025-10-02 00:06:18,733 - meal_planner.models.database - INFO - Aliment ajouté: Graines de courge (ID: 68)
+2025-10-02 00:06:18,737 - meal_planner.models.database - INFO - Aliment ajouté: Graines de tournesol (ID: 69)
+2025-10-02 00:06:18,740 - meal_planner.models.database - INFO - 69 aliments chargés depuis C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\presets\default_foods.json
+2025-10-02 00:06:18,740 - meal_planner - INFO - 69 aliments chargés depuis C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\presets\default_foods.json
+2025-10-02 00:06:18,740 - meal_planner - ERROR - Erreur lors de l'initialisation de la base de données: 'charmap' codec can't encode character '\u2713' in position 0: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\Users\Eric\Documents\Plans-alimentaires\main.py", line 43, in initialize_database
+    print(f"✓ {count} aliments chargés dans la base de données")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Eric\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 0: character maps to <undefined>
+2025-10-02 00:06:18,766 - meal_planner - CRITICAL - Erreur fatale lors du démarrage: 'charmap' codec can't encode character '\u2717' in position 0: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\Users\Eric\Documents\Plans-alimentaires\main.py", line 43, in initialize_database
+    print(f"✓ {count} aliments chargés dans la base de données")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Eric\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 0: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Eric\Documents\Plans-alimentaires\main.py", line 81, in main
+    initialize_database(db_manager)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Eric\Documents\Plans-alimentaires\main.py", line 61, in initialize_database
+    print(f"✗ Erreur lors de l'initialisation: {e}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Eric\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2717' in position 0: character maps to <undefined>
+2025-10-02 00:06:52,361 - meal_planner - INFO - ============================================================
+2025-10-02 00:06:52,361 - meal_planner - INFO - Démarrage de Meal Planner Pro
+2025-10-02 00:06:52,361 - meal_planner - INFO - ============================================================
+2025-10-02 00:06:52,379 - meal_planner - INFO - Initialisation de la base de données: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-02 00:06:52,391 - meal_planner.models.database - INFO - Base de données initialisée: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-02 00:06:52,397 - meal_planner - INFO - Base de données: 69 aliments trouvés
+2025-10-02 00:06:52,398 - meal_planner - INFO - Statistiques de la base: {'total_foods': 69, 'categories': {'Viandes et poissons': 10, 'Légumineuses': 6, 'Céréales et féculents': 10, 'Légumes': 10, 'Fruits': 10, 'Produits laitiers': 8, 'Noix et graines': 10, 'Huiles et matières grasses': 3, 'Autres': 2}, 'database_path': 'C:\\Users\\Eric\\Documents\\Plans-alimentaires\\meal_planner\\data\\foods.db'}
+2025-10-02 00:06:52,399 - meal_planner - INFO - Création de la fenêtre principale
+2025-10-02 00:06:52,641 - meal_planner - INFO - Application démarrée avec succès
+2025-10-02 00:07:36,858 - meal_planner.views.main_window - INFO - Fermeture de l'application
+2025-10-02 00:07:36,866 - meal_planner - INFO - Application terminée avec le code: 0
+2025-10-02 00:09:49,478 - meal_planner - INFO - ============================================================
+2025-10-02 00:09:49,479 - meal_planner - INFO - Démarrage de Meal Planner Pro
+2025-10-02 00:09:49,479 - meal_planner - INFO - ============================================================
+2025-10-02 00:09:49,503 - meal_planner - INFO - Initialisation de la base de données: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-02 00:09:49,518 - meal_planner.models.database - INFO - Base de données initialisée: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-02 00:09:49,524 - meal_planner - INFO - Base de données: 69 aliments trouvés
+2025-10-02 00:09:49,526 - meal_planner - INFO - Statistiques de la base: {'total_foods': 69, 'categories': {'Viandes et poissons': 10, 'Légumineuses': 6, 'Céréales et féculents': 10, 'Légumes': 10, 'Fruits': 10, 'Produits laitiers': 8, 'Noix et graines': 10, 'Huiles et matières grasses': 3, 'Autres': 2}, 'database_path': 'C:\\Users\\Eric\\Documents\\Plans-alimentaires\\meal_planner\\data\\foods.db'}
+2025-10-02 00:09:49,527 - meal_planner - INFO - Création de la fenêtre principale
+2025-10-02 00:09:49,683 - meal_planner - INFO - Application démarrée avec succès
+2025-10-02 00:09:55,123 - meal_planner.views.main_window - INFO - Fermeture de l'application
+2025-10-02 00:09:55,131 - meal_planner - INFO - Application terminée avec le code: 0
