@@ -32,6 +32,9 @@ class FoodDB(Base):
     fats = Column(Float, nullable=False)
     fibers = Column(Float, default=0.0)
     tags = Column(Text, default='[]')  # JSON array as string
+    price_per_100g = Column(Float, default=0.0)
+    health_index = Column(Integer, default=5)
+    variety_index = Column(Integer, default=5)
 
 
 class DatabaseManager:
@@ -108,7 +111,10 @@ class DatabaseManager:
             carbs=food.carbs,
             fats=food.fats,
             fibers=food.fibers,
-            tags=json.dumps(food.tags)
+            tags=json.dumps(food.tags),
+            price_per_100g=food.price_per_100g,
+            health_index=food.health_index,
+            variety_index=food.variety_index
         )
 
     def _db_to_food(self, food_db: FoodDB) -> Food:
@@ -124,7 +130,10 @@ class DatabaseManager:
             carbs=food_db.carbs,
             fats=food_db.fats,
             fibers=food_db.fibers,
-            tags=tags
+            tags=tags,
+            price_per_100g=getattr(food_db, 'price_per_100g', 0.0),
+            health_index=getattr(food_db, 'health_index', 5),
+            variety_index=getattr(food_db, 'variety_index', 5)
         )
 
     def add_food(self, food: Food) -> Food:
@@ -262,6 +271,9 @@ class DatabaseManager:
             food_db.fats = food.fats
             food_db.fibers = food.fibers
             food_db.tags = json.dumps(food.tags)
+            food_db.price_per_100g = food.price_per_100g
+            food_db.health_index = food.health_index
+            food_db.variety_index = food.variety_index
 
             logger.info(f"Aliment mis à jour: {food.name} (ID: {food.id})")
 

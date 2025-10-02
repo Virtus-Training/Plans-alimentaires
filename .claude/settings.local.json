@@ -3,7 +3,10 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(python:*)",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "Bash(.venvScriptspython.exe populate_test_foods.py)",
+      "Bash(\".venv\\Scripts\\python.exe\" populate_test_foods.py)",
+      "Bash(\".venv\\Scripts\\python.exe\" migrate_database.py)"
     ],
     "deny": [],
     "ask": []

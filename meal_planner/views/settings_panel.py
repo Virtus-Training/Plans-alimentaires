@@ -4,9 +4,10 @@ SettingsPanel - Panneau de configuration des objectifs nutritionnels
 
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel,
-    QSlider, QPushButton, QComboBox, QCheckBox, QGroupBox, QSpinBox
+    QSlider, QPushButton, QComboBox, QCheckBox, QGroupBox, QSpinBox, QLineEdit
 )
 from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QIntValidator
 from typing import Dict, List
 
 from meal_planner.config import (
@@ -52,6 +53,10 @@ class SettingsPanel(QWidget):
         options_group = self._create_options_group()
         layout.addWidget(options_group)
 
+        # Section Critères de sélection
+        criteria_group = self._create_criteria_group()
+        layout.addWidget(criteria_group)
+
         # Bouton Générer
         self.generate_button = QPushButton("Générer le Plan Alimentaire")
         self.generate_button.setStyleSheet("""
@@ -81,15 +86,14 @@ class SettingsPanel(QWidget):
         group = QGroupBox("Objectifs Nutritionnels")
         layout = QVBoxLayout()
 
-        # Calories
-        self.calories_slider, self.calories_label = self._create_slider_row(
-            "Calories (kcal)",
-            CALORIES_CONFIG["min"],
-            CALORIES_CONFIG["max"],
-            CALORIES_CONFIG["step"],
-            CALORIES_CONFIG["default"]
-        )
-        layout.addLayout(self.calories_slider)
+        # Calories (calculées automatiquement)
+        calories_layout = QHBoxLayout()
+        calories_layout.addWidget(QLabel("Calories (kcal)"))
+        self.calories_display = QLabel()
+        self.calories_display.setStyleSheet("font-weight: bold; font-size: 14px; color: #2196F3;")
+        calories_layout.addWidget(self.calories_display)
+        calories_layout.addStretch()
+        layout.addLayout(calories_layout)
 
         # Protéines
         self.proteins_slider, self.proteins_label = self._create_slider_row(
@@ -127,8 +131,15 @@ class SettingsPanel(QWidget):
         self.distribution_label.setWordWrap(True)
         layout.addWidget(self.distribution_label)
 
+        # Total en pourcentage
+        self.total_percentage_label = QLabel()
+        self.total_percentage_label.setStyleSheet("font-size: 12px; font-weight: bold;")
+        layout.addWidget(self.total_percentage_label)
+
         group.setLayout(layout)
-        self._update_distribution_label()
+
+        # Initialiser l'affichage après la création de tous les widgets
+        self._update_calories_and_distribution()
 
         return group
 
@@ -137,10 +148,10 @@ class SettingsPanel(QWidget):
         step: int, default: int
     ) -> tuple:
         """
-        Crée une ligne avec label, slider et valeur.
+        Crée une ligne avec label, slider et valeur éditable.
 
         Returns:
-            Tuple (layout, value_label)
+            Tuple (layout, value_input)
         """
         row_layout = QHBoxLayout()
 
@@ -158,30 +169,76 @@ class SettingsPanel(QWidget):
         slider.setTickInterval((max_val - min_val) // (step * 10))
         row_layout.addWidget(slider, stretch=3)
 
-        # Label de valeur
-        value_label = QLabel(str(default))
-        value_label.setMinimumWidth(50)
-        value_label.setStyleSheet("font-weight: bold;")
-        row_layout.addWidget(value_label)
+        # Input éditable de valeur
+        value_input = QLineEdit(str(default))
+        value_input.setMinimumWidth(50)
+        value_input.setMaximumWidth(70)
+        value_input.setStyleSheet("font-weight: bold; padding: 2px;")
+        value_input.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        # Connecter le slider à la mise à jour du label
+        # Validation pour n'accepter que des entiers
+        validator = QIntValidator(min_val, max_val)
+        value_input.setValidator(validator)
+
+        row_layout.addWidget(value_input)
+
+        # Connecter le slider à la mise à jour de l'input
         slider.valueChanged.connect(
-            lambda v: self._on_slider_changed(slider, value_label, step)
+            lambda v: self._on_macro_slider_changed(slider, value_input, step)
         )
 
-        return row_layout, value_label
+        # Connecter l'input à la mise à jour du slider
+        value_input.editingFinished.connect(
+            lambda: self._on_macro_input_changed(slider, value_input, step)
+        )
 
-    def _on_slider_changed(self, slider: QSlider, label: QLabel, step: int):
-        """Gère le changement de valeur d'un slider."""
+        return row_layout, value_input
+
+    def _on_macro_slider_changed(self, slider: QSlider, input_field: QLineEdit, step: int):
+        """Gère le changement de valeur d'un slider de macro."""
         value = slider.value() * step
-        label.setText(str(value))
-        self._update_distribution_label()
+        input_field.blockSignals(True)
+        input_field.setText(str(value))
+        input_field.blockSignals(False)
+        self._update_calories_and_distribution()
         self.settings_changed.emit(self.get_settings())
 
+    def _on_macro_input_changed(self, slider: QSlider, input_field: QLineEdit, step: int):
+        """Gère le changement de valeur d'un input de macro."""
+        try:
+            value = int(input_field.text())
+            slider.blockSignals(True)
+            slider.setValue(value // step)
+            slider.blockSignals(False)
+            self._update_calories_and_distribution()
+            self.settings_changed.emit(self.get_settings())
+        except ValueError:
+            # Si la valeur n'est pas valide, remettre la valeur du slider
+            value = slider.value() * step
+            input_field.setText(str(value))
+
+    def _calculate_calories(self) -> int:
+        """Calcule les calories totales basées sur les macros."""
+        try:
+            proteins = int(self.proteins_label.text())
+            carbs = int(self.carbs_label.text())
+            fats = int(self.fats_label.text())
+            return (proteins * 4) + (carbs * 4) + (fats * 9)
+        except (ValueError, AttributeError):
+            return 0
+
+    def _update_calories_and_distribution(self):
+        """Met à jour l'affichage des calories et de la distribution."""
+        calories = self._calculate_calories()
+        self.calories_display.setText(f"{calories} kcal")
+        self._update_distribution_label()
+
     def _update_distribution_label(self):
-        """Met à jour le label de répartition des macros."""
+        """Met à jour le label de répartition des macros et le total."""
         target = self.get_nutrition_target()
         percentages = target.get_macro_percentages()
+
+        total = percentages['proteins'] + percentages['carbs'] + percentages['fats']
 
         text = (
             f"Répartition: Protéines {percentages['proteins']:.1f}% | "
@@ -189,6 +246,20 @@ class SettingsPanel(QWidget):
             f"Lipides {percentages['fats']:.1f}%"
         )
         self.distribution_label.setText(text)
+
+        # Mise à jour du total avec code couleur
+        if 95 <= total <= 105:
+            color = "#4CAF50"  # Vert si proche de 100%
+            status = "✓"
+        elif 90 <= total <= 110:
+            color = "#FF9800"  # Orange si modérément proche
+            status = "⚠"
+        else:
+            color = "#F44336"  # Rouge si loin de 100%
+            status = "✗"
+
+        self.total_percentage_label.setText(f"{status} Total: {total:.1f}%")
+        self.total_percentage_label.setStyleSheet(f"font-size: 12px; font-weight: bold; color: {color};")
 
     def _create_options_group(self) -> QGroupBox:
         """Crée le groupe des options."""
@@ -214,16 +285,22 @@ class SettingsPanel(QWidget):
 
         # Durée du plan
         duration_layout = QHBoxLayout()
-        duration_layout.addWidget(QLabel("Durée du plan (jours):"))
+        duration_layout.addWidget(QLabel("Durée du plan:"))
 
-        self.duration_spinbox = QSpinBox()
-        self.duration_spinbox.setMinimum(PLAN_DURATION_CONFIG["min"])
-        self.duration_spinbox.setMaximum(PLAN_DURATION_CONFIG["max"])
-        self.duration_spinbox.setValue(PLAN_DURATION_CONFIG["default"])
-        self.duration_spinbox.valueChanged.connect(
+        self.duration_combo = QComboBox()
+        duration_options = [
+            (1, "1 semaine"),
+            (4, "4 semaines"),
+            (8, "8 semaines"),
+            (12, "12 semaines")
+        ]
+        for weeks, label in duration_options:
+            self.duration_combo.addItem(label, weeks * 7)  # Stocker en jours
+        self.duration_combo.setCurrentIndex(0)  # 1 semaine par défaut
+        self.duration_combo.currentIndexChanged.connect(
             lambda: self.settings_changed.emit(self.get_settings())
         )
-        duration_layout.addWidget(self.duration_spinbox)
+        duration_layout.addWidget(self.duration_combo)
         duration_layout.addStretch()
         layout.addLayout(duration_layout)
 
@@ -242,15 +319,150 @@ class SettingsPanel(QWidget):
         group.setLayout(layout)
         return group
 
+    def _create_criteria_group(self) -> QGroupBox:
+        """Crée le groupe des critères de sélection (prix, santé, variété)."""
+        group = QGroupBox("Critères de Sélection")
+        layout = QVBoxLayout()
+
+        # Slider Prix/repas
+        price_layout = QHBoxLayout()
+        price_layout.addWidget(QLabel("Budget/repas:"))
+
+        self.price_slider = QSlider(Qt.Orientation.Horizontal)
+        self.price_slider.setMinimum(1)
+        self.price_slider.setMaximum(10)
+        self.price_slider.setValue(5)
+        self.price_slider.setTickPosition(QSlider.TickPosition.TicksBelow)
+        self.price_slider.setTickInterval(1)
+        price_layout.addWidget(self.price_slider, stretch=3)
+
+        self.price_label = QLabel("Moyen")
+        self.price_label.setMinimumWidth(80)
+        self.price_label.setStyleSheet("font-weight: bold;")
+        self.price_slider.valueChanged.connect(self._update_price_label)
+        price_layout.addWidget(self.price_label)
+
+        layout.addLayout(price_layout)
+
+        # Slider Healthy
+        healthy_layout = QHBoxLayout()
+        healthy_layout.addWidget(QLabel("Indice santé:"))
+
+        self.healthy_slider = QSlider(Qt.Orientation.Horizontal)
+        self.healthy_slider.setMinimum(1)
+        self.healthy_slider.setMaximum(10)
+        self.healthy_slider.setValue(5)
+        self.healthy_slider.setTickPosition(QSlider.TickPosition.TicksBelow)
+        self.healthy_slider.setTickInterval(1)
+        healthy_layout.addWidget(self.healthy_slider, stretch=3)
+
+        self.healthy_label = QLabel("5/10")
+        self.healthy_label.setMinimumWidth(80)
+        self.healthy_label.setStyleSheet("font-weight: bold;")
+        self.healthy_slider.valueChanged.connect(self._update_healthy_label)
+        healthy_layout.addWidget(self.healthy_label)
+
+        layout.addLayout(healthy_layout)
+
+        # Slider Variété
+        variety_layout = QHBoxLayout()
+        variety_layout.addWidget(QLabel("Variété:"))
+
+        self.variety_slider = QSlider(Qt.Orientation.Horizontal)
+        self.variety_slider.setMinimum(1)
+        self.variety_slider.setMaximum(10)
+        self.variety_slider.setValue(5)
+        self.variety_slider.setTickPosition(QSlider.TickPosition.TicksBelow)
+        self.variety_slider.setTickInterval(1)
+        variety_layout.addWidget(self.variety_slider, stretch=3)
+
+        self.variety_label = QLabel("Équilibré")
+        self.variety_label.setMinimumWidth(80)
+        self.variety_label.setStyleSheet("font-weight: bold;")
+        self.variety_slider.valueChanged.connect(self._update_variety_label)
+        variety_layout.addWidget(self.variety_label)
+
+        layout.addLayout(variety_layout)
+
+        # Descriptions
+        desc_label = QLabel(
+            "<small><i>"
+            "• Budget: Contrôle le prix moyen par repas<br>"
+            "• Santé: Privilégie les aliments sains (1=peu, 10=très sain)<br>"
+            "• Variété: Inclut des aliments rares (1=commun, 10=exotique)"
+            "</i></small>"
+        )
+        desc_label.setWordWrap(True)
+        desc_label.setStyleSheet("color: #666; margin-top: 5px;")
+        layout.addWidget(desc_label)
+
+        # Connecter les sliders aux changements de settings
+        self.price_slider.valueChanged.connect(
+            lambda: self.settings_changed.emit(self.get_settings())
+        )
+        self.healthy_slider.valueChanged.connect(
+            lambda: self.settings_changed.emit(self.get_settings())
+        )
+        self.variety_slider.valueChanged.connect(
+            lambda: self.settings_changed.emit(self.get_settings())
+        )
+
+        group.setLayout(layout)
+        return group
+
+    def _update_price_label(self, value: int):
+        """Met à jour le label du slider de prix."""
+        labels = {
+            1: "Très bas",
+            2: "Bas",
+            3: "Économique",
+            4: "Raisonnable",
+            5: "Moyen",
+            6: "Modéré",
+            7: "Élevé",
+            8: "Cher",
+            9: "Très cher",
+            10: "Premium"
+        }
+        self.price_label.setText(labels.get(value, "Moyen"))
+
+    def _update_healthy_label(self, value: int):
+        """Met à jour le label du slider de santé."""
+        self.healthy_label.setText(f"{value}/10")
+        # Changer la couleur selon le niveau
+        if value >= 8:
+            color = "#4CAF50"  # Vert
+        elif value >= 5:
+            color = "#FF9800"  # Orange
+        else:
+            color = "#F44336"  # Rouge
+        self.healthy_label.setStyleSheet(f"font-weight: bold; color: {color};")
+
+    def _update_variety_label(self, value: int):
+        """Met à jour le label du slider de variété."""
+        labels = {
+            1: "Basique",
+            2: "Simple",
+            3: "Classique",
+            4: "Standard",
+            5: "Équilibré",
+            6: "Varié",
+            7: "Diversifié",
+            8: "Original",
+            9: "Exotique",
+            10: "Aventureux"
+        }
+        self.variety_label.setText(labels.get(value, "Équilibré"))
+
     def get_nutrition_target(self) -> NutritionTarget:
         """
         Retourne l'objectif nutritionnel actuel.
 
         Returns:
-            NutritionTarget basé sur les valeurs des sliders
+            NutritionTarget basé sur les valeurs des inputs
         """
         return NutritionTarget(
-            calories=float(self.calories_label.text()),
+            calories=float(self._calculate_calories()),
             proteins=float(self.proteins_label.text()),
             carbs=float(self.carbs_label.text()),
             fats=float(self.fats_label.text())
@@ -266,8 +478,11 @@ class SettingsPanel(QWidget):
         return {
             "nutrition_target": self.get_nutrition_target(),
             "meal_count": self.meal_count_combo.currentData(),
-            "duration_days": self.duration_spinbox.value(),
-            "dietary_preferences": self.get_dietary_preferences()
+            "duration_days": self.duration_combo.currentData(),
+            "dietary_preferences": self.get_dietary_preferences(),
+            "price_level": self.price_slider.value(),
+            "health_index": self.healthy_slider.value(),
+            "variety_level": self.variety_slider.value()
         }
 
     def get_dietary_preferences(self) -> List[str]:
@@ -296,9 +511,6 @@ class SettingsPanel(QWidget):
         if "nutrition_target" in settings:
             target = settings["nutrition_target"]
             if isinstance(target, NutritionTarget):
-                self.calories_slider.children()[1].setValue(
-                    int(target.calories // CALORIES_CONFIG["step"])
-                )
                 self.proteins_slider.children()[1].setValue(
                     int(target.proteins // PROTEINS_CONFIG["step"])
                 )
@@ -308,13 +520,19 @@ class SettingsPanel(QWidget):
                 self.fats_slider.children()[1].setValue(
                     int(target.fats // FATS_CONFIG["step"])
                 )
+                self._update_calories_and_distribution()
 
         if "meal_count" in settings:
             index = MEAL_COUNT_OPTIONS.index(settings["meal_count"])
             self.meal_count_combo.setCurrentIndex(index)
 
         if "duration_days" in settings:
-            self.duration_spinbox.setValue(settings["duration_days"])
+            days = settings["duration_days"]
+            # Trouver l'index correspondant
+            for i in range(self.duration_combo.count()):
+                if self.duration_combo.itemData(i) == days:
+                    self.duration_combo.setCurrentIndex(i)
+                    break
 
         if "dietary_preferences" in settings:
             for tag, checkbox in self.preference_checkboxes.items():

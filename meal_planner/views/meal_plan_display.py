@@ -73,11 +73,12 @@ class MealPlanDisplay(QWidget):
         """
         self.current_plan = meal_plan
 
+        # Masquer le message vide avant de nettoyer
+        if self.empty_label:
+            self.empty_label.hide()
+
         # Effacer le contenu précédent
         self._clear_content()
-
-        # Masquer le message vide
-        self.empty_label.hide()
 
         # Mettre à jour le titre
         self.title_label.setText(
@@ -95,7 +96,7 @@ class MealPlanDisplay(QWidget):
         """Efface le contenu de l'affichage."""
         while self.content_layout.count():
             item = self.content_layout.takeAt(0)
-            if item.widget():
+            if item.widget() and item.widget() != self.empty_label:
                 item.widget().deleteLater()
 
     def _create_day_widget(self, day: int) -> QGroupBox:
@@ -177,65 +178,161 @@ class MealPlanDisplay(QWidget):
         Returns:
             Widget représentant le repas
         """
+        # Couleurs et icônes selon le type de repas
+        meal_styles = {
+            "breakfast": {
+                "color": "#FFF3E0",
+                "border": "#FF9800",
+                "icon": "☀",
+                "name": "Petit-déjeuner"
+            },
+            "lunch": {
+                "color": "#E3F2FD",
+                "border": "#2196F3",
+                "icon": "🍽",
+                "name": "Déjeuner"
+            },
+            "dinner": {
+                "color": "#F3E5F5",
+                "border": "#9C27B0",
+                "icon": "🌙",
+                "name": "Dîner"
+            },
+            "snack": {
+                "color": "#E8F5E9",
+                "border": "#4CAF50",
+                "icon": "🍎",
+                "name": "Collation"
+            },
+            "afternoon_snack": {
+                "color": "#FFF9C4",
+                "border": "#FBC02D",
+                "icon": "☕",
+                "name": "Goûter"
+            },
+            "morning_snack": {
+                "color": "#E8F5E9",
+                "border": "#66BB6A",
+                "icon": "🥐",
+                "name": "Collation matinale"
+            },
+            "evening_snack": {
+                "color": "#E0F2F1",
+                "border": "#26A69A",
+                "icon": "🥛",
+                "name": "Collation soirée"
+            }
+        }
+
+        style = meal_styles.get(meal.meal_type, {
+            "color": "#F5F5F5",
+            "border": "#9E9E9E",
+            "icon": "🍴",
+            "name": meal.meal_type
+        })
+
         frame = QFrame()
         frame.setFrameShape(QFrame.Shape.StyledPanel)
-        frame.setStyleSheet("""
-            QFrame {
-                background-color: #f9f9f9;
-                border-radius: 3px;
-                padding: 5px;
-            }
+        frame.setStyleSheet(f"""
+            QFrame {{
+                background-color: {style['color']};
+                border-left: 4px solid {style['border']};
+                border-radius: 8px;
+                padding: 12px;
+                margin: 5px 0;
+            }}
         """)
 
         layout = QVBoxLayout(frame)
-        layout.setSpacing(5)
+        layout.setSpacing(8)
 
-        # Nom et type du repas
+        # En-tête du repas avec icône
         header_layout = QHBoxLayout()
-        meal_name_label = QLabel(f"<b>{meal.name}</b> ({meal.meal_type})")
-        header_layout.addWidget(meal_name_label)
-        header_layout.addStretch()
 
-        # Bouton régénérer (pour Phase 2)
-        # regenerate_btn = QPushButton("Régénérer")
-        # regenerate_btn.setMaximumWidth(100)
-        # regenerate_btn.clicked.connect(
-        #     lambda: self.meal_regenerate_requested.emit(meal.day_number, 0)
-        # )
-        # header_layout.addWidget(regenerate_btn)
+        icon_label = QLabel(style['icon'])
+        icon_label.setStyleSheet("font-size: 20px;")
+        header_layout.addWidget(icon_label)
+
+        meal_name_label = QLabel(f"<b>{style['name']}</b>")
+        meal_name_label.setStyleSheet(f"font-size: 14px; color: {style['border']};")
+        header_layout.addWidget(meal_name_label)
+
+        header_layout.addStretch()
 
         layout.addLayout(header_layout)
 
-        # Liste des aliments
+        # Liste des aliments avec style amélioré
         if meal.foods:
+            foods_container = QWidget()
+            foods_layout = QVBoxLayout(foods_container)
+            foods_layout.setContentsMargins(20, 5, 5, 5)
+            foods_layout.setSpacing(4)
+
             for food, quantity in meal.foods:
                 food_macros = food.calculate_for_quantity(quantity)
-                food_text = (
-                    f"• {food.name}: {quantity:.0f}g "
-                    f"({food_macros['calories']:.0f} kcal, "
-                    f"P: {food_macros['proteins']:.1f}g, "
-                    f"G: {food_macros['carbs']:.1f}g, "
-                    f"L: {food_macros['fats']:.1f}g)"
+
+                # Widget pour chaque aliment
+                food_widget = QWidget()
+                food_layout = QHBoxLayout(food_widget)
+                food_layout.setContentsMargins(0, 0, 0, 0)
+
+                # Nom et quantité
+                name_label = QLabel(f"<b>{food.name}</b> · {quantity:.0f}g")
+                name_label.setStyleSheet("font-size: 12px; color: #333;")
+                food_layout.addWidget(name_label)
+
+                food_layout.addStretch()
+
+                # Macros en badges
+                macros_label = QLabel(
+                    f"<span style='background-color: #fff; padding: 2px 6px; border-radius: 3px; margin: 0 2px;'>"
+                    f"{food_macros['calories']:.0f} kcal</span> "
+                    f"<span style='background-color: #fff; padding: 2px 6px; border-radius: 3px; margin: 0 2px;'>"
+                    f"P {food_macros['proteins']:.1f}g</span> "
+                    f"<span style='background-color: #fff; padding: 2px 6px; border-radius: 3px; margin: 0 2px;'>"
+                    f"G {food_macros['carbs']:.1f}g</span> "
+                    f"<span style='background-color: #fff; padding: 2px 6px; border-radius: 3px; margin: 0 2px;'>"
+                    f"L {food_macros['fats']:.1f}g</span>"
                 )
-                food_label = QLabel(food_text)
-                food_label.setStyleSheet("font-size: 12px; color: #333;")
-                layout.addWidget(food_label)
+                macros_label.setStyleSheet("font-size: 11px; color: #666;")
+                food_layout.addWidget(macros_label)
+
+                foods_layout.addWidget(food_widget)
+
+            layout.addWidget(foods_container)
         else:
             no_foods_label = QLabel("Aucun aliment")
-            no_foods_label.setStyleSheet("font-size: 12px; color: #999; font-style: italic;")
+            no_foods_label.setStyleSheet("font-size: 12px; color: #999; font-style: italic; padding-left: 20px;")
             layout.addWidget(no_foods_label)
 
-        # Totaux du repas
+        # Séparateur
+        separator = QFrame()
+        separator.setFrameShape(QFrame.Shape.HLine)
+        separator.setStyleSheet(f"background-color: {style['border']}; max-height: 1px; margin: 5px 0;")
+        layout.addWidget(separator)
+
+        # Totaux du repas avec style amélioré
         meal_macros = meal.calculate_macros()
-        totals_text = (
-            f"Total: {meal_macros['calories']:.0f} kcal | "
-            f"P: {meal_macros['proteins']:.1f}g | "
-            f"G: {meal_macros['carbs']:.1f}g | "
+        totals_widget = QWidget()
+        totals_layout = QHBoxLayout(totals_widget)
+        totals_layout.setContentsMargins(0, 0, 0, 0)
+
+        totals_label = QLabel("TOTAL:")
+        totals_label.setStyleSheet("font-size: 11px; font-weight: bold; color: #555;")
+        totals_layout.addWidget(totals_label)
+
+        totals_layout.addStretch()
+
+        values_label = QLabel(
+            f"<b>{meal_macros['calories']:.0f} kcal</b>  |  "
+            f"P: {meal_macros['proteins']:.1f}g  |  "
+            f"G: {meal_macros['carbs']:.1f}g  |  "
             f"L: {meal_macros['fats']:.1f}g"
         )
-        totals_label = QLabel(totals_text)
-        totals_label.setStyleSheet("font-size: 11px; color: #666; font-weight: bold;")
-        layout.addWidget(totals_label)
+        values_label.setStyleSheet(f"font-size: 12px; color: {style['border']}; font-weight: bold;")
+        totals_layout.addWidget(values_label)
+
+        layout.addWidget(totals_widget)
 
         return frame
 

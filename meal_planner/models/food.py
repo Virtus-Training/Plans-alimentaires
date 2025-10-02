@@ -27,6 +27,9 @@ class Food:
         fats: Lipides pour 100g (g)
         fibers: Fibres pour 100g (g)
         tags: Liste de tags (vegetarian, vegan, gluten_free, etc.)
+        price_per_100g: Prix pour 100g en euros (0.0 par défaut)
+        health_index: Indice de santé de 1 à 10 (5 par défaut)
+        variety_index: Indice de rareté de 1 à 10 (5 par défaut, 10=très rare, 1=très commun)
     """
 
     name: str
@@ -37,6 +40,9 @@ class Food:
     fats: float
     fibers: float = 0.0
     tags: List[str] = field(default_factory=list)
+    price_per_100g: float = 0.0
+    health_index: int = 5
+    variety_index: int = 5
     id: Optional[int] = None
 
     def validate(self) -> Tuple[bool, str]:
@@ -88,6 +94,18 @@ class Food:
         for tag in self.tags:
             if not isinstance(tag, str):
                 return False, "Tous les tags doivent être des chaînes de caractères"
+
+        # Valider le prix
+        if self.price_per_100g < 0:
+            return False, "Le prix ne peut pas être négatif"
+
+        # Valider l'indice de santé (1-10)
+        if not (1 <= self.health_index <= 10):
+            return False, "L'indice de santé doit être entre 1 et 10"
+
+        # Valider l'indice de variété (1-10)
+        if not (1 <= self.variety_index <= 10):
+            return False, "L'indice de variété doit être entre 1 et 10"
 
         return True, ""
 
@@ -161,7 +179,10 @@ class Food:
             "carbs": self.carbs,
             "fats": self.fats,
             "fibers": self.fibers,
-            "tags": self.tags
+            "tags": self.tags,
+            "price_per_100g": self.price_per_100g,
+            "health_index": self.health_index,
+            "variety_index": self.variety_index
         }
 
     @classmethod
@@ -192,7 +213,10 @@ class Food:
             carbs=float(data["carbs"]),
             fats=float(data["fats"]),
             fibers=float(data.get("fibers", 0.0)),
-            tags=tags if isinstance(tags, list) else []
+            tags=tags if isinstance(tags, list) else [],
+            price_per_100g=float(data.get("price_per_100g", 0.0)),
+            health_index=int(data.get("health_index", 5)),
+            variety_index=int(data.get("variety_index", 5))
         )
 
     def __str__(self) -> str:

@@ -79,7 +79,7 @@ FOOD_CATEGORIES = [
 MACRO_TOLERANCE = 0.05  # ±5%
 
 # Contraintes de quantités pour l'optimisation (en grammes)
-MIN_FOOD_QUANTITY = 30
+MIN_FOOD_QUANTITY = 10  # Réduit pour permettre de petites quantités (huile, épices, etc.)
 MAX_FOOD_QUANTITY = 500
 
 # Nombre d'aliments par repas
