@@ -1,0 +1,30 @@
+{
+  "breakfast": {
+    "required": ["céréales", "produits laitiers"],
+    "optional": ["fruits"]
+  },
+  "lunch": {
+    "required": ["protéines", "féculents", "légumes"],
+    "optional": ["produits laitiers"]
+  },
+  "dinner": {
+    "required": ["protéines", "légumes"],
+    "optional": ["fruits", "féculents"]
+  },
+  "snack": {
+    "required": ["fruits"],
+    "optional": ["produits laitiers", "noix"]
+  },
+  "afternoon_snack": {
+    "required": ["fruits"],
+    "optional": ["produits laitiers", "noix"]
+  },
+  "morning_snack": {
+    "required": ["fruits"],
+    "optional": ["produits laitiers"]
+  },
+  "evening_snack": {
+    "required": [],
+    "optional": ["produits laitiers", "fruits"]
+  }
+}

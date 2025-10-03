@@ -9,6 +9,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "meal_planner" / "data"
 PRESETS_DIR = DATA_DIR / "presets"
+ICONS_DIR = DATA_DIR / "icons"
 DATABASE_PATH = DATA_DIR / "foods.db"
 
 # Configuration des macros (min, max, step)
@@ -52,7 +53,68 @@ DIETARY_PREFERENCES = {
     "vegetarian": "Végétarien",
     "vegan": "Végan",
     "gluten_free": "Sans gluten",
-    "lactose_free": "Sans lactose"
+    "lactose_free": "Sans lactose",
+    "keto": "Keto (cétogène)",
+    "paleo": "Paléo",
+    "mediterranean": "Méditerranéen"
+}
+
+# Définition des régimes spécifiques avec leurs règles
+DIET_RULES = {
+    "keto": {
+        "description": "Régime cétogène - très faible en glucides, riche en lipides",
+        "carbs_max_percent": 0.10,  # Max 10% des calories en glucides
+        "fats_min_percent": 0.70,   # Min 70% des calories en lipides
+        "proteins_percent": 0.20,    # ~20% des calories en protéines
+        "excluded_categories": [
+            "céréales", "féculents", "fruits", "légumineuses"
+        ],
+        "allowed_low_carb_foods": [
+            # Légumes faibles en glucides autorisés
+            "épinards", "chou kale", "laitue", "concombre", "courgette",
+            "brocoli", "chou-fleur", "asperges", "champignons", "tomates"
+        ],
+        "prioritized_foods": [
+            # Aliments prioritaires en keto
+            "huile", "beurre", "fromage", "viandes", "poissons", "œufs",
+            "avocat", "noix", "graines"
+        ]
+    },
+    "paleo": {
+        "description": "Régime paléo - aliments non transformés, comme au paléolithique",
+        "excluded_categories": [
+            "céréales", "produits laitiers", "légumineuses"
+        ],
+        "excluded_keywords": [
+            "pain", "pâtes", "riz", "blé", "lait", "yaourt", "fromage",
+            "lentilles", "haricots", "pois", "soja"
+        ],
+        "prioritized_foods": [
+            "viandes", "poissons", "œufs", "légumes", "fruits",
+            "noix", "graines", "huile d'olive", "huile de coco"
+        ],
+        "allowed_exceptions": [
+            # Quelques exceptions couramment acceptées
+            "patate douce", "courge", "huile d'olive"
+        ]
+    },
+    "mediterranean": {
+        "description": "Régime méditerranéen - riche en fruits, légumes, poissons, huile d'olive",
+        "prioritized_categories": [
+            "légumes", "fruits", "poissons", "légumineuses", "noix et graines"
+        ],
+        "prioritized_foods": [
+            "huile d'olive", "tomates", "olives", "poissons gras",
+            "légumes verts", "légumineuses", "noix", "fruits frais"
+        ],
+        "limited_foods": [
+            # Aliments à limiter (pas exclus mais moins prioritaires)
+            "viande rouge", "beurre", "crème"
+        ],
+        "carbs_range": (0.40, 0.50),   # 40-50% glucides
+        "fats_range": (0.30, 0.40),    # 30-40% lipides (surtout insaturés)
+        "proteins_range": (0.15, 0.20)  # 15-20% protéines
+    }
 }
 
 # Durée du plan
@@ -76,15 +138,15 @@ FOOD_CATEGORIES = [
 ]
 
 # Tolérance pour la validation des macros (en pourcentage)
-MACRO_TOLERANCE = 0.05  # ±5%
+MACRO_TOLERANCE = 0.10  # ±10% (tolérance réaliste pour un plan alimentaire précis)
 
 # Contraintes de quantités pour l'optimisation (en grammes)
 MIN_FOOD_QUANTITY = 10  # Réduit pour permettre de petites quantités (huile, épices, etc.)
 MAX_FOOD_QUANTITY = 500
 
-# Nombre d'aliments par repas
-MIN_FOODS_PER_MEAL = 3
-MAX_FOODS_PER_MEAL = 8
+# Nombre d'aliments par repas (augmenté pour plus de diversité)
+MIN_FOODS_PER_MEAL = 5
+MAX_FOODS_PER_MEAL = 9
 
 # Configuration de l'interface
 WINDOW_CONFIG = {
@@ -102,39 +164,47 @@ LOG_CONFIG = {
     "filename": BASE_DIR / "meal_planner.log"
 }
 
-# Répartition des macros par repas (pourcentages par défaut)
-DEFAULT_MEAL_DISTRIBUTION = {
-    3: {  # 3 repas
-        "breakfast": 0.30,
-        "lunch": 0.40,
-        "dinner": 0.30
-    },
-    4: {  # 4 repas
-        "breakfast": 0.25,
-        "lunch": 0.35,
-        "snack": 0.10,
-        "dinner": 0.30
-    },
-    5: {  # 5 repas
-        "breakfast": 0.25,
-        "snack1": 0.10,
-        "lunch": 0.30,
-        "snack2": 0.10,
-        "dinner": 0.25
-    },
-    6: {  # 6 repas
-        "breakfast": 0.20,
-        "snack1": 0.10,
-        "lunch": 0.25,
-        "snack2": 0.10,
-        "dinner": 0.25,
-        "snack3": 0.10
-    }
-}
-
 # Valeurs caloriques des macronutriments (kcal/g)
 MACRO_CALORIES = {
     "proteins": 4,
     "carbs": 4,
     "fats": 9
+}
+
+# ========== Modes de Génération ==========
+
+# Modes de génération disponibles
+GENERATION_MODES = {
+    "food": "🍎 Par Aliments",
+    "preset": "🍽️ Repas Complets",
+    "components": "🥗 Entrée/Plat/Dessert",
+    "categories": "📋 Par Catégories"
+}
+
+# Chemin vers le fichier de règles de catégories
+CATEGORY_RULES_PATH = BASE_DIR / "meal_planner" / "config" / "category_rules.json"
+
+# Catégories d'aliments détaillées pour le mode "Par Catégories"
+FOOD_CATEGORIES_DETAILED = {
+    "protéines": ["viandes", "poissons", "œufs", "tofu", "seitan"],
+    "féculents": ["céréales", "pain", "pâtes", "riz", "pommes de terre"],
+    "légumes": ["légumes verts", "légumes racines", "légumes-feuilles", "crucifères"],
+    "fruits": ["fruits frais", "fruits secs", "baies"],
+    "produits laitiers": ["lait", "yaourt", "fromage", "fromage blanc"],
+    "noix": ["amandes", "noix", "noisettes", "pistaches", "graines"],
+    "légumineuses": ["lentilles", "haricots", "pois chiches", "fèves"],
+    "matières grasses": ["huile", "beurre", "margarine", "avocat"]
+}
+
+# Mapping catégories simples -> catégories détaillées dans la base
+# Pour mapper les catégories configurables aux vraies catégories de la DB
+CATEGORY_MAPPING = {
+    "protéines": ["viandes", "poissons", "œufs", "légumineuses", "tofu"],
+    "féculents": ["céréales", "féculents"],
+    "légumes": ["légumes"],
+    "fruits": ["fruits"],
+    "produits laitiers": ["produits laitiers"],
+    "noix": ["noix et graines"],
+    "céréales": ["céréales", "féculents"],
+    "légumineuses": ["légumineuses"]
 }

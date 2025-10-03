@@ -37,28 +37,99 @@ class MainWindow(QMainWindow):
         self.resize(WINDOW_CONFIG["width"], WINDOW_CONFIG["height"])
         self.setMinimumSize(WINDOW_CONFIG["min_width"], WINDOW_CONFIG["min_height"])
 
+        # Style global de l'application
+        self.setStyleSheet("""
+            QMainWindow {
+                background-color: #f5f5f5;
+            }
+            QWidget {
+                font-family: 'Segoe UI', 'Arial', sans-serif;
+            }
+            QStatusBar {
+                background-color: #2c3e50;
+                color: white;
+                font-size: 12px;
+                padding: 5px;
+            }
+            QMenuBar {
+                background-color: #34495e;
+                color: white;
+                padding: 4px;
+            }
+            QMenuBar::item {
+                background-color: transparent;
+                padding: 6px 12px;
+            }
+            QMenuBar::item:selected {
+                background-color: #2c3e50;
+                border-radius: 4px;
+            }
+            QMenu {
+                background-color: white;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+            }
+            QMenu::item {
+                padding: 8px 30px;
+            }
+            QMenu::item:selected {
+                background-color: #3498db;
+                color: white;
+            }
+        """)
+
         # Widget central
         central_widget = QWidget()
+        central_widget.setStyleSheet("background-color: #ecf0f1;")
         self.setCentralWidget(central_widget)
 
         # Layout principal avec splitter
         main_layout = QHBoxLayout(central_widget)
-        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setContentsMargins(8, 8, 8, 8)
+        main_layout.setSpacing(8)
 
         # Splitter pour diviser gauche/droite
         splitter = QSplitter(Qt.Orientation.Horizontal)
+        splitter.setStyleSheet("""
+            QSplitter::handle {
+                background-color: #bdc3c7;
+                width: 3px;
+            }
+            QSplitter::handle:hover {
+                background-color: #3498db;
+            }
+        """)
 
         # Panneau de gauche (paramètres) - 1/3
         self.settings_panel = SettingsPanel()
+        self.settings_panel.setStyleSheet("""
+            QWidget {
+                background-color: white;
+                border-radius: 8px;
+            }
+        """)
         splitter.addWidget(self.settings_panel)
 
         # Panneau de droite (affichage) - 2/3
         self.meal_plan_display = MealPlanDisplay()
+        self.meal_plan_display.setStyleSheet("""
+            QWidget {
+                background-color: white;
+                border-radius: 8px;
+            }
+        """)
         splitter.addWidget(self.meal_plan_display)
 
-        # Définir les proportions (1:2)
+        # Définir les proportions (1:2) et tailles minimales
         splitter.setStretchFactor(0, 1)
         splitter.setStretchFactor(1, 2)
+
+        # Empêcher le panneau gauche de se réduire trop
+        splitter.setCollapsible(0, False)
+        splitter.setCollapsible(1, False)
+
+        # Définir les largeurs initiales (en pixels)
+        splitter.setSizes([400, 800])
 
         main_layout.addWidget(splitter)
 
@@ -68,7 +139,7 @@ class MainWindow(QMainWindow):
         # Status bar
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
-        self._update_status("Prêt")
+        self._update_status("✓ Prêt")
 
     def _create_menu_bar(self):
         """Crée la barre de menu."""
@@ -84,28 +155,27 @@ class MainWindow(QMainWindow):
 
         file_menu.addSeparator()
 
-        # Gérer aliments (pour Phase 3)
-        # manage_foods_action = QAction("&Gérer les aliments", self)
-        # manage_foods_action.triggered.connect(self.on_manage_foods)
-        # file_menu.addAction(manage_foods_action)
-
-        # file_menu.addSeparator()
-
         quit_action = QAction("&Quitter", self)
         quit_action.setShortcut("Ctrl+Q")
         quit_action.triggered.connect(self.close)
         file_menu.addAction(quit_action)
 
-        # Menu Export (Phase 3)
-        # export_menu = menubar.addMenu("&Export")
-        #
-        # export_pdf_action = QAction("Export &PDF", self)
-        # export_pdf_action.triggered.connect(self.on_export_pdf)
-        # export_menu.addAction(export_pdf_action)
-        #
-        # export_excel_action = QAction("Export &Excel", self)
-        # export_excel_action.triggered.connect(self.on_export_excel)
-        # export_menu.addAction(export_excel_action)
+        # Menu Gestion (nouveau)
+        manage_menu = menubar.addMenu("&Gestion")
+
+        preset_meals_action = QAction("🍽️ Repas Prédéfinis", self)
+        preset_meals_action.triggered.connect(self.on_manage_preset_meals)
+        manage_menu.addAction(preset_meals_action)
+
+        components_action = QAction("🥗 Composantes E/P/D", self)
+        components_action.triggered.connect(self.on_manage_components)
+        manage_menu.addAction(components_action)
+
+        manage_menu.addSeparator()
+
+        category_rules_action = QAction("📋 Règles de Catégories", self)
+        category_rules_action.triggered.connect(self.on_manage_category_rules)
+        manage_menu.addAction(category_rules_action)
 
         # Menu Aide
         help_menu = menubar.addMenu("&Aide")
@@ -163,7 +233,7 @@ class MainWindow(QMainWindow):
         try:
             self.meal_plan_display.display_meal_plan(meal_plan)
             self._update_status(
-                f"Plan généré avec succès - {meal_plan.duration_days} jour(s)"
+                f"✓ Plan généré avec succès - {meal_plan.duration_days} jour(s)"
             )
         except Exception as e:
             logger.error(f"Erreur lors de l'affichage du plan: {e}", exc_info=True)
@@ -192,7 +262,7 @@ class MainWindow(QMainWindow):
 
         if reply == QMessageBox.StandardButton.Yes:
             self.meal_plan_display.clear()
-            self._update_status("Nouveau plan")
+            self._update_status("✓ Nouveau plan créé")
 
     def on_error(self, error_message: str):
         """
@@ -203,27 +273,66 @@ class MainWindow(QMainWindow):
         """
         self.show_error("Erreur", error_message)
 
+    def on_manage_preset_meals(self):
+        """Ouvre l'interface de gestion des repas prédéfinis."""
+        from meal_planner.views.preset_meal_manager import PresetMealManager
+        dialog = PresetMealManager(self.controller.db_manager, parent=self)
+        dialog.exec()
+        self._update_status("✓ Gestion des repas prédéfinis")
+
+    def on_manage_components(self):
+        """Ouvre l'interface de gestion des composantes E/P/D."""
+        from meal_planner.views.meal_component_manager import MealComponentManager
+        dialog = MealComponentManager(self.controller.db_manager, parent=self)
+        dialog.exec()
+        self._update_status("✓ Gestion des composantes E/P/D")
+
+    def on_manage_category_rules(self):
+        """Ouvre l'interface de configuration des règles de catégories."""
+        from meal_planner.views.category_rules_dialog import CategoryRulesDialog
+        dialog = CategoryRulesDialog(parent=self)
+        dialog.exec()
+        self._update_status("✓ Configuration des règles de catégories")
+
     def on_about(self):
         """Affiche la boîte de dialogue À propos."""
-        QMessageBox.about(
-            self,
-            "À propos de Meal Planner Pro",
-            "<h3>Meal Planner Pro</h3>"
-            "<p>Version 0.1.0 (Phase 1)</p>"
-            "<p>Générateur de plans alimentaires personnalisés</p>"
-            "<p><b>Fonctionnalités Phase 1:</b></p>"
-            "<ul>"
-            "<li>Configuration des objectifs nutritionnels</li>"
-            "<li>Interface avec sliders interactifs</li>"
-            "<li>Base de données d'aliments</li>"
-            "<li>Architecture MVC complète</li>"
+        msg_box = QMessageBox(self)
+        msg_box.setWindowTitle("À propos de Meal Planner Pro")
+        msg_box.setTextFormat(Qt.TextFormat.RichText)
+        msg_box.setText(
+            "<div style='text-align: center;'>"
+            "<h2 style='color: #2c3e50; margin-bottom: 10px;'>🍽️ Meal Planner Pro</h2>"
+            "<p style='color: #7f8c8d; font-size: 11px; margin: 5px 0;'>Version 1.0.0 (Multi-Modes)</p>"
+            "<p style='color: #34495e; margin: 15px 0;'>Générateur de plans alimentaires personnalisés</p>"
+            "</div>"
+            "<div style='margin-top: 20px;'>"
+            "<p style='color: #2c3e50; font-weight: bold; margin-bottom: 8px;'>✨ Fonctionnalités:</p>"
+            "<ul style='color: #555; margin-left: 20px;'>"
+            "<li>🎯 4 modes de génération (Aliments, Repas, E/P/D, Catégories)</li>"
+            "<li>🎨 Interface moderne et intuitive</li>"
+            "<li>💾 Gestion des repas et composantes</li>"
+            "<li>⚙️ Configuration personnalisable</li>"
             "</ul>"
-            "<p><b>À venir (Phase 2):</b></p>"
-            "<ul>"
-            "<li>Algorithme de génération optimisée</li>"
-            "<li>Génération de repas complets</li>"
+            "</div>"
+            "<div style='margin-top: 15px;'>"
+            "<p style='color: #2c3e50; font-weight: bold; margin-bottom: 8px;'>🚀 À venir (Phase 2):</p>"
+            "<ul style='color: #555; margin-left: 20px;'>"
+            "<li>🧮 Algorithme de génération optimisée</li>"
+            "<li>🍱 Génération de repas complets</li>"
+            "<li>📊 Export PDF/Excel</li>"
             "</ul>"
+            "</div>"
         )
+        msg_box.setStyleSheet("""
+            QMessageBox {
+                background-color: white;
+            }
+            QMessageBox QLabel {
+                min-width: 450px;
+                min-height: 300px;
+            }
+        """)
+        msg_box.exec()
 
     def show_error(self, title: str, message: str):
         """

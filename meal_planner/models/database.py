@@ -14,6 +14,9 @@ from meal_planner.models.food import Food
 from meal_planner.config import DATABASE_PATH, PRESETS_DIR
 from meal_planner.utils.logger import get_logger
 
+# Import des modèles PresetMeal et MealComponent (import tardif pour éviter circular import)
+# Ces imports seront faits dans les méthodes qui en ont besoin
+
 logger = get_logger(__name__)
 
 Base = declarative_base()
@@ -35,6 +38,28 @@ class FoodDB(Base):
     price_per_100g = Column(Float, default=0.0)
     health_index = Column(Integer, default=5)
     variety_index = Column(Integer, default=5)
+
+
+class PresetMealDB(Base):
+    """Table SQLAlchemy pour les repas prédéfinis."""
+    __tablename__ = 'preset_meals'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(200), nullable=False)
+    meal_type = Column(String(50), nullable=False)
+    foods_json = Column(Text, nullable=False)  # JSON: [{"food_id": int, "quantity": float}, ...]
+    description = Column(Text, default='')
+
+
+class MealComponentDB(Base):
+    """Table SQLAlchemy pour les composantes de repas (entrée/plat/dessert)."""
+    __tablename__ = 'meal_components'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(200), nullable=False)
+    component_type = Column(String(50), nullable=False)  # entrée, plat, dessert, accompagnement
+    foods_json = Column(Text, nullable=False)  # JSON: [{"food_id": int, "quantity": float}, ...]
+    description = Column(Text, default='')
 
 
 class DatabaseManager:
@@ -369,8 +394,343 @@ class DatabaseManager:
                 cat = food_db.category
                 categories[cat] = categories.get(cat, 0) + 1
 
+            preset_meals_count = session.query(PresetMealDB).count()
+            components_count = session.query(MealComponentDB).count()
+
             return {
                 "total_foods": total,
                 "categories": categories,
+                "preset_meals": preset_meals_count,
+                "meal_components": components_count,
                 "database_path": str(self.db_path)
             }
+
+    # ========== Méthodes CRUD pour PresetMeal ==========
+
+    def add_preset_meal(self, preset_meal) -> 'PresetMeal':
+        """
+        Ajoute un repas prédéfini à la base de données.
+
+        Args:
+            preset_meal: Le repas prédéfini (PresetMeal)
+
+        Returns:
+            Le repas avec son ID assigné
+        """
+        from meal_planner.models.preset_meal import PresetMeal
+
+        # Valider le repas
+        is_valid, msg = preset_meal.validate()
+        if not is_valid:
+            raise ValueError(f"Repas prédéfini invalide: {msg}")
+
+        with self.get_session() as session:
+            preset_db = PresetMealDB(
+                name=preset_meal.name,
+                meal_type=preset_meal.meal_type,
+                foods_json=preset_meal.to_json_string(),
+                description=preset_meal.description
+            )
+            session.add(preset_db)
+            session.flush()
+
+            preset_meal.id = preset_db.id
+            logger.info(f"Repas prédéfini ajouté: {preset_meal.name} (ID: {preset_meal.id})")
+
+            return preset_meal
+
+    def get_preset_meal_by_id(self, meal_id: int) -> Optional['PresetMeal']:
+        """
+        Récupère un repas prédéfini par son ID.
+
+        Args:
+            meal_id: L'ID du repas
+
+        Returns:
+            Le repas prédéfini ou None
+        """
+        from meal_planner.models.preset_meal import PresetMeal
+
+        with self.get_session() as session:
+            preset_db = session.query(PresetMealDB).filter_by(id=meal_id).first()
+            if not preset_db:
+                return None
+
+            # Récupérer tous les aliments nécessaires
+            foods_by_id = {food.id: food for food in self.get_all_foods()}
+
+            return PresetMeal.from_db_row({
+                "id": preset_db.id,
+                "name": preset_db.name,
+                "meal_type": preset_db.meal_type,
+                "foods_json": preset_db.foods_json,
+                "description": preset_db.description
+            }, foods_by_id)
+
+    def get_all_preset_meals(self) -> List['PresetMeal']:
+        """
+        Récupère tous les repas prédéfinis.
+
+        Returns:
+            Liste de PresetMeal
+        """
+        from meal_planner.models.preset_meal import PresetMeal
+
+        with self.get_session() as session:
+            presets_db = session.query(PresetMealDB).all()
+            foods_by_id = {food.id: food for food in self.get_all_foods()}
+
+            return [
+                PresetMeal.from_db_row({
+                    "id": p.id,
+                    "name": p.name,
+                    "meal_type": p.meal_type,
+                    "foods_json": p.foods_json,
+                    "description": p.description
+                }, foods_by_id)
+                for p in presets_db
+            ]
+
+    def get_preset_meals_by_type(self, meal_type: str) -> List['PresetMeal']:
+        """
+        Récupère les repas prédéfinis d'un type donné.
+
+        Args:
+            meal_type: Type de repas
+
+        Returns:
+            Liste de PresetMeal
+        """
+        from meal_planner.models.preset_meal import PresetMeal
+
+        with self.get_session() as session:
+            presets_db = session.query(PresetMealDB).filter_by(meal_type=meal_type).all()
+            foods_by_id = {food.id: food for food in self.get_all_foods()}
+
+            return [
+                PresetMeal.from_db_row({
+                    "id": p.id,
+                    "name": p.name,
+                    "meal_type": p.meal_type,
+                    "foods_json": p.foods_json,
+                    "description": p.description
+                }, foods_by_id)
+                for p in presets_db
+            ]
+
+    def update_preset_meal(self, preset_meal) -> 'PresetMeal':
+        """
+        Met à jour un repas prédéfini.
+
+        Args:
+            preset_meal: Le repas à mettre à jour (doit avoir un ID)
+
+        Returns:
+            Le repas mis à jour
+        """
+        if preset_meal.id is None:
+            raise ValueError("Le repas doit avoir un ID pour être mis à jour")
+
+        is_valid, msg = preset_meal.validate()
+        if not is_valid:
+            raise ValueError(f"Repas prédéfini invalide: {msg}")
+
+        with self.get_session() as session:
+            preset_db = session.query(PresetMealDB).filter_by(id=preset_meal.id).first()
+
+            if not preset_db:
+                raise ValueError(f"Repas avec ID {preset_meal.id} introuvable")
+
+            preset_db.name = preset_meal.name
+            preset_db.meal_type = preset_meal.meal_type
+            preset_db.foods_json = preset_meal.to_json_string()
+            preset_db.description = preset_meal.description
+
+            logger.info(f"Repas prédéfini mis à jour: {preset_meal.name} (ID: {preset_meal.id})")
+
+            return preset_meal
+
+    def delete_preset_meal(self, meal_id: int) -> bool:
+        """
+        Supprime un repas prédéfini.
+
+        Args:
+            meal_id: L'ID du repas à supprimer
+
+        Returns:
+            True si supprimé, False sinon
+        """
+        with self.get_session() as session:
+            preset_db = session.query(PresetMealDB).filter_by(id=meal_id).first()
+
+            if preset_db:
+                session.delete(preset_db)
+                logger.info(f"Repas prédéfini supprimé: ID {meal_id}")
+                return True
+
+            return False
+
+    # ========== Méthodes CRUD pour MealComponent ==========
+
+    def add_meal_component(self, component) -> 'MealComponent':
+        """
+        Ajoute une composante de repas à la base de données.
+
+        Args:
+            component: La composante (MealComponent)
+
+        Returns:
+            La composante avec son ID assigné
+        """
+        from meal_planner.models.meal_component import MealComponent
+
+        is_valid, msg = component.validate()
+        if not is_valid:
+            raise ValueError(f"Composante invalide: {msg}")
+
+        with self.get_session() as session:
+            component_db = MealComponentDB(
+                name=component.name,
+                component_type=component.component_type,
+                foods_json=component.to_json_string(),
+                description=component.description
+            )
+            session.add(component_db)
+            session.flush()
+
+            component.id = component_db.id
+            logger.info(f"Composante ajoutée: {component.name} (ID: {component.id})")
+
+            return component
+
+    def get_meal_component_by_id(self, component_id: int) -> Optional['MealComponent']:
+        """
+        Récupère une composante par son ID.
+
+        Args:
+            component_id: L'ID de la composante
+
+        Returns:
+            La composante ou None
+        """
+        from meal_planner.models.meal_component import MealComponent
+
+        with self.get_session() as session:
+            component_db = session.query(MealComponentDB).filter_by(id=component_id).first()
+            if not component_db:
+                return None
+
+            foods_by_id = {food.id: food for food in self.get_all_foods()}
+
+            return MealComponent.from_db_row({
+                "id": component_db.id,
+                "name": component_db.name,
+                "component_type": component_db.component_type,
+                "foods_json": component_db.foods_json,
+                "description": component_db.description
+            }, foods_by_id)
+
+    def get_all_meal_components(self) -> List['MealComponent']:
+        """
+        Récupère toutes les composantes de repas.
+
+        Returns:
+            Liste de MealComponent
+        """
+        from meal_planner.models.meal_component import MealComponent
+
+        with self.get_session() as session:
+            components_db = session.query(MealComponentDB).all()
+            foods_by_id = {food.id: food for food in self.get_all_foods()}
+
+            return [
+                MealComponent.from_db_row({
+                    "id": c.id,
+                    "name": c.name,
+                    "component_type": c.component_type,
+                    "foods_json": c.foods_json,
+                    "description": c.description
+                }, foods_by_id)
+                for c in components_db
+            ]
+
+    def get_components_by_type(self, component_type: str) -> List['MealComponent']:
+        """
+        Récupère les composantes d'un type donné.
+
+        Args:
+            component_type: Type de composante (entrée, plat, dessert, accompagnement)
+
+        Returns:
+            Liste de MealComponent
+        """
+        from meal_planner.models.meal_component import MealComponent
+
+        with self.get_session() as session:
+            components_db = session.query(MealComponentDB).filter_by(
+                component_type=component_type
+            ).all()
+            foods_by_id = {food.id: food for food in self.get_all_foods()}
+
+            return [
+                MealComponent.from_db_row({
+                    "id": c.id,
+                    "name": c.name,
+                    "component_type": c.component_type,
+                    "foods_json": c.foods_json,
+                    "description": c.description
+                }, foods_by_id)
+                for c in components_db
+            ]
+
+    def update_meal_component(self, component) -> 'MealComponent':
+        """
+        Met à jour une composante de repas.
+
+        Args:
+            component: La composante à mettre à jour (doit avoir un ID)
+
+        Returns:
+            La composante mise à jour
+        """
+        if component.id is None:
+            raise ValueError("La composante doit avoir un ID pour être mise à jour")
+
+        is_valid, msg = component.validate()
+        if not is_valid:
+            raise ValueError(f"Composante invalide: {msg}")
+
+        with self.get_session() as session:
+            component_db = session.query(MealComponentDB).filter_by(id=component.id).first()
+
+            if not component_db:
+                raise ValueError(f"Composante avec ID {component.id} introuvable")
+
+            component_db.name = component.name
+            component_db.component_type = component.component_type
+            component_db.foods_json = component.to_json_string()
+            component_db.description = component.description
+
+            logger.info(f"Composante mise à jour: {component.name} (ID: {component.id})")
+
+            return component
+
+    def delete_meal_component(self, component_id: int) -> bool:
+        """
+        Supprime une composante de repas.
+
+        Args:
+            component_id: L'ID de la composante à supprimer
+
+        Returns:
+            True si supprimé, False sinon
+        """
+        with self.get_session() as session:
+            component_db = session.query(MealComponentDB).filter_by(id=component_id).first()
+
+            if component_db:
+                session.delete(component_db)
+                logger.info(f"Composante supprimée: ID {component_id}")
+                return True
+
+            return False

@@ -1,0 +1,101 @@
+{
+  "12": {
+    "food_id": 12,
+    "food_name": "Pain complet",
+    "preference_score": 0.1,
+    "times_used": 1,
+    "times_liked": 1,
+    "times_disliked": 0,
+    "last_used": "2025-10-03T09:31:37.398276"
+  },
+  "72": {
+    "food_id": 72,
+    "food_name": "Lait demi-écrémé",
+    "preference_score": 0.1,
+    "times_used": 1,
+    "times_liked": 1,
+    "times_disliked": 0,
+    "last_used": "2025-10-03T09:31:37.398280"
+  },
+  "73": {
+    "food_id": 73,
+    "food_name": "Yaourt grec",
+    "preference_score": 0.1,
+    "times_used": 1,
+    "times_liked": 1,
+    "times_disliked": 0,
+    "last_used": "2025-10-03T09:31:37.398283"
+  },
+  "106": {
+    "food_id": 106,
+    "food_name": "Lait de soja (non sucré)",
+    "preference_score": 0.1,
+    "times_used": 1,
+    "times_liked": 1,
+    "times_disliked": 0,
+    "last_used": "2025-10-03T09:31:37.398285"
+  },
+  "15": {
+    "food_id": 15,
+    "food_name": "Brocoli (cuit)",
+    "preference_score": 0.1,
+    "times_used": 1,
+    "times_liked": 1,
+    "times_disliked": 0,
+    "last_used": "2025-10-03T09:31:37.398287"
+  },
+  "75": {
+    "food_id": 75,
+    "food_name": "Saumon",
+    "preference_score": -0.15,
+    "times_used": 1,
+    "times_liked": 0,
+    "times_disliked": 1,
+    "last_used": "2025-10-03T09:31:37.399373"
+  },
+  "18": {
+    "food_id": 18,
+    "food_name": "Tomates",
+    "preference_score": -0.15,
+    "times_used": 1,
+    "times_liked": 0,
+    "times_disliked": 1,
+    "last_used": "2025-10-03T09:31:37.399376"
+  },
+  "94": {
+    "food_id": 94,
+    "food_name": "Épinards (cuits)",
+    "preference_score": -0.15,
+    "times_used": 1,
+    "times_liked": 0,
+    "times_disliked": 1,
+    "last_used": "2025-10-03T09:31:37.399379"
+  },
+  "96": {
+    "food_id": 96,
+    "food_name": "Chou kale (cru)",
+    "preference_score": -0.15,
+    "times_used": 1,
+    "times_liked": 0,
+    "times_disliked": 1,
+    "last_used": "2025-10-03T09:31:37.399380"
+  },
+  "54": {
+    "food_id": 54,
+    "food_name": "Edamame",
+    "preference_score": -0.15,
+    "times_used": 1,
+    "times_liked": 0,
+    "times_disliked": 1,
+    "last_used": "2025-10-03T09:31:37.399382"
+  },
+  "14": {
+    "food_id": 14,
+    "food_name": "Pomme de terre (cuite)",
+    "preference_score": -0.15,
+    "times_used": 1,
+    "times_liked": 0,
+    "times_disliked": 1,
+    "last_used": "2025-10-03T09:31:37.399384"
+  }
+}

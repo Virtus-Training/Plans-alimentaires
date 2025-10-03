@@ -47,7 +47,7 @@ class MealPlan:
 
     def validate_day(self, day: int) -> Dict:
         """
-        Valide un jour spécifique du plan.
+        Valide un jour spécifique du plan, incluant l'équilibre glycémique.
 
         Args:
             day: Numéro du jour à valider
@@ -63,7 +63,8 @@ class MealPlan:
             "totals": daily_totals,
             "target": target.to_dict(),
             "deviations": {},
-            "messages": []
+            "messages": [],
+            "glycemic_balance": self._calculate_glycemic_balance(day)
         }
 
         # Calculer les écarts
@@ -83,7 +84,114 @@ class MealPlan:
                         f"écart: {deviation * 100:.1f}%)"
                     )
 
+        # Ajouter un avertissement si l'équilibre glycémique est mauvais
+        if result["glycemic_balance"]["score"] < 60:
+            result["messages"].append(
+                f"⚠️ Équilibre glycémique insuffisant ({result['glycemic_balance']['score']}/100)"
+            )
+
         return result
+
+    def _calculate_glycemic_balance(self, day: int) -> Dict:
+        """
+        Évalue l'équilibre glycémique d'une journée.
+        Un bon équilibre signifie une distribution appropriée des glucides sur la journée.
+
+        Args:
+            day: Numéro du jour
+
+        Returns:
+            Dict avec le score d'équilibre et des détails
+        """
+        day_meals = self.get_meals_for_day(day)
+
+        if not day_meals:
+            return {"score": 0, "status": "Aucun repas", "details": {}}
+
+        # Calculer la distribution des glucides par repas
+        total_carbs = 0
+        meal_carbs = []
+
+        for meal in day_meals:
+            macros = meal.calculate_macros()
+            carbs = macros.get("carbs", 0)
+            total_carbs += carbs
+            meal_carbs.append({
+                "meal": meal.name,
+                "carbs": carbs,
+                "meal_type": meal.meal_type
+            })
+
+        if total_carbs == 0:
+            return {"score": 0, "status": "Pas de glucides", "details": {}}
+
+        # Vérifier la distribution (éviter les pics glycémiques)
+        # Un bon plan distribue les glucides régulièrement
+        carb_percentages = [m["carbs"] / total_carbs for m in meal_carbs]
+
+        # Calculer l'écart-type de la distribution
+        import statistics
+        if len(carb_percentages) > 1:
+            std_dev = statistics.stdev(carb_percentages)
+            # Un écart-type faible = bonne distribution
+            # Écart-type > 0.2 = mauvaise distribution
+            if std_dev < 0.15:
+                distribution_score = 100
+            elif std_dev < 0.25:
+                distribution_score = 80
+            elif std_dev < 0.35:
+                distribution_score = 60
+            else:
+                distribution_score = 40
+        else:
+            distribution_score = 50  # Score neutre si un seul repas
+
+        # Vérifier qu'il y a des fibres (ralentissent l'absorption)
+        daily_totals = self.calculate_daily_totals(day)
+        fiber_ratio = daily_totals.get("fibers", 0) / total_carbs if total_carbs > 0 else 0
+
+        # Objectif: au moins 0.10 (10g de fibres pour 100g de glucides)
+        if fiber_ratio >= 0.12:
+            fiber_score = 100
+        elif fiber_ratio >= 0.08:
+            fiber_score = 80
+        elif fiber_ratio >= 0.05:
+            fiber_score = 60
+        else:
+            fiber_score = 40
+
+        # Score global (70% distribution, 30% fibres)
+        total_score = distribution_score * 0.70 + fiber_score * 0.30
+
+        # Statut
+        if total_score >= 80:
+            status = "Excellent"
+        elif total_score >= 70:
+            status = "Bon"
+        elif total_score >= 60:
+            status = "Acceptable"
+        else:
+            status = "À améliorer"
+
+        return {
+            "score": round(total_score, 1),
+            "status": status,
+            "details": {
+                "total_carbs": round(total_carbs, 1),
+                "total_fibers": round(daily_totals.get("fibers", 0), 1),
+                "fiber_ratio": round(fiber_ratio, 2),
+                "distribution_score": round(distribution_score, 1),
+                "fiber_score": round(fiber_score, 1),
+                "meal_distribution": [
+                    {
+                        "meal": m["meal"],
+                        "carbs": round(m["carbs"], 1),
+                        "percentage": round((m["carbs"] / total_carbs) * 100, 1)
+                    }
+                    for m in meal_carbs
+                ]
+            }
+        }
 
     def validate_against_target(self, tolerance: float = MACRO_TOLERANCE) -> Dict:
         """
@@ -227,6 +335,199 @@ class MealPlan:
 
         return "\n".join(summary_lines)
 
+    def calculate_quality_score(self) -> Dict:
+        """
+        Calcule un score de qualité global du plan alimentaire.
+        Basé sur les meilleures pratiques de l'industrie (MyFitnessPal, Yazio).
+
+        Returns:
+            Dict contenant les scores et métriques de qualité
+        """
+        # Score nutritionnel (40% du score total)
+        nutrition_score = self._calculate_nutrition_score()
+
+        # Score de diversité (30% du score total)
+        diversity_score = self._calculate_diversity_score()
+
+        # Score de palatabilité (20% du score total)
+        palatability_score = self._calculate_palatability_score()
+
+        # Score de praticité (10% du score total)
+        practicality_score = self._calculate_practicality_score()
+
+        # Score global pondéré
+        total_score = (
+            nutrition_score * 0.40 +
+            diversity_score * 0.30 +
+            palatability_score * 0.20 +
+            practicality_score * 0.10
+        )
+
+        return {
+            "total_score": round(total_score, 2),
+            "nutrition_score": round(nutrition_score, 2),
+            "diversity_score": round(diversity_score, 2),
+            "palatability_score": round(palatability_score, 2),
+            "practicality_score": round(practicality_score, 2),
+            "grade": self._get_grade(total_score),
+            "recommendations": self._generate_recommendations(
+                nutrition_score, diversity_score, palatability_score, practicality_score
+            )
+        }
+
+    def _calculate_nutrition_score(self) -> float:
+        """Score basé sur la précision nutritionnelle (0-100)"""
+        total_deviation = 0.0
+        day_count = 0
+
+        for day in range(1, self.duration_days + 1):
+            day_result = self.validate_day(day)
+            # Moyenne des déviations pour ce jour
+            if day_result["deviations"]:
+                avg_deviation = sum(day_result["deviations"].values()) / len(day_result["deviations"])
+                total_deviation += avg_deviation
+                day_count += 1
+
+        if day_count == 0:
+            return 100.0
+
+        avg_total_deviation = total_deviation / day_count
+
+        # Convertir la déviation en score (moins de déviation = meilleur score)
+        # Tolérance de 10% = score parfait
+        if avg_total_deviation <= 0.10:
+            return 100.0
+        elif avg_total_deviation <= 0.15:
+            return 90.0
+        elif avg_total_deviation <= 0.20:
+            return 75.0
+        else:
+            return max(0, 50 - (avg_total_deviation - 0.20) * 100)
+
+    def _calculate_diversity_score(self) -> float:
+        """Score basé sur la diversité alimentaire (0-100)"""
+        all_foods = []
+        all_categories = []
+
+        for meal in self.meals:
+            for food, qty in meal.foods:
+                all_foods.append(food.name)
+                all_categories.append(food.category)
+
+        unique_foods = len(set(all_foods))
+        unique_categories = len(set(all_categories))
+        total_foods = len(all_foods)
+
+        # Ratio de diversité
+        diversity_ratio = unique_foods / total_foods if total_foods > 0 else 0
+
+        # Objectifs: 20+ aliments uniques/jour, 8+ catégories
+        foods_per_day = unique_foods / self.duration_days if self.duration_days > 0 else 0
+
+        # Score basé sur la diversité
+        food_score = min(100, (foods_per_day / 20) * 100)
+        category_score = min(100, (unique_categories / 8) * 100)
+        ratio_score = diversity_ratio * 100
+
+        return (food_score * 0.5 + category_score * 0.3 + ratio_score * 0.2)
+
+    def _calculate_palatability_score(self) -> float:
+        """Score basé sur la compatibilité et palatabilité des repas (0-100)"""
+        try:
+            from meal_planner.data.food_compatibility import calculate_meal_palatability
+
+            total_palatability = 0.0
+            meal_count = 0
+
+            for meal in self.meals:
+                if len(meal.foods) > 1:
+                    foods = [food.name for food, qty in meal.foods]
+                    categories = [food.category for food, qty in meal.foods]
+                    palatability = calculate_meal_palatability(foods, categories)
+                    total_palatability += palatability
+                    meal_count += 1
+
+            if meal_count == 0:
+                return 75.0  # Score neutre si pas de données
+
+            avg_palatability = total_palatability / meal_count
+            return avg_palatability * 100
+
+        except ImportError:
+            return 75.0  # Score neutre si module non disponible
+
+    def _calculate_practicality_score(self) -> float:
+        """Score basé sur la praticité du plan (portions, quantités) (0-100)"""
+        practical_portions = 0
+        total_portions = 0
+
+        for meal in self.meals:
+            for food, quantity in meal.foods:
+                total_portions += 1
+
+                # Vérifier si la quantité est "pratique" (multiple de 5, 10, 20, 25, 50)
+                if (quantity % 50 == 0 or quantity % 25 == 0 or quantity % 20 == 0 or
+                    quantity % 10 == 0 or quantity % 5 == 0):
+                    practical_portions += 1
+
+        if total_portions == 0:
+            return 100.0
+
+        practicality_ratio = practical_portions / total_portions
+        return practicality_ratio * 100
+
+    def _get_grade(self, score: float) -> str:
+        """Convertit un score en note alphabétique"""
+        if score >= 90:
+            return "A+"
+        elif score >= 85:
+            return "A"
+        elif score >= 80:
+            return "B+"
+        elif score >= 75:
+            return "B"
+        elif score >= 70:
+            return "C+"
+        elif score >= 65:
+            return "C"
+        else:
+            return "D"
+
+    def _generate_recommendations(
+        self,
+        nutrition_score: float,
+        diversity_score: float,
+        palatability_score: float,
+        practicality_score: float
+    ) -> List[str]:
+        """Génère des recommandations pour améliorer le plan"""
+        recommendations = []
+
+        if nutrition_score < 80:
+            recommendations.append(
+                "Ajuster les portions pour mieux respecter les objectifs nutritionnels"
+            )
+
+        if diversity_score < 70:
+            recommendations.append(
+                "Augmenter la variété d'aliments et de catégories alimentaires"
+            )
+
+        if palatability_score < 70:
+            recommendations.append(
+                "Améliorer les combinaisons d'aliments pour une meilleure compatibilité gustative"
+            )
+
+        if practicality_score < 75:
+            recommendations.append(
+                "Arrondir les quantités pour faciliter la préparation"
+            )
+
+        if not recommendations:
+            recommendations.append("Excellent plan alimentaire, aucune amélioration majeure nécessaire!")
+
+        return recommendations
+
     def to_dict(self) -> Dict:
         """
         Convertit le plan en dictionnaire.
@@ -240,7 +541,8 @@ class MealPlan:
             "nutrition_target": self.nutrition_target.to_dict(),
             "meals": [meal.to_dict() for meal in self.meals],
             "notes": self.notes,
-            "validation": self.validate_against_target()
+            "validation": self.validate_against_target(),
+            "quality_score": self.calculate_quality_score()
         }
 
     def __str__(self) -> str:

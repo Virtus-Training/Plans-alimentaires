@@ -1,12 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mkdir:*)",
+      "Bash(\".venv\\Scripts\\python.exe\":*)",
+      "Bash(\".venv/Scripts/python.exe\" test_improvements.py)",
+      "Bash(\"c:\\Users\\Eric\\Documents\\Plans-alimentaires\\.venv\\Scripts\\python.exe\" \"c:\\Users\\Eric\\Documents\\Plans-alimentaires\\main.py\")",
+      "Bash(.venv/Scripts/python.exe:*)",
       "Bash(python:*)",
+      "Bash(.venvScriptspython.exe test_improvements.py)",
+      "Bash(\".venv\\Scripts\\python.exe\" test_improvements.py)",
+      "Bash(\".venv\\Scripts\\python.exe\" test_all_improvements.py)",
+      "Bash(\".venv\\Scripts\\python.exe\" main.py)",
       "Bash(timeout:*)",
-      "Bash(.venvScriptspython.exe populate_test_foods.py)",
-      "Bash(\".venv\\Scripts\\python.exe\" populate_test_foods.py)",
-      "Bash(\".venv\\Scripts\\python.exe\" migrate_database.py)"
+      "Bash(\".venv\\Scripts\\python.exe\" -c \"from meal_planner.controllers.meal_plan_controller import MealPlanController; from meal_planner.models.database import DatabaseManager; print(''✓ Imports OK'')\")"
     ],
     "deny": [],
     "ask": []

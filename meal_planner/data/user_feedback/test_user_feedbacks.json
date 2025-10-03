@@ -1,0 +1,18 @@
+[
+  {
+    "meal_id": null,
+    "meal_name": "Petit-déjeuner - Jour 1",
+    "rating": 5.0,
+    "followed": true,
+    "timestamp": "2025-10-03T09:31:37.398242",
+    "comments": "Excellent!"
+  },
+  {
+    "meal_id": null,
+    "meal_name": "Déjeuner - Jour 1",
+    "rating": 2.0,
+    "followed": false,
+    "timestamp": "2025-10-03T09:31:37.399368",
+    "comments": "Pas apprécié"
+  }
+]

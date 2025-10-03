@@ -8,8 +8,13 @@ from PyQt6.QtCore import QObject, pyqtSignal
 from meal_planner.models.meal_plan import MealPlan
 from meal_planner.models.nutrition import NutritionTarget
 from meal_planner.models.database import DatabaseManager
-from meal_planner.services.meal_generator import MealGenerator, MealDistribution
+from meal_planner.services.meal_generators import (
+    MealDistribution,
+    FoodBasedGenerator, PresetMealGenerator,
+    ComponentBasedGenerator, CategoryBasedGenerator
+)
 from meal_planner.utils.logger import get_logger
+from meal_planner.utils.diet_filters import apply_diet_filter
 
 logger = get_logger(__name__)
 
@@ -39,6 +44,64 @@ class MealPlanController(QObject):
         self.db_manager = db_manager
         self.current_plan: Optional[MealPlan] = None
 
+    def _create_generator(
+        self,
+        mode: str,
+        available_foods,
+        nutrition_target,
+        distribution,
+        price_level,
+        health_index,
+        variety_level,
+        feedback_system
+    ):
+        """
+        Factory method pour créer le générateur approprié selon le mode.
+
+        Args:
+            mode: Mode de génération ("food", "preset", "components", "categories")
+            available_foods: Liste des aliments disponibles
+            nutrition_target: Objectif nutritionnel
+            distribution: Répartition calorique
+            price_level: Niveau de prix
+            health_index: Indice de santé
+            variety_level: Niveau de variété
+            feedback_system: Système de feedback utilisateur
+
+        Returns:
+            Instance du générateur approprié
+        """
+        common_params = {
+            "available_foods": available_foods,
+            "nutrition_target": nutrition_target,
+            "distribution": distribution,
+            "price_level": price_level,
+            "health_index": health_index,
+            "variety_level": variety_level,
+            "feedback_system": feedback_system
+        }
+
+        if mode == "food":
+            logger.info("Utilisation du mode 'Par Aliments' (FoodBasedGenerator)")
+            return FoodBasedGenerator(**common_params)
+
+        elif mode == "preset":
+            logger.info("Utilisation du mode 'Repas Complets' (PresetMealGenerator)")
+            # Passer aussi le db_manager pour accéder aux repas prédéfinis
+            return PresetMealGenerator(**common_params, db_manager=self.db_manager)
+
+        elif mode == "components":
+            logger.info("Utilisation du mode 'Entrée/Plat/Dessert' (ComponentBasedGenerator)")
+            return ComponentBasedGenerator(**common_params, db_manager=self.db_manager)
+
+        elif mode == "categories":
+            logger.info("Utilisation du mode 'Par Catégories' (CategoryBasedGenerator)")
+            return CategoryBasedGenerator(**common_params)
+
+        else:
+            logger.warning(f"Mode inconnu '{mode}', fallback sur 'Par Aliments'")
+            return FoodBasedGenerator(**common_params)
+
     def generate_meal_plan(self, settings: Dict) -> None:
         """
         Génère un plan alimentaire basé sur les paramètres.
@@ -67,12 +130,36 @@ class MealPlanController(QObject):
             # Récupérer les aliments disponibles selon les préférences
             self.status_updated.emit("Chargement des aliments...")
 
-            if dietary_preferences:
-                available_foods = self.db_manager.get_foods_with_tags(dietary_preferences)
-                logger.info(f"{len(available_foods)} aliments trouvés avec les préférences: {dietary_preferences}")
+            # Séparer les régimes spécifiques des autres préférences
+            special_diets = ['keto', 'paleo', 'mediterranean']
+            diet_type = None
+            other_preferences = []
+
+            for pref in dietary_preferences:
+                if pref in special_diets:
+                    diet_type = pref
+                else:
+                    other_preferences.append(pref)
+
+            # Charger les aliments avec les préférences non-régimes (vegetarian, vegan, etc.)
+            if other_preferences:
+                available_foods = self.db_manager.get_foods_with_tags(other_preferences)
+                logger.info(f"{len(available_foods)} aliments trouvés avec les préférences: {other_preferences}")
             else:
                 available_foods = self.db_manager.get_all_foods()
                 logger.info(f"{len(available_foods)} aliments disponibles au total")
+
+            # Appliquer les filtres de régimes spécifiques (Keto, Paléo, Méditerranéen)
+            if diet_type:
+                self.status_updated.emit(f"Application du régime {diet_type}...")
+                available_foods, nutrition_target = apply_diet_filter(
+                    available_foods,
+                    diet_type,
+                    nutrition_target
+                )
+                logger.info(
+                    f"Régime {diet_type} appliqué: {len(available_foods)} aliments compatibles"
+                )
 
             if len(available_foods) < 5:
                 raise ValueError(
@@ -96,15 +183,19 @@ class MealPlanController(QObject):
             price_level = settings.get("price_level", 5)
             health_index = settings.get("health_index", 5)
             variety_level = settings.get("variety_level", 5)
+            feedback_system = settings.get("feedback_system", None)
+            generation_mode = settings.get("generation_mode", "food")
 
-            # Créer le générateur
-            generator = MealGenerator(
+            # Factory Pattern: Créer le générateur approprié selon le mode
+            generator = self._create_generator(
+                mode=generation_mode,
                 available_foods=available_foods,
                 nutrition_target=nutrition_target,
                 distribution=distribution,
                 price_level=price_level,
                 health_index=health_index,
-                variety_level=variety_level
+                variety_level=variety_level,
+                feedback_system=feedback_system
             )
 
             # Générer les repas pour chaque jour
@@ -113,15 +204,22 @@ class MealPlanController(QObject):
             for day in range(1, duration_days + 1):
                 self.status_updated.emit(f"Génération jour {day}/{duration_days}...")
 
+                # Réinitialiser l'accumulation journalière au début de chaque jour
+                generator.daily_accumulated_calories = 0.0
+
                 # Réinitialiser l'historique des aliments tous les 2 jours pour la variété
                 if day > 1 and day % 2 == 1:
                     generator.reset_used_foods()
 
-                for meal_type, percentage in meal_types:
+                for i, (meal_type, percentage) in enumerate(meal_types):
+                    # Déterminer si c'est le dernier repas de la journée
+                    is_last_meal = (i == len(meal_types) - 1)
+
                     meal = generator.generate_meal(
                         meal_type=meal_type,
                         day_number=day,
-                        target_percentage=percentage
+                        target_percentage=percentage,
+                        is_last_meal_of_day=is_last_meal
                     )
                     meal_plan.add_meal(meal)
 
