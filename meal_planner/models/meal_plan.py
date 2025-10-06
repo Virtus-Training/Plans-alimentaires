@@ -545,6 +545,35 @@ class MealPlan:
             "quality_score": self.calculate_quality_score()
         }
 
+    def save_to_json(self, filepath: str) -> bool:
+        """
+        Sauvegarde le plan alimentaire au format JSON.
+
+        Args:
+            filepath: Chemin du fichier de sauvegarde
+
+        Returns:
+            True si sauvegarde réussie, False sinon
+        """
+        import json
+        from datetime import datetime
+
+        try:
+            data = {
+                "version": "1.0",
+                "created_at": datetime.now().isoformat(),
+                "plan": self.to_dict()
+            }
+
+            with open(filepath, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+
+            return True
+
+        except Exception as e:
+            print(f"Erreur lors de la sauvegarde: {e}")
+            return False
+
     def __str__(self) -> str:
         """Représentation textuelle du plan."""
         return (

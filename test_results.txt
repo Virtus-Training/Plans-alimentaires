@@ -1,0 +1,420 @@
+Base de données: 108 aliments disponibles
+
+
+################################################################################
+# PROFIL: Femme sédentaire - Perte de poids
+# Objectif: 1500 kcal/jour
+################################################################################
+
+================================================================================
+ANALYSE DU PLAN: 1500 kcal/jour
+================================================================================
+
+--- JOUR 1 ---
+
+Total jour: 1474 kcal | P: 88.5g | C: 153.3g | F: 52.8g | Fibres: 40.6g
+
+  Petit-déjeuner - Jour 1:
+    Aliments (4): 
+      - Lait de soja (non sucré): 10g
+      - Beurre d'amande: 20g
+      - Skyr nature: 125g
+      - Poivron rouge: 500g (150.0g/unité)
+    Macros: 370 kcal | P: 23.3g | C: 38.9g | F: 13.1g
+
+  Déjeuner - Jour 1:
+    Aliments (5): 
+      - Saumon: 100g
+      - Saumon fumé: 10g
+      - Pâtes complètes: 100g
+      - Patate douce: 10g
+      - Graines de sésame: 10g
+    Macros: 638 kcal | P: 36.8g | C: 68.3g | F: 20.9g
+
+  Goûter - Jour 1:
+    Aliments (4): 
+      - Semoule (cuite): 20g
+      - Courgette (cuite): 15g (250.0g/unité)
+      - Maquereau (grillé): 10g
+      - Houmous (maison): 10g
+    Macros: 68 kcal | P: 4.1g | C: 6.5g | F: 2.8g
+
+  Dîner - Jour 1:
+    Aliments (5): 
+      - Huile d'olive: 10g
+      - Fèves (cuits): 200g
+      - Saumon (cuit): 10g
+      - Thon en conserve (au naturel): 20g
+      - Graines de chia: 10g
+    Macros: 399 kcal | P: 24.3g | C: 39.6g | F: 16.0g
+
+================================================================================
+SCORES DE QUALITÉ
+================================================================================
+Score global: 93.1/100 (Grade: A+)
+  - Nutrition: 100.0/100
+  - Diversité: 95.0/100
+  - Palatabilité: 73.2/100
+  - Praticité: 100.0/100
+
+Recommandations:
+  - Excellent plan alimentaire, aucune amélioration majeure nécessaire!
+
+Validation: [OK] VALIDE
+
+================================================================================
+COMPARAISON AVEC STANDARDS PROFESSIONNELS
+================================================================================
+
+1. NOMBRE D'ALIMENTS PAR REPAS
+   Standard professionnel:
+   - Petit-déjeuner: 3-5 aliments
+   - Déjeuner/Dîner: 4-7 aliments
+   - Collations: 1-3 aliments
+
+   Notre génération:
+   [OK] Petit-déjeuner - Jour 1: 4 aliments
+   [OK] Déjeuner - Jour 1: 5 aliments
+   [OK] Goûter - Jour 1: 4 aliments
+   [OK] Dîner - Jour 1: 5 aliments
+
+2. RÉPARTITION DES MACRONUTRIMENTS
+   Standard professionnel:
+   - Protéines: 15-30% des calories
+   - Glucides: 45-65% des calories
+   - Lipides: 20-35% des calories
+
+   day_1:
+   - Proteines: 24.0% [OK]
+   - Glucides: 41.6% [X] (hors norme)
+   - Lipides: 32.3% [OK]
+
+3. APPORT EN FIBRES
+   Standard professionnel: 25-30g/jour minimum
+   day_1: 40.6g [OK]
+
+4. PORTIONS RÉALISTES
+   Standard professionnel:
+   - Pas de portions < 30g (sauf condiments/épices)
+   - Pas de portions > 300g (sauf légumes)
+
+   Portions problematiques trouvees:
+   [X] Lait de soja (non sucré): 10g trop petit
+   [X] Beurre d'amande: 20g trop petit
+   [X] Poivron rouge: 500g tres gros
+   [X] Saumon fumé: 10g trop petit
+   [X] Patate douce: 10g trop petit
+   [X] Graines de sésame: 10g trop petit
+   [X] Semoule (cuite): 20g trop petit
+   [X] Courgette (cuite): 15g trop petit
+   [X] Maquereau (grillé): 10g trop petit
+   [X] Houmous (maison): 10g trop petit
+
+================================================================================
+RÉSUMÉ DE LA CONFORMITÉ
+================================================================================
+[X] 14 problemes detectes:
+   day_1: Glucides 41.6% hors norme
+   [X] Lait de soja (non sucré): 10g trop petit
+   [X] Beurre d'amande: 20g trop petit
+   [X] Poivron rouge: 500g tres gros
+   [X] Saumon fumé: 10g trop petit
+   [X] Patate douce: 10g trop petit
+   [X] Graines de sésame: 10g trop petit
+   [X] Semoule (cuite): 20g trop petit
+   [X] Courgette (cuite): 15g trop petit
+   [X] Maquereau (grillé): 10g trop petit
+   [X] Houmous (maison): 10g trop petit
+   [X] Saumon (cuit): 10g trop petit
+   [X] Thon en conserve (au naturel): 20g trop petit
+   [X] Graines de chia: 10g trop petit
+
+
+################################################################################
+# PROFIL: Homme actif - Maintien
+# Objectif: 2200 kcal/jour
+################################################################################
+
+================================================================================
+ANALYSE DU PLAN: 2200 kcal/jour
+================================================================================
+
+--- JOUR 1 ---
+
+Total jour: 2184 kcal | P: 138.7g | C: 245.0g | F: 74.2g | Fibres: 67.7g
+
+  Petit-déjeuner - Jour 1:
+    Aliments (6): 
+      - Flocons d'avoine: 20g
+      - Grenade (arilles): 100g
+      - Beurre d'amande: 30g
+      - Pêche: 10g (150.0g/unité)
+      - Cabillaud (cuit): 100g
+      - Poivron rouge: 500g (150.0g/unité)
+    Macros: 624 kcal | P: 39.5g | C: 68.6g | F: 21.8g
+
+  Déjeuner - Jour 1:
+    Aliments (4): 
+      - Chou kale (cru): 500g
+      - Millet (cuit): 150g
+      - Edamame: 300g
+      - Huile de coco: 10g
+    Macros: 937 kcal | P: 59.8g | C: 106.5g | F: 31.0g
+
+  Goûter - Jour 1:
+    Aliments (4): 
+      - Ananas: 10g
+      - Quinoa (cuit): 40g
+      - Chou-fleur (cuit): 60g
+      - Saumon: 20g
+    Macros: 108 kcal | P: 7.0g | C: 12.2g | F: 3.7g
+
+  Dîner - Jour 1:
+    Aliments (5): 
+      - Saumon fumé: 100g
+      - Courge butternut (rôtie): 10g
+      - Quinoa: 80g
+      - Tempeh: 10g
+      - Avocat: 50g
+    Macros: 515 kcal | P: 32.5g | C: 57.7g | F: 17.7g
+
+================================================================================
+SCORES DE QUALITÉ
+================================================================================
+Score global: 93.6/100 (Grade: A+)
+  - Nutrition: 100.0/100
+  - Diversité: 97.5/100
+  - Palatabilité: 71.7/100
+  - Praticité: 100.0/100
+
+Recommandations:
+  - Excellent plan alimentaire, aucune amélioration majeure nécessaire!
+
+Validation: [OK] VALIDE
+
+================================================================================
+COMPARAISON AVEC STANDARDS PROFESSIONNELS
+================================================================================
+
+1. NOMBRE D'ALIMENTS PAR REPAS
+   Standard professionnel:
+   - Petit-déjeuner: 3-5 aliments
+   - Déjeuner/Dîner: 4-7 aliments
+   - Collations: 1-3 aliments
+
+   Notre génération:
+   [OK] Petit-déjeuner - Jour 1: 6 aliments
+   [OK] Déjeuner - Jour 1: 4 aliments
+   [OK] Goûter - Jour 1: 4 aliments
+   [OK] Dîner - Jour 1: 5 aliments
+
+2. RÉPARTITION DES MACRONUTRIMENTS
+   Standard professionnel:
+   - Protéines: 15-30% des calories
+   - Glucides: 45-65% des calories
+   - Lipides: 20-35% des calories
+
+   day_1:
+   - Proteines: 25.4% [OK]
+   - Glucides: 44.9% [X] (hors norme)
+   - Lipides: 30.6% [OK]
+
+3. APPORT EN FIBRES
+   Standard professionnel: 25-30g/jour minimum
+   day_1: 67.7g [OK]
+
+4. PORTIONS RÉALISTES
+   Standard professionnel:
+   - Pas de portions < 30g (sauf condiments/épices)
+   - Pas de portions > 300g (sauf légumes)
+
+   Portions problematiques trouvees:
+   [X] Flocons d'avoine: 20g trop petit
+   [X] Pêche: 10g trop petit
+   [X] Poivron rouge: 500g tres gros
+   [X] Chou kale (cru): 500g tres gros
+   [X] Ananas: 10g trop petit
+   [X] Saumon: 20g trop petit
+   [X] Courge butternut (rôtie): 10g trop petit
+   [X] Tempeh: 10g trop petit
+
+================================================================================
+RÉSUMÉ DE LA CONFORMITÉ
+================================================================================
+[X] 9 problemes detectes:
+   day_1: Glucides 44.9% hors norme
+   [X] Flocons d'avoine: 20g trop petit
+   [X] Pêche: 10g trop petit
+   [X] Poivron rouge: 500g tres gros
+   [X] Chou kale (cru): 500g tres gros
+   [X] Ananas: 10g trop petit
+   [X] Saumon: 20g trop petit
+   [X] Courge butternut (rôtie): 10g trop petit
+   [X] Tempeh: 10g trop petit
+
+
+################################################################################
+# PROFIL: Sportif - Prise de masse
+# Objectif: 3000 kcal/jour
+################################################################################
+
+================================================================================
+ANALYSE DU PLAN: 3000 kcal/jour
+================================================================================
+
+--- JOUR 1 ---
+
+Total jour: 3011 kcal | P: 196.5g | C: 372.1g | F: 103.8g | Fibres: 112.2g
+
+  Petit-déjeuner - Jour 1:
+    Aliments (5): 
+      - Myrtilles: 200g
+      - Avocat: 80g
+      - Framboises: 500g
+      - Beurre d'amande: 15g
+      - Cabillaud (cuit): 175g
+    Macros: 785 kcal | P: 52.4g | C: 98.0g | F: 26.1g
+
+  Déjeuner - Jour 1:
+    Aliments (8): 
+      - Courge butternut (rôtie): 500g
+      - Épinards (cuits): 500g
+      - Betterave (cuite): 500g
+      - Huile d'olive: 30g
+      - Tofu: 80g
+      - Thon en conserve (au naturel): 125g
+      - Poivron rouge: 500g (150.0g/unité)
+      - Tofu ferme: 60g
+    Macros: 1283 kcal | P: 82.6g | C: 157.3g | F: 45.2g
+
+  Goûter - Jour 1:
+    Aliments (4): 
+      - Riz basmati (cuit): 10g
+      - Concombre: 400g (300.0g/unité)
+      - Œufs: 15g (50.0g/unité)
+      - Saumon: 20g
+    Macros: 135 kcal | P: 9.0g | C: 17.0g | F: 4.5g
+
+  Dîner - Jour 1:
+    Aliments (5): 
+      - Tomates: 300g (120.0g/unité)
+      - Graines de sésame: 50g
+      - Raisin: 60g
+      - Pêche: 500g (150.0g/unité)
+      - Fromage blanc 0%: 450g
+    Macros: 808 kcal | P: 52.5g | C: 99.8g | F: 28.0g
+
+================================================================================
+SCORES DE QUALITÉ
+================================================================================
+Score global: 94.9/100 (Grade: A+)
+  - Nutrition: 100.0/100
+  - Diversité: 100.0/100
+  - Palatabilité: 74.5/100
+  - Praticité: 100.0/100
+
+Recommandations:
+  - Excellent plan alimentaire, aucune amélioration majeure nécessaire!
+
+Validation: [OK] VALIDE
+
+================================================================================
+COMPARAISON AVEC STANDARDS PROFESSIONNELS
+================================================================================
+
+1. NOMBRE D'ALIMENTS PAR REPAS
+   Standard professionnel:
+   - Petit-déjeuner: 3-5 aliments
+   - Déjeuner/Dîner: 4-7 aliments
+   - Collations: 1-3 aliments
+
+   Notre génération:
+   [OK] Petit-déjeuner - Jour 1: 5 aliments
+   [OK] Goûter - Jour 1: 4 aliments
+   [OK] Dîner - Jour 1: 5 aliments
+
+2. RÉPARTITION DES MACRONUTRIMENTS
+   Standard professionnel:
+   - Protéines: 15-30% des calories
+   - Glucides: 45-65% des calories
+   - Lipides: 20-35% des calories
+
+   day_1:
+   - Proteines: 26.1% [OK]
+   - Glucides: 49.4% [OK]
+   - Lipides: 31.0% [OK]
+
+3. APPORT EN FIBRES
+   Standard professionnel: 25-30g/jour minimum
+   day_1: 112.2g [OK]
+
+4. PORTIONS RÉALISTES
+   Standard professionnel:
+   - Pas de portions < 30g (sauf condiments/épices)
+   - Pas de portions > 300g (sauf légumes)
+
+   Portions problematiques trouvees:
+   [X] Framboises: 500g tres gros
+   [X] Beurre d'amande: 15g trop petit
+   [X] Courge butternut (rôtie): 500g tres gros
+   [X] Épinards (cuits): 500g tres gros
+   [X] Betterave (cuite): 500g tres gros
+   [X] Poivron rouge: 500g tres gros
+   [X] Riz basmati (cuit): 10g trop petit
+   [X] Concombre: 400g tres gros
+   [X] Œufs: 15g trop petit
+   [X] Saumon: 20g trop petit
+
+================================================================================
+RÉSUMÉ DE LA CONFORMITÉ
+================================================================================
+[X] 13 problemes detectes:
+   [X] Déjeuner - Jour 1: 8 aliments (hors norme 4-7)
+   [X] Framboises: 500g tres gros
+   [X] Beurre d'amande: 15g trop petit
+   [X] Courge butternut (rôtie): 500g tres gros
+   [X] Épinards (cuits): 500g tres gros
+   [X] Betterave (cuite): 500g tres gros
+   [X] Poivron rouge: 500g tres gros
+   [X] Riz basmati (cuit): 10g trop petit
+   [X] Concombre: 400g tres gros
+   [X] Œufs: 15g trop petit
+   [X] Saumon: 20g trop petit
+   [X] Pêche: 500g tres gros
+   [X] Fromage blanc 0%: 450g tres gros
+
+
+################################################################################
+# SYNTHÈSE GLOBALE
+################################################################################
+
+Femme sédentaire - Perte de poids:
+  Score qualite: 93.1/100 (A+)
+  Problemes detectes: 14
+  Validation: [OK]
+
+Homme actif - Maintien:
+  Score qualite: 93.6/100 (A+)
+  Problemes detectes: 9
+  Validation: [OK]
+
+Sportif - Prise de masse:
+  Score qualite: 94.9/100 (A+)
+  Problemes detectes: 13
+  Validation: [OK]
+
+================================================================================
+AXES D'AMÉLIORATION PRIORITAIRES
+================================================================================
+
+Scores moyens (du plus faible au plus fort):
+  Palatabilité: 73.1/100 - [!] Moyen
+  Diversité: 97.5/100 - [OK] Bon
+  Nutrition: 100.0/100 - [OK] Bon
+  Praticité: 100.0/100 - [OK] Bon
+
+Recommandations prioritaires:
+  1. Ameliorer le score de Palatabilité (actuellement 73.1)
+
+
+Test terminé!

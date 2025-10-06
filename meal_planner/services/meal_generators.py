@@ -56,6 +56,18 @@ except ImportError:
     logger = get_logger(__name__)
     logger.warning("Module de saisonnalité non disponible")
 
+# Importer les règles de cohérence de repas
+try:
+    from meal_planner.data.meal_coherence_rules import (
+        get_meal_coherence_score,
+        get_combination_penalty
+    )
+    COHERENCE_RULES_AVAILABLE = True
+except ImportError:
+    COHERENCE_RULES_AVAILABLE = False
+    logger = get_logger(__name__)
+    logger.warning("Module de règles de cohérence non disponible")
+
 logger = get_logger(__name__)
 
 
@@ -80,7 +92,7 @@ class MealGeneratorBase(ABC):
         available_foods: List[Food],
         nutrition_target: NutritionTarget,
         distribution: Optional[MealDistribution] = None,
-        tolerance: float = 0.15,
+        tolerance: float = 0.10,  # CORRECTION: Réduit de 0.15 à 0.10 (15% → 10%)
         price_level: int = 5,
         health_index: int = 5,
         variety_level: int = 5,
@@ -252,6 +264,7 @@ class MealGeneratorBase(ABC):
     def _round_to_practical_portion(self, quantity: float, food: Food) -> float:
         """
         Arrondit une quantité à une portion pratique et réaliste.
+        Si l'aliment a un poids unitaire défini, arrondit au multiple d'unités le plus proche.
 
         Args:
             quantity: Quantité brute en grammes
@@ -260,27 +273,68 @@ class MealGeneratorBase(ABC):
         Returns:
             Quantité arrondie en grammes
         """
-        # Arrondir toujours au minimum à 10g
-        if quantity < 10:
-            return 10
+        # Si l'aliment a un poids unitaire défini, arrondir au nombre d'unités
+        if food.unit_weight and food.unit_weight > 0:
+            # Calculer le nombre d'unités nécessaires
+            num_units = quantity / food.unit_weight
 
-        # Portions très petites (huiles, épices, etc.) : arrondir à 5g
-        if quantity < 20:
+            # Arrondir au nombre entier d'unités le plus proche (min 1 unité)
+            rounded_units = max(1, round(num_units))
+
+            # LIMITE IMPORTANTE: Ne pas dépasser 3 unités pour éviter portions aberrantes
+            # Ex: éviter 500g de poivron (3+ unités), préférer max 2 unités = 300g
+            max_units = 3
+            if rounded_units > max_units:
+                rounded_units = max_units
+
+            # Retourner le poids total pour ce nombre d'unités
+            return rounded_units * food.unit_weight
+
+        # Sinon, utiliser la logique par catégorie
+        category_lower = food.category.lower()
+
+        # Portions minimales selon la catégorie
+        if any(cat in category_lower for cat in ["huile", "matières grasses"]):
+            min_portion = 10  # Minimum 10g d'huile (environ 1 cuillère à soupe)
+            if quantity < min_portion:
+                return min_portion
+            return round(quantity / 5) * 5  # Arrondir à 5g
+
+        elif any(cat in category_lower for cat in ["épices", "condiments"]):
+            min_portion = 5  # Minimum 5g pour épices
+            if quantity < min_portion:
+                return min_portion
             return round(quantity / 5) * 5
 
-        # Portions petites (beurre, fromage) : arrondir à 10g
+        elif any(cat in category_lower for cat in ["fromage", "beurre"]):
+            min_portion = 20  # Minimum 20g de fromage/beurre
+            if quantity < min_portion:
+                return min_portion
+            return round(quantity / 10) * 10  # Arrondir à 10g
+
+        elif any(cat in category_lower for cat in ["lait", "boisson"]):
+            min_portion = 100  # Minimum 100ml de lait
+            if quantity < min_portion:
+                return min_portion
+            return round(quantity / 50) * 50  # Arrondir à 50ml
+
+        elif any(cat in category_lower for cat in ["œuf"]):
+            min_portion = 50  # Minimum 50g (1 œuf)
+            if quantity < min_portion:
+                return min_portion
+            return round(quantity / 50) * 50  # Arrondir à 50g (par œuf)
+
+        # Pour tous les autres aliments (viandes, légumes, féculents, etc.)
+        min_portion = 30  # Minimum 30g pour portion visible
+
+        if quantity < min_portion:
+            return min_portion
         elif quantity < 50:
             return round(quantity / 10) * 10
-
-        # Portions moyennes : arrondir à 20g pour plus de praticité
         elif quantity < 100:
             return round(quantity / 20) * 20
-
-        # Portions grandes : arrondir à 25g
         elif quantity < 200:
             return round(quantity / 25) * 25
-
-        # Très grandes portions : arrondir à 50g
         else:
             return round(quantity / 50) * 50
 
@@ -317,6 +371,12 @@ class FoodBasedGenerator(MealGeneratorBase):
         Returns:
             Repas généré
         """
+        # CORRECTION CRITIQUE: Ajuster min/max_foods pour les collations
+        # Problème identifié : collations avec 9 aliments dépassent massivement la cible (+200-500%)
+        if "snack" in meal_type.lower():
+            min_foods = 2  # Minimum 2 aliments pour une collation
+            max_foods = 4  # Maximum 4 aliments pour rester léger
+
         # Calculer l'objectif nutritionnel pour ce repas
         meal_target = self.nutrition_target.scale_for_meal(target_percentage)
 
@@ -334,7 +394,7 @@ class FoodBasedGenerator(MealGeneratorBase):
             f"accumulé: {self.daily_accumulated_calories:.0f} kcal)"
         )
 
-        # Sélectionner les aliments
+        # Sélectionner les aliments avec le type de repas
         selected_foods = self._select_foods_for_meal(
             adjusted_target,
             meal_type,
@@ -394,12 +454,35 @@ class FoodBasedGenerator(MealGeneratorBase):
             if f.id not in self.used_foods
         ]
 
-        # Si trop peu d'aliments disponibles, réinitialiser l'historique
-        # Augmenter le seuil pour forcer plus de variété
-        if len(available) < max_foods * 3:
+        # CORRECTION: Augmenter le seuil de réinitialisation pour plus de variété
+        # Problème identifié : aliments répétés jusqu'à 10× sur 7 jours
+        # Anciennement: max_foods * 3, maintenant: max_foods * 5 pour plus de variété
+        if len(available) < max_foods * 5:
             self.used_foods.clear()
             available = self.available_foods
             logger.info("Réinitialisation de l'historique des aliments utilisés")
+
+        # CORRECTION CRITIQUE: Filtrer les aliments trop riches en glucides pour profils low-carb
+        # Problème identifié : Pois cassés (41g glucides) systématiquement sélectionnés
+        if target.carbs < 150:  # Profil faible en glucides
+            # Calculer le seuil acceptable de glucides par aliment (pour 100g)
+            # Si cible totale = 100g, un aliment ne devrait pas avoir >15g/100g
+            max_carbs_per_100g = target.carbs * 0.15  # 15% de la cible quotidienne
+
+            carb_filtered = []
+            for food in available:
+                # Exclure les aliments dont les glucides dépassent le seuil
+                # SAUF s'ils sont très faibles en calories (légumes verts)
+                if food.carbs <= max_carbs_per_100g or food.calories < 50:
+                    carb_filtered.append(food)
+                else:
+                    logger.debug(f"Aliment exclu (low-carb): {food.name} ({food.carbs:.1f}g glucides/100g)")
+
+            if len(carb_filtered) >= min_foods:
+                available = carb_filtered
+                logger.info(f"Filtrage low-carb: {len(carb_filtered)}/{len(available)} aliments conservés")
+            else:
+                logger.warning(f"Filtrage low-carb trop strict, conservé tous les aliments")
 
         # Filtrer et prioriser selon le type de repas
         prioritized = self._filter_and_prioritize_by_meal_type(available, meal_type)
@@ -487,7 +570,8 @@ class FoodBasedGenerator(MealGeneratorBase):
                 target,
                 min_foods,
                 max_foods,
-                is_last_meal
+                is_last_meal,
+                meal_type  # Ajouter le type de repas
             )
 
             # Évaluer la qualité de cette solution
@@ -529,7 +613,8 @@ class FoodBasedGenerator(MealGeneratorBase):
         target: NutritionTarget,
         min_foods: int,
         max_foods: int,
-        is_last_meal: bool
+        is_last_meal: bool,
+        meal_type: str = ""
     ) -> List[Tuple[Food, float]]:
         """Sélection gloutonne standard."""
         selected = []
@@ -545,7 +630,8 @@ class FoodBasedGenerator(MealGeneratorBase):
                 current_macros,
                 len(selected),
                 is_last_meal,
-                selected  # Passer les aliments déjà sélectionnés pour compatibilité
+                selected,  # Passer les aliments déjà sélectionnés pour compatibilité
+                meal_type  # Passer le type de repas pour cohérence
             )
 
             if best_food is None:
@@ -561,12 +647,24 @@ class FoodBasedGenerator(MealGeneratorBase):
 
             prioritized = [f for f in prioritized if f.id != best_food.id]
 
+            # Vérifier si on peut s'arrêter (seulement après le minimum)
             if len(selected) >= min_foods:
                 cal_ratio = current_macros["calories"] / target.calories if target.calories > 0 else 0
-                if is_last_meal and 0.97 <= cal_ratio <= 1.05:
-                    break
-                elif not is_last_meal and 0.90 <= cal_ratio <= 1.05:
-                    break
+
+                # Conditions d'arrêt plus strictes pour éviter de toujours avoir le minimum
+                # On s'arrête seulement si on est vraiment proche de la cible
+                if is_last_meal:
+                    # Dernier repas: être très précis (95-105%)
+                    if 0.95 <= cal_ratio <= 1.05:
+                        break
+                else:
+                    # Autres repas: être assez précis (92-103%)
+                    # Mais continuer si on est en dessous ET qu'on n'a pas atteint max_foods
+                    if 0.92 <= cal_ratio <= 1.03:
+                        # Ajouter un facteur aléatoire pour la variabilité
+                        # 60% de chance de s'arrêter, 40% de continuer pour plus de variété
+                        if random.random() < 0.6 or len(selected) >= max_foods - 1:
+                            break
 
         return selected
 
@@ -648,7 +746,8 @@ class FoodBasedGenerator(MealGeneratorBase):
         current_macros: Dict[str, float],
         current_food_count: int,
         is_last_meal: bool = False,
-        selected_foods: List[Tuple[Food, float]] = None
+        selected_foods: List[Tuple[Food, float]] = None,
+        meal_type: str = ""
     ) -> Tuple[Optional[Food], float, float]:
         """
         Trouve le meilleur aliment pour compléter les macros actuelles.
@@ -676,12 +775,76 @@ class FoodBasedGenerator(MealGeneratorBase):
         }
 
         for food in available_foods:
+            # RÈGLE STRICTE PALATABILITÉ: Si un féculent est déjà sélectionné, interdire un autre féculent
+            # CORRECTION: Toujours appliquer cette règle + détecter les variations du même féculent
+            if selected_foods:
+                try:
+                    from meal_planner.data.meal_coherence_rules import is_starch_food, get_starch_base_name
+
+                    # Vérifier si un féculent est déjà dans le repas
+                    existing_starches = []
+                    for sf, _ in selected_foods:
+                        if is_starch_food(sf.category, sf.name):
+                            # Stocker le nom de base pour détecter les variantes
+                            existing_starches.append(get_starch_base_name(sf.name))
+
+                    # Si food actuel est un féculent
+                    if is_starch_food(food.category, food.name):
+                        # Vérifier si c'est le même type de féculent (ou un autre)
+                        current_base = get_starch_base_name(food.name)
+
+                        # INTERDIRE si:
+                        # 1. C'est un féculent différent (base différente)
+                        # 2. OU c'est le même féculent mais déjà présent
+                        if existing_starches and (
+                            current_base in existing_starches or  # Même féculent
+                            len(existing_starches) > 0  # Ou féculent différent
+                        ):
+                            continue  # SKIP cet aliment complètement
+                except ImportError:
+                    # Si module non disponible, continuer sans cette vérification
+                    pass
+
             # Essayer différentes quantités ARRONDIES dès le départ
             quantities = self._get_reasonable_quantities(food, remaining["calories"])
 
             for quantity in quantities:
                 # Forcer l'arrondi pour maximiser les portions pratiques
                 quantity = self._round_to_practical_portion(quantity, food)
+
+                # FILTRE CRITIQUE: Exclure les portions trop petites ou trop grandes
+                # Portions minimales selon la catégorie FINE
+                category_lower = food.category.lower()
+                food_name_lower = food.name.lower()
+
+                # Définir portion minimale acceptable par catégorie fine
+                # Chercher dans catégorie ET nom pour plus de robustesse
+                combined_text = (category_lower + " " + food_name_lower).lower()
+
+                if any(cat in combined_text for cat in ["huile", "matiere", "matieres", "grasse", "grasses"]):
+                    min_acceptable = 10  # Huiles: min 10g (1 cuillère à soupe)
+                elif any(cat in combined_text for cat in ["epice", "épice", "condiment"]):
+                    min_acceptable = 5  # Épices/condiments: min 5g
+                elif any(cat in combined_text for cat in ["chocolat", "cacao"]):
+                    min_acceptable = 20  # Chocolat: min 20g (2 carrés)
+                elif any(word in combined_text for word in ["graine", "noix", "amande", "noisette", "cacahuete", "cacahuète", "sesame", "sésame", "chia", "lin", "tournesol", "pecan", "cajou"]):
+                    min_acceptable = 20  # Noix/graines: min 20g (poignée minimale)
+                elif any(cat in combined_text for cat in ["fromage", "beurre"]):
+                    min_acceptable = 30  # Fromages: min 30g
+                elif any(word in combined_text for word in ["lait", "yaourt", "skyr", "fromage blanc", "kefir", "kéfir", "cottage"]):
+                    min_acceptable = 100  # Laitages liquides: min 100g/ml
+                else:
+                    min_acceptable = 30  # Minimum 30g pour tous les autres aliments
+
+                # Exclure les portions trop petites
+                if quantity < min_acceptable:
+                    continue
+
+                # Exclure les portions trop grandes (sauf légumes/salades)
+                max_acceptable = 500 if any(cat in category_lower for cat in ["légumes", "salade"]) else 300
+                if quantity > max_acceptable:
+                    continue
+
                 food_macros = food.calculate_for_quantity(quantity)
 
                 # Calculer le score nutritionnel de base (distance aux objectifs)
@@ -700,28 +863,78 @@ class FoodBasedGenerator(MealGeneratorBase):
                 # Calculer le score de compatibilité avec les aliments déjà sélectionnés
                 compatibility_score = self._calculate_compatibility_score(food, selected_foods)
 
-                # Score composite pondéré - VARIETY_LEVEL MAXIMISÉ POUR INFLUENCE
-                # OPTIMISATION FINALE: Variety passé à 30% pour impact maximum
+                # NOUVEAU: Calculer le score de cohérence avec le type de repas
+                coherence_score = 0.0
+                if COHERENCE_RULES_AVAILABLE and meal_type:
+                    # Score de cohérence de cet aliment pour ce type de repas
+                    meal_coherence = get_meal_coherence_score(food.category, meal_type)
+
+                    # Pénalités pour combinaisons incohérentes avec les aliments déjà dans le repas
+                    combination_penalty = 0.0
+                    if selected_foods:
+                        for selected_food, _ in selected_foods:
+                            # AMÉLIORATION: Passer aussi les noms pour détecter les féculents
+                            penalty = get_combination_penalty(
+                                food.category,
+                                selected_food.category,
+                                food.name,
+                                selected_food.name
+                            )
+                            combination_penalty = max(combination_penalty, penalty)  # Prendre la pire pénalité
+
+                    # Score final de cohérence (1 = parfait, 0 = incohérent)
+                    # Plus le meal_coherence est haut, plus le score est bas (bon)
+                    # Plus la pénalité est haute, plus le score est haut (mauvais)
+                    coherence_score = (1.0 - meal_coherence) + combination_penalty
+                else:
+                    coherence_score = 0.5  # Neutre si pas de règles disponibles
+
+                # Score composite pondéré - AMÉLIORATION PALATABILITÉ ET VARIÉTÉ
+                # CORRECTION: Augmenter le poids de la variété pour réduire répétitivité
                 score = (
-                    macro_score * 0.35 +           # 35% priorité aux macros (réduit de 40%)
-                    price_score * 0.10 +           # 10% priorité au prix (réduit de 12%)
-                    health_score * 0.10 +          # 10% priorité à la santé (réduit de 12%)
-                    variety_score * 0.30 +         # 30% priorité à la variété (AUGMENTÉ de 21% à 30%)
-                    compatibility_score * 0.15     # 15% priorité à la compatibilité (inchangé)
+                    macro_score * 0.26 +           # 26% priorité aux macros (réduit de 28%)
+                    price_score * 0.06 +           # 6% priorité au prix (réduit de 7%)
+                    health_score * 0.05 +          # 5% priorité à la santé (inchangé)
+                    variety_score * 0.28 +         # 28% priorité à la variété (augmenté de 25% pour moins de répétition)
+                    compatibility_score * 0.15 +   # 15% priorité à la compatibilité alimentaire (inchangé)
+                    coherence_score * 0.20         # 20% pénalité de cohérence repas (inchangé)
                 )
 
                 # Pénaliser plus fortement si ça dépasse les objectifs
                 new_calories = current_macros["calories"] + food_macros["calories"]
                 new_proteins = current_macros["proteins"] + food_macros["proteins"]
+                new_carbs = current_macros["carbs"] + food_macros["carbs"]
                 new_fats = current_macros["fats"] + food_macros["fats"]
 
-                # Pénalité si dépassement des calories (tolérance 5%)
-                if new_calories > target.calories * 1.05:
-                    score *= 5  # Pénalité forte
+                # CORRECTION: Pénalité progressive pour dépassement calories
+                # Problème identifié : dépassement systématique de +12-20%
+                calories_overshoot = new_calories - target.calories
+                if calories_overshoot > 0:
+                    # Pénalité progressive selon l'importance du dépassement
+                    if calories_overshoot > target.calories * 0.10:  # Dépassement >10%
+                        score *= 8  # Pénalité très forte
+                    elif calories_overshoot > target.calories * 0.05:  # Dépassement >5%
+                        score *= 5   # Pénalité forte
+                    elif calories_overshoot > target.calories * 0.02:  # Dépassement >2%
+                        score *= 2   # Pénalité modérée
 
                 # Pénalité si dépassement protéines (tolérance +10g)
                 if new_proteins > target.proteins + 10:
                     score *= 3
+
+                # CORRECTION CRITIQUE: Pénalité EXPONENTIELLE pour dépassement glucides
+                # C'est le problème majeur identifié dans l'analyse
+                carbs_overshoot = new_carbs - target.carbs
+                if carbs_overshoot > 0:
+                    # Pénalité progressive selon l'importance du dépassement
+                    if carbs_overshoot > target.carbs * 0.15:  # Dépassement >15%
+                        score *= 15  # Pénalité maximale (augmenté de 10)
+                    elif carbs_overshoot > target.carbs * 0.08:  # Dépassement >8%
+                        score *= 8   # Pénalité très forte (augmenté de 6)
+                    elif carbs_overshoot > target.carbs * 0.03:  # Dépassement >3%
+                        score *= 4   # Pénalité forte (augmenté de 3)
+                    elif carbs_overshoot > 0:  # Tout dépassement
+                        score *= 1.5  # Pénalité modérée
 
                 # Pénalité si dépassement lipides (tolérance +10g)
                 if new_fats > target.fats + 10:
@@ -747,11 +960,12 @@ class FoodBasedGenerator(MealGeneratorBase):
         Plus le score est bas, meilleur est l'aliment.
         """
         # Distance pondérée pour chaque macro
+        # CORRECTION: Augmenter le poids des glucides pour meilleur contrôle
         weights = {
-            "calories": 1.8,  # Prioriser fortement les calories
-            "proteins": 2.5,  # Très forte priorité aux protéines
-            "carbs": 1.0,
-            "fats": 1.2
+            "calories": 2.0,  # Forte priorité aux calories (augmenté de 1.8)
+            "proteins": 2.5,  # Très forte priorité aux protéines (inchangé)
+            "carbs": 1.8,     # Forte priorité aux glucides (augmenté de 1.0 à 1.8)
+            "fats": 1.2       # Priorité modérée aux lipides (inchangé)
         }
 
         total_distance = 0.0
@@ -801,8 +1015,29 @@ class FoodBasedGenerator(MealGeneratorBase):
         # Quantité pour atteindre les calories restantes
         if food.calories > 0:
             optimal = (remaining_calories / food.calories) * 100
+
+            # Définir min selon la catégorie FINE
+            category_lower = food.category.lower()
+            food_name_lower = food.name.lower()
+            combined_text = (category_lower + " " + food_name_lower).lower()
+
+            if any(cat in combined_text for cat in ["huile", "matiere", "matieres", "grasse", "grasses"]):
+                min_qty = 10
+            elif any(cat in combined_text for cat in ["epice", "épice", "condiment"]):
+                min_qty = 5
+            elif any(cat in combined_text for cat in ["chocolat", "cacao"]):
+                min_qty = 20
+            elif any(word in combined_text for word in ["graine", "noix", "amande", "noisette", "cacahuete", "cacahuète", "sesame", "sésame", "chia", "lin", "tournesol", "pecan", "cajou"]):
+                min_qty = 20
+            elif any(cat in combined_text for cat in ["fromage", "beurre"]):
+                min_qty = 30
+            elif any(word in combined_text for word in ["lait", "yaourt", "skyr", "fromage blanc", "kefir", "kéfir", "cottage"]):
+                min_qty = 100
+            else:
+                min_qty = 30
+
             # Réduire la quantité max pour forcer la variété
-            optimal = max(20, min(optimal, 150))  # Entre 20g et 150g
+            optimal = max(min_qty, min(optimal, 150))
         else:
             optimal = 80
 
@@ -841,16 +1076,36 @@ class FoodBasedGenerator(MealGeneratorBase):
         # Ajouter des variations plus petites et plus grandes en respectant les multiples
         increment = self._get_practical_increment(rounded_optimal)
 
-        if rounded_optimal - increment >= 10:
+        # Déterminer le minimum acceptable selon la catégorie FINE
+        category_lower = food.category.lower()
+        food_name_lower = food.name.lower()
+        combined_text = (category_lower + " " + food_name_lower).lower()
+
+        if any(cat in combined_text for cat in ["huile", "matiere", "matieres", "grasse", "grasses"]):
+            min_acceptable = 10
+        elif any(cat in combined_text for cat in ["epice", "épice", "condiment"]):
+            min_acceptable = 5
+        elif any(cat in combined_text for cat in ["chocolat", "cacao"]):
+            min_acceptable = 20
+        elif any(word in combined_text for word in ["graine", "noix", "amande", "noisette", "cacahuete", "cacahuète", "sesame", "sésame", "chia", "lin", "tournesol", "pecan", "cajou"]):
+            min_acceptable = 20
+        elif any(cat in combined_text for cat in ["fromage", "beurre"]):
+            min_acceptable = 30
+        elif any(word in combined_text for word in ["lait", "yaourt", "skyr", "fromage blanc", "kefir", "kéfir", "cottage"]):
+            min_acceptable = 100
+        else:
+            min_acceptable = 30
+
+        if rounded_optimal - increment >= min_acceptable:
             practical_variations.add(rounded_optimal - increment)
-        if rounded_optimal - 2 * increment >= 10:
+        if rounded_optimal - 2 * increment >= min_acceptable:
             practical_variations.add(rounded_optimal - 2 * increment)
 
         practical_variations.add(rounded_optimal + increment)
         practical_variations.add(rounded_optimal + 2 * increment)
 
-        # Filtrer et trier
-        return sorted([q for q in practical_variations if q >= 10 and q <= 500])
+        # Filtrer et trier avec le minimum acceptable
+        return sorted([q for q in practical_variations if q >= min_acceptable and q <= 500])
 
     def _get_practical_increment(self, quantity: float) -> float:
         """
@@ -900,12 +1155,31 @@ class FoodBasedGenerator(MealGeneratorBase):
             "evening_snack": []
         }
 
-        # Exclure les aliments incompatibles
+        # AMÉLIORATION: Définir des catégories incompatibles par type de repas
+        # pour éviter les combinaisons absurdes (ex: poisson au petit-déjeuner)
+        incompatible_categories = {
+            "breakfast": ["poissons", "viandes"],  # Sauf exceptions (saumon fumé géré par tags)
+            "afternoon_snack": ["viandes", "poissons"],
+            "morning_snack": ["viandes", "poissons"],
+            "evening_snack": ["viandes", "poissons"]
+        }
+
+        # Exclure les aliments incompatibles par tags
         excluded_tags = incompatible_tags.get(meal_type, [])
         filtered = [
             f for f in foods
             if not any(f.has_tag(tag) for tag in excluded_tags)
         ]
+
+        # NOUVEAU: Exclure aussi par catégories incompatibles
+        excluded_categories = incompatible_categories.get(meal_type, [])
+        if excluded_categories:
+            # Exception: autoriser saumon fumé au petit-déjeuner même si c'est du poisson
+            filtered = [
+                f for f in filtered
+                if not any(cat in f.category.lower() for cat in excluded_categories)
+                or "fumé" in f.name.lower()  # Exception pour produits fumés
+            ]
 
         # Filtrer par tags de type de repas si disponibles
         with_meal_tag = [f for f in filtered if f.has_tag(meal_type)]

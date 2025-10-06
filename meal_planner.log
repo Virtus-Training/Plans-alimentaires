@@ -4676,3 +4676,547 @@ RuntimeError: wrapped C/C++ object of type QLabel has been deleted
 2025-10-03 15:57:59,321 - meal_planner - INFO - Application démarrée avec succès
 2025-10-03 15:58:08,521 - meal_planner.views.main_window - INFO - Fermeture de l'application
 2025-10-03 15:58:08,532 - meal_planner - INFO - Application terminée avec le code: 0
+2025-10-03 16:02:50,508 - meal_planner - INFO - ============================================================
+2025-10-03 16:02:50,508 - meal_planner - INFO - Démarrage de Meal Planner Pro
+2025-10-03 16:02:50,509 - meal_planner - INFO - ============================================================
+2025-10-03 16:02:50,526 - meal_planner - INFO - Initialisation de la base de données: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-03 16:02:50,540 - meal_planner.models.database - INFO - Base de données initialisée: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-03 16:02:50,550 - meal_planner - INFO - Base de données: 108 aliments trouvés
+2025-10-03 16:02:50,552 - meal_planner - INFO - Statistiques de la base: {'total_foods': 108, 'categories': {'Viandes et poissons': 10, 'Légumineuses': 10, 'Céréales et féculents': 12, 'Céréales': 3, 'Légumes': 15, 'Fruits': 14, 'Produits laitiers': 12, 'Noix': 1, 'Noix et graines': 12, 'Matières grasses': 1, 'Huiles et matières grasses': 2, 'Autres': 5, 'Œufs': 1, 'Viandes': 1, 'Poissons': 5, 'Féculents': 4}, 'preset_meals': 0, 'meal_components': 0, 'database_path': 'C:\\Users\\Eric\\Documents\\Plans-alimentaires\\meal_planner\\data\\foods.db'}
+2025-10-03 16:02:50,554 - meal_planner - INFO - Création de la fenêtre principale
+2025-10-03 16:02:51,348 - meal_planner - INFO - Application démarrée avec succès
+2025-10-03 16:03:16,198 - meal_planner.controllers.meal_plan_controller - INFO - Génération d'un plan avec les paramètres: {'nutrition_target': NutritionTarget(calories=2030.0, proteins=150.0, carbs=200.0, fats=70.0), 'meal_count': 4, 'duration_days': 7, 'dietary_preferences': [], 'price_level': 5, 'health_index': 5, 'variety_level': 5, 'goal': 'balance', 'include_whey': True, 'generation_mode': 'food'}
+2025-10-03 16:03:16,200 - meal_planner.controllers.meal_plan_controller - INFO - 108 aliments disponibles au total
+2025-10-03 16:03:16,201 - meal_planner.controllers.meal_plan_controller - INFO - Utilisation du mode 'Par Aliments' (FoodBasedGenerator)
+2025-10-03 16:03:16,201 - meal_planner.services.meal_generators - INFO - FoodBasedGenerator initialisé avec optimisation ILP
+2025-10-03 16:03:16,201 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 1: cible ajustée 533 kcal (objectif initial: 508 kcal, accumulé: 0 kcal)
+2025-10-03 16:03:16,201 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-03 16:03:16,239 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 564/533, Protéines: 41.5/39.4g, Portions pratiques: ON
+2025-10-03 16:03:16,239 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 564/533 kcal
+2025-10-03 16:03:16,239 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 1 - 564 kcal
+2025-10-03 16:03:16,240 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 1: cible ajustée 746 kcal (objectif initial: 710 kcal, accumulé: 564 kcal)
+2025-10-03 16:03:16,240 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-03 16:03:16,292 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 759/746, Protéines: 54.8/55.1g, Portions pratiques: ON
+2025-10-03 16:03:16,292 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 759/746 kcal
+2025-10-03 16:03:16,293 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 1 - 759 kcal
+2025-10-03 16:03:16,293 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 1: cible ajustée 579 kcal (objectif initial: 609 kcal, accumulé: 1323 kcal)
+2025-10-03 16:03:16,293 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-03 16:03:16,342 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 577/579, Protéines: 41.2/42.8g, Portions pratiques: ON
+2025-10-03 16:03:16,342 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 577/579 kcal
+2025-10-03 16:03:16,342 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 1 - 577 kcal
+2025-10-03 16:03:16,343 - meal_planner.services.meal_generators - INFO - Génération repas snack jour 1: cible ajustée 130 kcal (objectif initial: 203 kcal, accumulé: 1900 kcal)
+2025-10-03 16:03:16,343 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour snack
+2025-10-03 16:03:16,416 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 125/130, Protéines: 9.1/9.6g, Portions pratiques: ON
+2025-10-03 16:03:16,416 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 125/130 kcal
+2025-10-03 16:03:16,416 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Collation - Jour 1 - 125 kcal
+2025-10-03 16:03:16,416 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 2: cible ajustée 533 kcal (objectif initial: 508 kcal, accumulé: 0 kcal)
+2025-10-03 16:03:16,417 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-03 16:03:16,456 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 546/533, Protéines: 41.1/39.4g, Portions pratiques: ON
+2025-10-03 16:03:16,457 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 546/533 kcal
+2025-10-03 16:03:16,457 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 2 - 546 kcal
+2025-10-03 16:03:16,457 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 2: cible ajustée 746 kcal (objectif initial: 710 kcal, accumulé: 546 kcal)
+2025-10-03 16:03:16,457 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-03 16:03:16,490 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 708/746, Protéines: 51.4/55.1g, Portions pratiques: ON
+2025-10-03 16:03:16,491 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 708/746 kcal
+2025-10-03 16:03:16,491 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 2 - 708 kcal
+2025-10-03 16:03:16,491 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 2: cible ajustée 579 kcal (objectif initial: 609 kcal, accumulé: 1254 kcal)
+2025-10-03 16:03:16,492 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-03 16:03:16,541 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 570/579, Protéines: 41.5/42.8g, Portions pratiques: ON
+2025-10-03 16:03:16,542 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 570/579 kcal
+2025-10-03 16:03:16,542 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 2 - 570 kcal
+2025-10-03 16:03:16,542 - meal_planner.services.meal_generators - INFO - Génération repas snack jour 2: cible ajustée 206 kcal (objectif initial: 203 kcal, accumulé: 1824 kcal)
+2025-10-03 16:03:16,542 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour snack
+2025-10-03 16:03:16,668 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 199/206, Protéines: 14.5/15.2g, Portions pratiques: ON
+2025-10-03 16:03:16,669 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 199/206 kcal
+2025-10-03 16:03:16,669 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Collation - Jour 2 - 199 kcal
+2025-10-03 16:03:16,669 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 3: cible ajustée 533 kcal (objectif initial: 508 kcal, accumulé: 0 kcal)
+2025-10-03 16:03:16,670 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-03 16:03:16,701 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 492/533, Protéines: 37.0/39.4g, Portions pratiques: ON
+2025-10-03 16:03:16,701 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 492/533 kcal
+2025-10-03 16:03:16,702 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 3 - 492 kcal
+2025-10-03 16:03:16,702 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 3: cible ajustée 746 kcal (objectif initial: 710 kcal, accumulé: 492 kcal)
+2025-10-03 16:03:16,702 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-03 16:03:16,739 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 766/746, Protéines: 56.9/55.1g, Portions pratiques: ON
+2025-10-03 16:03:16,739 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 766/746 kcal
+2025-10-03 16:03:16,739 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 3 - 766 kcal
+2025-10-03 16:03:16,739 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 3: cible ajustée 579 kcal (objectif initial: 609 kcal, accumulé: 1257 kcal)
+2025-10-03 16:03:16,740 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-03 16:03:16,774 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 572/579, Protéines: 42.2/42.8g, Portions pratiques: ON
+2025-10-03 16:03:16,774 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 572/579 kcal
+2025-10-03 16:03:16,775 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 3 - 572 kcal
+2025-10-03 16:03:16,775 - meal_planner.services.meal_generators - INFO - Génération repas snack jour 3: cible ajustée 200 kcal (objectif initial: 203 kcal, accumulé: 1830 kcal)
+2025-10-03 16:03:16,775 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour snack
+2025-10-03 16:03:16,911 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 195/200, Protéines: 14.0/14.8g, Portions pratiques: ON
+2025-10-03 16:03:16,911 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 195/200 kcal
+2025-10-03 16:03:16,911 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Collation - Jour 3 - 195 kcal
+2025-10-03 16:03:16,911 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 4: cible ajustée 533 kcal (objectif initial: 508 kcal, accumulé: 0 kcal)
+2025-10-03 16:03:16,912 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-03 16:03:16,943 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 551/533, Protéines: 41.0/39.4g, Portions pratiques: ON
+2025-10-03 16:03:16,943 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 551/533 kcal
+2025-10-03 16:03:16,943 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 4 - 551 kcal
+2025-10-03 16:03:16,943 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 4: cible ajustée 746 kcal (objectif initial: 710 kcal, accumulé: 551 kcal)
+2025-10-03 16:03:16,944 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-03 16:03:16,978 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 760/746, Protéines: 54.0/55.1g, Portions pratiques: ON
+2025-10-03 16:03:16,979 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 760/746 kcal
+2025-10-03 16:03:16,979 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 4 - 760 kcal
+2025-10-03 16:03:16,979 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 4: cible ajustée 579 kcal (objectif initial: 609 kcal, accumulé: 1311 kcal)
+2025-10-03 16:03:16,980 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-03 16:03:17,014 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 577/579, Protéines: 43.6/42.8g, Portions pratiques: ON
+2025-10-03 16:03:17,015 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 577/579 kcal
+2025-10-03 16:03:17,015 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 4 - 577 kcal
+2025-10-03 16:03:17,015 - meal_planner.services.meal_generators - INFO - Génération repas snack jour 4: cible ajustée 142 kcal (objectif initial: 203 kcal, accumulé: 1888 kcal)
+2025-10-03 16:03:17,015 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour snack
+2025-10-03 16:03:17,092 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 137/142, Protéines: 9.6/10.5g, Portions pratiques: ON
+2025-10-03 16:03:17,092 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 137/142 kcal
+2025-10-03 16:03:17,092 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Collation - Jour 4 - 137 kcal
+2025-10-03 16:03:17,093 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 5: cible ajustée 533 kcal (objectif initial: 508 kcal, accumulé: 0 kcal)
+2025-10-03 16:03:17,093 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-03 16:03:17,125 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 530/533, Protéines: 38.9/39.4g, Portions pratiques: ON
+2025-10-03 16:03:17,125 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 530/533 kcal
+2025-10-03 16:03:17,126 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 5 - 530 kcal
+2025-10-03 16:03:17,126 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 5: cible ajustée 746 kcal (objectif initial: 710 kcal, accumulé: 530 kcal)
+2025-10-03 16:03:17,126 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-03 16:03:17,162 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 768/746, Protéines: 57.2/55.1g, Portions pratiques: ON
+2025-10-03 16:03:17,163 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 768/746 kcal
+2025-10-03 16:03:17,163 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 5 - 768 kcal
+2025-10-03 16:03:17,163 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 5: cible ajustée 579 kcal (objectif initial: 609 kcal, accumulé: 1298 kcal)
+2025-10-03 16:03:17,164 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-03 16:03:17,211 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 577/579, Protéines: 41.2/42.8g, Portions pratiques: ON
+2025-10-03 16:03:17,212 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 577/579 kcal
+2025-10-03 16:03:17,212 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 5 - 577 kcal
+2025-10-03 16:03:17,212 - meal_planner.services.meal_generators - INFO - Génération repas snack jour 5: cible ajustée 155 kcal (objectif initial: 203 kcal, accumulé: 1875 kcal)
+2025-10-03 16:03:17,213 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour snack
+2025-10-03 16:03:17,386 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 148/155, Protéines: 10.8/11.5g, Portions pratiques: ON
+2025-10-03 16:03:17,386 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 148/155 kcal
+2025-10-03 16:03:17,387 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Collation - Jour 5 - 148 kcal
+2025-10-03 16:03:17,387 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 6: cible ajustée 533 kcal (objectif initial: 508 kcal, accumulé: 0 kcal)
+2025-10-03 16:03:17,387 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-03 16:03:17,417 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 538/533, Protéines: 36.5/39.4g, Portions pratiques: ON
+2025-10-03 16:03:17,418 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 538/533 kcal
+2025-10-03 16:03:17,418 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 6 - 538 kcal
+2025-10-03 16:03:17,418 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 6: cible ajustée 746 kcal (objectif initial: 710 kcal, accumulé: 538 kcal)
+2025-10-03 16:03:17,419 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-03 16:03:17,452 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 706/746, Protéines: 51.6/55.1g, Portions pratiques: ON
+2025-10-03 16:03:17,452 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 706/746 kcal
+2025-10-03 16:03:17,452 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 6 - 706 kcal
+2025-10-03 16:03:17,452 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 6: cible ajustée 579 kcal (objectif initial: 609 kcal, accumulé: 1244 kcal)
+2025-10-03 16:03:17,453 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-03 16:03:17,487 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 558/579, Protéines: 43.0/42.8g, Portions pratiques: ON
+2025-10-03 16:03:17,487 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 558/579 kcal
+2025-10-03 16:03:17,487 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 6 - 558 kcal
+2025-10-03 16:03:17,487 - meal_planner.services.meal_generators - INFO - Génération repas snack jour 6: cible ajustée 227 kcal (objectif initial: 203 kcal, accumulé: 1803 kcal)
+2025-10-03 16:03:17,488 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour snack
+2025-10-03 16:03:17,545 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 226/227, Protéines: 16.9/16.8g, Portions pratiques: ON
+2025-10-03 16:03:17,545 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 226/227 kcal
+2025-10-03 16:03:17,545 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Collation - Jour 6 - 226 kcal
+2025-10-03 16:03:17,545 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 7: cible ajustée 533 kcal (objectif initial: 508 kcal, accumulé: 0 kcal)
+2025-10-03 16:03:17,546 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-03 16:03:17,578 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 552/533, Protéines: 41.1/39.4g, Portions pratiques: ON
+2025-10-03 16:03:17,579 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 552/533 kcal
+2025-10-03 16:03:17,579 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 7 - 552 kcal
+2025-10-03 16:03:17,579 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 7: cible ajustée 746 kcal (objectif initial: 710 kcal, accumulé: 552 kcal)
+2025-10-03 16:03:17,580 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-03 16:03:17,615 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 751/746, Protéines: 52.9/55.1g, Portions pratiques: ON
+2025-10-03 16:03:17,615 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 751/746 kcal
+2025-10-03 16:03:17,616 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 7 - 751 kcal
+2025-10-03 16:03:17,616 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 7: cible ajustée 579 kcal (objectif initial: 609 kcal, accumulé: 1304 kcal)
+2025-10-03 16:03:17,616 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-03 16:03:17,799 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 576/579, Protéines: 43.3/42.8g, Portions pratiques: ON
+2025-10-03 16:03:17,799 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 576/579 kcal
+2025-10-03 16:03:17,799 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 7 - 576 kcal
+2025-10-03 16:03:17,799 - meal_planner.services.meal_generators - INFO - Génération repas snack jour 7: cible ajustée 150 kcal (objectif initial: 203 kcal, accumulé: 1880 kcal)
+2025-10-03 16:03:17,800 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour snack
+2025-10-03 16:03:17,973 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 141/150, Protéines: 10.8/11.1g, Portions pratiques: ON
+2025-10-03 16:03:17,974 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 141/150 kcal
+2025-10-03 16:03:17,974 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Collation - Jour 7 - 141 kcal
+2025-10-03 16:03:17,978 - meal_planner.controllers.meal_plan_controller - INFO - Plan généré: Plan alimentaire 7 jour(s) - 28 repas - Objectif: 2030 kcal/jour
+2025-10-03 16:03:17,978 - meal_planner.controllers.meal_plan_controller - INFO - Validation: True
+2025-10-03 16:04:20,617 - meal_planner.views.main_window - INFO - Fermeture de l'application
+2025-10-03 16:04:20,632 - meal_planner - INFO - Application terminée avec le code: 0
+2025-10-05 18:33:46,356 - meal_planner - INFO - ============================================================
+2025-10-05 18:33:46,356 - meal_planner - INFO - Démarrage de Meal Planner Pro
+2025-10-05 18:33:46,356 - meal_planner - INFO - ============================================================
+2025-10-05 18:33:46,374 - meal_planner - INFO - Initialisation de la base de données: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-05 18:33:46,454 - meal_planner.models.database - INFO - Base de données initialisée: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-05 18:33:46,467 - meal_planner - INFO - Base de données: 108 aliments trouvés
+2025-10-05 18:33:46,471 - meal_planner - INFO - Statistiques de la base: {'total_foods': 108, 'categories': {'Viandes et poissons': 10, 'Légumineuses': 10, 'Céréales et féculents': 12, 'Céréales': 3, 'Légumes': 15, 'Fruits': 14, 'Produits laitiers': 12, 'Noix': 1, 'Noix et graines': 12, 'Matières grasses': 1, 'Huiles et matières grasses': 2, 'Autres': 5, 'Œufs': 1, 'Viandes': 1, 'Poissons': 5, 'Féculents': 4}, 'preset_meals': 0, 'meal_components': 0, 'database_path': 'C:\\Users\\Eric\\Documents\\Plans-alimentaires\\meal_planner\\data\\foods.db'}
+2025-10-05 18:33:46,473 - meal_planner - INFO - Création de la fenêtre principale
+2025-10-05 18:33:47,367 - meal_planner - INFO - Application démarrée avec succès
+2025-10-05 18:33:50,439 - meal_planner.controllers.meal_plan_controller - INFO - Génération d'un plan avec les paramètres: {'nutrition_target': NutritionTarget(calories=2030.0, proteins=150.0, carbs=200.0, fats=70.0), 'meal_count': 3, 'duration_days': 7, 'dietary_preferences': [], 'price_level': 5, 'health_index': 5, 'variety_level': 5, 'goal': 'balance', 'include_whey': False, 'generation_mode': 'food'}
+2025-10-05 18:33:50,442 - meal_planner.controllers.meal_plan_controller - INFO - 108 aliments disponibles au total
+2025-10-05 18:33:50,442 - meal_planner.controllers.meal_plan_controller - INFO - Utilisation du mode 'Par Aliments' (FoodBasedGenerator)
+2025-10-05 18:33:50,442 - meal_planner.services.meal_generators - INFO - FoodBasedGenerator initialisé avec optimisation ILP
+2025-10-05 18:33:50,442 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 1: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 18:33:50,443 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 18:33:50,539 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 612/639, Protéines: 45.4/47.2g, Portions pratiques: ON
+2025-10-05 18:33:50,539 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 612/639 kcal
+2025-10-05 18:33:50,540 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 1 - 612 kcal
+2025-10-05 18:33:50,540 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 1: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 612 kcal)
+2025-10-05 18:33:50,540 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 18:33:50,575 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 848/853, Protéines: 58.9/63.0g, Portions pratiques: ON
+2025-10-05 18:33:50,575 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 848/853 kcal
+2025-10-05 18:33:50,575 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 1 - 848 kcal
+2025-10-05 18:33:50,575 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 1: cible ajustée 569 kcal (objectif initial: 609 kcal, accumulé: 1461 kcal)
+2025-10-05 18:33:50,576 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 18:33:50,624 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 548/569, Protéines: 40.6/42.1g, Portions pratiques: ON
+2025-10-05 18:33:50,625 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 548/569 kcal
+2025-10-05 18:33:50,625 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 1 - 548 kcal
+2025-10-05 18:33:50,625 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 2: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 18:33:50,625 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 18:33:50,658 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 626/639, Protéines: 46.6/47.2g, Portions pratiques: ON
+2025-10-05 18:33:50,659 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 626/639 kcal
+2025-10-05 18:33:50,659 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 2 - 626 kcal
+2025-10-05 18:33:50,659 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 2: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 626 kcal)
+2025-10-05 18:33:50,660 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 18:33:50,695 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 858/853, Protéines: 62.0/63.0g, Portions pratiques: ON
+2025-10-05 18:33:50,695 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 858/853 kcal
+2025-10-05 18:33:50,695 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 2 - 858 kcal
+2025-10-05 18:33:50,695 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 2: cible ajustée 546 kcal (objectif initial: 609 kcal, accumulé: 1484 kcal)
+2025-10-05 18:33:50,696 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 18:33:50,730 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 543/546, Protéines: 40.6/40.3g, Portions pratiques: ON
+2025-10-05 18:33:50,730 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 543/546 kcal
+2025-10-05 18:33:50,730 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 2 - 543 kcal
+2025-10-05 18:33:50,730 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 3: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 18:33:50,731 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 18:33:50,786 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 672/639, Protéines: 49.8/47.2g, Portions pratiques: ON
+2025-10-05 18:33:50,786 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 672/639 kcal
+2025-10-05 18:33:50,786 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 3 - 672 kcal
+2025-10-05 18:33:50,787 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 3: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 672 kcal)
+2025-10-05 18:33:50,787 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 18:33:50,852 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 7 aliments, Calories: 859/853, Protéines: 63.7/63.0g, Portions pratiques: ON
+2025-10-05 18:33:50,852 - meal_planner.services.meal_generators - INFO - ILP optimal: 7 aliments, 859/853 kcal
+2025-10-05 18:33:50,852 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 3 - 859 kcal
+2025-10-05 18:33:50,852 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 3: cible ajustée 499 kcal (objectif initial: 609 kcal, accumulé: 1531 kcal)
+2025-10-05 18:33:50,853 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 18:33:50,907 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 513/499, Protéines: 37.9/36.8g, Portions pratiques: ON
+2025-10-05 18:33:50,908 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 513/499 kcal
+2025-10-05 18:33:50,908 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 3 - 513 kcal
+2025-10-05 18:33:50,908 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 4: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 18:33:50,909 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 18:33:50,939 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 655/639, Protéines: 47.8/47.2g, Portions pratiques: ON
+2025-10-05 18:33:50,939 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 655/639 kcal
+2025-10-05 18:33:50,940 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 4 - 655 kcal
+2025-10-05 18:33:50,940 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 4: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 655 kcal)
+2025-10-05 18:33:50,940 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 18:33:50,975 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 830/853, Protéines: 63.6/63.0g, Portions pratiques: ON
+2025-10-05 18:33:50,976 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 830/853 kcal
+2025-10-05 18:33:50,976 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 4 - 830 kcal
+2025-10-05 18:33:50,976 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 4: cible ajustée 544 kcal (objectif initial: 609 kcal, accumulé: 1486 kcal)
+2025-10-05 18:33:50,976 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 18:33:51,021 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 575/544, Protéines: 42.9/40.2g, Portions pratiques: ON
+2025-10-05 18:33:51,022 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 575/544 kcal
+2025-10-05 18:33:51,022 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 4 - 575 kcal
+2025-10-05 18:33:51,022 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 5: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 18:33:51,023 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 18:33:51,202 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 631/639, Protéines: 46.5/47.2g, Portions pratiques: ON
+2025-10-05 18:33:51,202 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 631/639 kcal
+2025-10-05 18:33:51,203 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 5 - 631 kcal
+2025-10-05 18:33:51,203 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 5: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 631 kcal)
+2025-10-05 18:33:51,203 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 18:33:51,239 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 830/853, Protéines: 61.9/63.0g, Portions pratiques: ON
+2025-10-05 18:33:51,239 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 830/853 kcal
+2025-10-05 18:33:51,239 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 5 - 830 kcal
+2025-10-05 18:33:51,240 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 5: cible ajustée 569 kcal (objectif initial: 609 kcal, accumulé: 1461 kcal)
+2025-10-05 18:33:51,240 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 18:33:51,274 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 569/569, Protéines: 44.2/42.0g, Portions pratiques: ON
+2025-10-05 18:33:51,274 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 569/569 kcal
+2025-10-05 18:33:51,274 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 5 - 569 kcal
+2025-10-05 18:33:51,275 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 6: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 18:33:51,275 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 18:33:51,307 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 631/639, Protéines: 45.8/47.2g, Portions pratiques: ON
+2025-10-05 18:33:51,308 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 631/639 kcal
+2025-10-05 18:33:51,308 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 6 - 631 kcal
+2025-10-05 18:33:51,308 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 6: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 631 kcal)
+2025-10-05 18:33:51,309 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 18:33:51,343 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 886/853, Protéines: 63.5/63.0g, Portions pratiques: ON
+2025-10-05 18:33:51,343 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 886/853 kcal
+2025-10-05 18:33:51,343 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 6 - 886 kcal
+2025-10-05 18:33:51,344 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 6: cible ajustée 512 kcal (objectif initial: 609 kcal, accumulé: 1518 kcal)
+2025-10-05 18:33:51,344 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 18:33:51,376 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 529/512, Protéines: 39.9/37.9g, Portions pratiques: ON
+2025-10-05 18:33:51,377 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 529/512 kcal
+2025-10-05 18:33:51,377 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 6 - 529 kcal
+2025-10-05 18:33:51,377 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 7: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 18:33:51,378 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 18:33:51,425 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 615/639, Protéines: 45.8/47.2g, Portions pratiques: ON
+2025-10-05 18:33:51,426 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 615/639 kcal
+2025-10-05 18:33:51,426 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 7 - 615 kcal
+2025-10-05 18:33:51,426 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 7: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 615 kcal)
+2025-10-05 18:33:51,427 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 18:33:51,462 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 817/853, Protéines: 58.7/63.0g, Portions pratiques: ON
+2025-10-05 18:33:51,462 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 817/853 kcal
+2025-10-05 18:33:51,462 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 7 - 817 kcal
+2025-10-05 18:33:51,463 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 7: cible ajustée 598 kcal (objectif initial: 609 kcal, accumulé: 1432 kcal)
+2025-10-05 18:33:51,463 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 18:33:51,535 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 549/598, Protéines: 40.4/44.2g, Portions pratiques: ON
+2025-10-05 18:33:51,535 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 549/598 kcal
+2025-10-05 18:33:51,535 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 7 - 549 kcal
+2025-10-05 18:33:51,540 - meal_planner.controllers.meal_plan_controller - INFO - Plan généré: Plan alimentaire 7 jour(s) - 21 repas - Objectif: 2030 kcal/jour
+2025-10-05 18:33:51,540 - meal_planner.controllers.meal_plan_controller - INFO - Validation: True
+2025-10-05 18:34:06,486 - meal_planner.views.main_window - INFO - Fermeture de l'application
+2025-10-05 18:34:06,501 - meal_planner - INFO - Application terminée avec le code: 0
+2025-10-05 19:10:57,314 - meal_planner - INFO - ============================================================
+2025-10-05 19:10:57,314 - meal_planner - INFO - Démarrage de Meal Planner Pro
+2025-10-05 19:10:57,314 - meal_planner - INFO - ============================================================
+2025-10-05 19:10:57,332 - meal_planner - INFO - Initialisation de la base de données: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-05 19:10:57,392 - meal_planner.models.database - INFO - Base de données initialisée: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-05 19:10:57,402 - meal_planner - INFO - Base de données: 108 aliments trouvés
+2025-10-05 19:10:57,405 - meal_planner - INFO - Statistiques de la base: {'total_foods': 108, 'categories': {'Viandes et poissons': 10, 'Légumineuses': 10, 'Céréales et féculents': 12, 'Céréales': 3, 'Légumes': 15, 'Fruits': 14, 'Produits laitiers': 12, 'Noix': 1, 'Noix et graines': 12, 'Matières grasses': 1, 'Huiles et matières grasses': 2, 'Autres': 5, 'Œufs': 1, 'Viandes': 1, 'Poissons': 5, 'Féculents': 4}, 'preset_meals': 0, 'meal_components': 0, 'database_path': 'C:\\Users\\Eric\\Documents\\Plans-alimentaires\\meal_planner\\data\\foods.db'}
+2025-10-05 19:10:57,407 - meal_planner - INFO - Création de la fenêtre principale
+2025-10-05 19:10:58,213 - meal_planner - INFO - Application démarrée avec succès
+2025-10-05 19:10:59,786 - meal_planner.controllers.meal_plan_controller - INFO - Génération d'un plan avec les paramètres: {'nutrition_target': NutritionTarget(calories=2030.0, proteins=150.0, carbs=200.0, fats=70.0), 'meal_count': 3, 'duration_days': 7, 'dietary_preferences': [], 'price_level': 5, 'health_index': 5, 'variety_level': 5, 'goal': 'balance', 'include_whey': False, 'generation_mode': 'food'}
+2025-10-05 19:10:59,789 - meal_planner.controllers.meal_plan_controller - INFO - 108 aliments disponibles au total
+2025-10-05 19:10:59,789 - meal_planner.controllers.meal_plan_controller - INFO - Utilisation du mode 'Par Aliments' (FoodBasedGenerator)
+2025-10-05 19:10:59,789 - meal_planner.services.meal_generators - INFO - FoodBasedGenerator initialisé avec optimisation ILP
+2025-10-05 19:10:59,789 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 1: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 19:10:59,790 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 19:10:59,886 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 631/639, Protéines: 46.0/47.2g, Portions pratiques: ON
+2025-10-05 19:10:59,886 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 631/639 kcal
+2025-10-05 19:10:59,886 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 1 - 631 kcal
+2025-10-05 19:10:59,886 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 1: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 631 kcal)
+2025-10-05 19:10:59,887 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 19:10:59,940 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 817/853, Protéines: 59.9/63.0g, Portions pratiques: ON
+2025-10-05 19:10:59,940 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 817/853 kcal
+2025-10-05 19:10:59,940 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 1 - 817 kcal
+2025-10-05 19:10:59,941 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 1: cible ajustée 582 kcal (objectif initial: 609 kcal, accumulé: 1448 kcal)
+2025-10-05 19:10:59,941 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 19:10:59,977 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 569/582, Protéines: 43.0/43.0g, Portions pratiques: ON
+2025-10-05 19:10:59,977 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 569/582 kcal
+2025-10-05 19:10:59,978 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 1 - 569 kcal
+2025-10-05 19:10:59,978 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 2: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 19:10:59,978 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 19:11:00,009 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 3 aliments, Calories: 639/639, Protéines: 47.6/47.2g, Portions pratiques: ON
+2025-10-05 19:11:00,009 - meal_planner.services.meal_generators - INFO - ILP optimal: 3 aliments, 639/639 kcal
+2025-10-05 19:11:00,009 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 2 - 639 kcal
+2025-10-05 19:11:00,009 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 2: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 639 kcal)
+2025-10-05 19:11:00,010 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 19:11:00,044 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 831/853, Protéines: 60.8/63.0g, Portions pratiques: ON
+2025-10-05 19:11:00,045 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 831/853 kcal
+2025-10-05 19:11:00,045 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 2 - 831 kcal
+2025-10-05 19:11:00,045 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 2: cible ajustée 560 kcal (objectif initial: 609 kcal, accumulé: 1470 kcal)
+2025-10-05 19:11:00,046 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 19:11:00,079 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 580/560, Protéines: 41.5/41.4g, Portions pratiques: ON
+2025-10-05 19:11:00,079 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 580/560 kcal
+2025-10-05 19:11:00,080 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 2 - 580 kcal
+2025-10-05 19:11:00,080 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 3: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 19:11:00,080 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 19:11:00,112 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 3 aliments, Calories: 632/639, Protéines: 45.2/47.2g, Portions pratiques: ON
+2025-10-05 19:11:00,112 - meal_planner.services.meal_generators - INFO - ILP optimal: 3 aliments, 632/639 kcal
+2025-10-05 19:11:00,113 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 3 - 632 kcal
+2025-10-05 19:11:00,113 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 3: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 632 kcal)
+2025-10-05 19:11:00,113 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 19:11:00,151 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 825/853, Protéines: 59.5/63.0g, Portions pratiques: ON
+2025-10-05 19:11:00,151 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 825/853 kcal
+2025-10-05 19:11:00,151 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 3 - 825 kcal
+2025-10-05 19:11:00,151 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 3: cible ajustée 573 kcal (objectif initial: 609 kcal, accumulé: 1457 kcal)
+2025-10-05 19:11:00,152 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 19:11:00,184 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 536/573, Protéines: 38.8/42.4g, Portions pratiques: ON
+2025-10-05 19:11:00,185 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 536/573 kcal
+2025-10-05 19:11:00,185 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 3 - 536 kcal
+2025-10-05 19:11:00,185 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 4: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 19:11:00,185 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 19:11:00,233 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 592/639, Protéines: 44.2/47.2g, Portions pratiques: ON
+2025-10-05 19:11:00,233 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 592/639 kcal
+2025-10-05 19:11:00,233 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 4 - 592 kcal
+2025-10-05 19:11:00,234 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 4: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 592 kcal)
+2025-10-05 19:11:00,234 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 19:11:00,266 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 880/853, Protéines: 61.8/63.0g, Portions pratiques: ON
+2025-10-05 19:11:00,266 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 880/853 kcal
+2025-10-05 19:11:00,266 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 4 - 880 kcal
+2025-10-05 19:11:00,267 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 4: cible ajustée 558 kcal (objectif initial: 609 kcal, accumulé: 1472 kcal)
+2025-10-05 19:11:00,267 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 19:11:00,311 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 549/558, Protéines: 40.8/41.2g, Portions pratiques: ON
+2025-10-05 19:11:00,311 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 549/558 kcal
+2025-10-05 19:11:00,311 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 4 - 549 kcal
+2025-10-05 19:11:00,311 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 5: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 19:11:00,312 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 19:11:00,343 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 3 aliments, Calories: 635/639, Protéines: 45.8/47.2g, Portions pratiques: ON
+2025-10-05 19:11:00,343 - meal_planner.services.meal_generators - INFO - ILP optimal: 3 aliments, 635/639 kcal
+2025-10-05 19:11:00,343 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 5 - 635 kcal
+2025-10-05 19:11:00,344 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 5: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 635 kcal)
+2025-10-05 19:11:00,344 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 19:11:00,379 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 815/853, Protéines: 63.6/63.0g, Portions pratiques: ON
+2025-10-05 19:11:00,379 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 815/853 kcal
+2025-10-05 19:11:00,380 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 5 - 815 kcal
+2025-10-05 19:11:00,380 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 5: cible ajustée 581 kcal (objectif initial: 609 kcal, accumulé: 1449 kcal)
+2025-10-05 19:11:00,380 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 19:11:00,412 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 597/581, Protéines: 43.2/42.9g, Portions pratiques: ON
+2025-10-05 19:11:00,413 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 597/581 kcal
+2025-10-05 19:11:00,413 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 5 - 597 kcal
+2025-10-05 19:11:00,413 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 6: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 19:11:00,414 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 19:11:00,445 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 3 aliments, Calories: 652/639, Protéines: 48.1/47.2g, Portions pratiques: ON
+2025-10-05 19:11:00,445 - meal_planner.services.meal_generators - INFO - ILP optimal: 3 aliments, 652/639 kcal
+2025-10-05 19:11:00,445 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 6 - 652 kcal
+2025-10-05 19:11:00,445 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 6: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 652 kcal)
+2025-10-05 19:11:00,446 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 19:11:00,481 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 844/853, Protéines: 60.0/63.0g, Portions pratiques: ON
+2025-10-05 19:11:00,481 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 844/853 kcal
+2025-10-05 19:11:00,481 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 6 - 844 kcal
+2025-10-05 19:11:00,481 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 6: cible ajustée 534 kcal (objectif initial: 609 kcal, accumulé: 1496 kcal)
+2025-10-05 19:11:00,482 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 19:11:00,539 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 549/534, Protéines: 38.7/39.5g, Portions pratiques: ON
+2025-10-05 19:11:00,540 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 549/534 kcal
+2025-10-05 19:11:00,540 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 6 - 549 kcal
+2025-10-05 19:11:00,540 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 7: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-05 19:11:00,541 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-05 19:11:00,572 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 621/639, Protéines: 44.5/47.2g, Portions pratiques: ON
+2025-10-05 19:11:00,573 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 621/639 kcal
+2025-10-05 19:11:00,573 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 7 - 621 kcal
+2025-10-05 19:11:00,573 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 7: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 621 kcal)
+2025-10-05 19:11:00,574 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-05 19:11:00,611 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 817/853, Protéines: 58.7/63.0g, Portions pratiques: ON
+2025-10-05 19:11:00,611 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 817/853 kcal
+2025-10-05 19:11:00,611 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 7 - 817 kcal
+2025-10-05 19:11:00,611 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 7: cible ajustée 592 kcal (objectif initial: 609 kcal, accumulé: 1438 kcal)
+2025-10-05 19:11:00,612 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-05 19:11:00,748 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 583/592, Protéines: 41.4/43.7g, Portions pratiques: ON
+2025-10-05 19:11:00,748 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 583/592 kcal
+2025-10-05 19:11:00,749 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 7 - 583 kcal
+2025-10-05 19:11:00,753 - meal_planner.controllers.meal_plan_controller - INFO - Plan généré: Plan alimentaire 7 jour(s) - 21 repas - Objectif: 2030 kcal/jour
+2025-10-05 19:11:00,753 - meal_planner.controllers.meal_plan_controller - INFO - Validation: True
+2025-10-05 19:12:25,640 - meal_planner.views.main_window - INFO - Fermeture de l'application
+2025-10-05 19:12:25,652 - meal_planner - INFO - Application terminée avec le code: 0
+2025-10-06 04:54:07,992 - meal_planner - INFO - ============================================================
+2025-10-06 04:54:07,992 - meal_planner - INFO - Démarrage de Meal Planner Pro
+2025-10-06 04:54:07,993 - meal_planner - INFO - ============================================================
+2025-10-06 04:54:08,009 - meal_planner - INFO - Initialisation de la base de données: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-06 04:54:08,022 - meal_planner.models.database - INFO - Base de données initialisée: C:\Users\Eric\Documents\Plans-alimentaires\meal_planner\data\foods.db
+2025-10-06 04:54:08,033 - meal_planner - INFO - Base de données: 108 aliments trouvés
+2025-10-06 04:54:08,036 - meal_planner - INFO - Statistiques de la base: {'total_foods': 108, 'categories': {'Viandes et poissons': 10, 'Légumineuses': 10, 'Céréales et féculents': 12, 'Céréales': 3, 'Légumes': 15, 'Fruits': 14, 'Produits laitiers': 12, 'Noix': 1, 'Noix et graines': 12, 'Matières grasses': 1, 'Huiles et matières grasses': 2, 'Autres': 5, 'Œufs': 1, 'Viandes': 1, 'Poissons': 5, 'Féculents': 4}, 'preset_meals': 0, 'meal_components': 0, 'database_path': 'C:\\Users\\Eric\\Documents\\Plans-alimentaires\\meal_planner\\data\\foods.db'}
+2025-10-06 04:54:08,037 - meal_planner - INFO - Création de la fenêtre principale
+2025-10-06 04:54:08,773 - meal_planner - INFO - Application démarrée avec succès
+2025-10-06 04:54:11,086 - meal_planner.controllers.meal_plan_controller - INFO - Génération d'un plan avec les paramètres: {'nutrition_target': NutritionTarget(calories=2030.0, proteins=150.0, carbs=200.0, fats=70.0), 'meal_count': 3, 'duration_days': 7, 'dietary_preferences': [], 'price_level': 5, 'health_index': 5, 'variety_level': 5, 'goal': 'balance', 'include_whey': False, 'generation_mode': 'food'}
+2025-10-06 04:54:11,089 - meal_planner.controllers.meal_plan_controller - INFO - 108 aliments disponibles au total
+2025-10-06 04:54:11,090 - meal_planner.controllers.meal_plan_controller - INFO - Utilisation du mode 'Par Aliments' (FoodBasedGenerator)
+2025-10-06 04:54:11,090 - meal_planner.services.meal_generators - INFO - FoodBasedGenerator initialisé avec optimisation ILP
+2025-10-06 04:54:11,090 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 1: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-06 04:54:11,090 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 56/56 aliments conservés
+2025-10-06 04:54:11,090 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-06 04:54:11,124 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 659/639, Protéines: 48.9/47.2g, Portions pratiques: ON
+2025-10-06 04:54:11,124 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 659/639 kcal
+2025-10-06 04:54:11,124 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 1 - 659 kcal
+2025-10-06 04:54:11,124 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 1: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 659 kcal)
+2025-10-06 04:54:11,125 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 54/54 aliments conservés
+2025-10-06 04:54:11,125 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-06 04:54:11,158 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 814/853, Protéines: 58.4/63.0g, Portions pratiques: ON
+2025-10-06 04:54:11,158 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 814/853 kcal
+2025-10-06 04:54:11,158 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 1 - 814 kcal
+2025-10-06 04:54:11,158 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 1: cible ajustée 557 kcal (objectif initial: 609 kcal, accumulé: 1473 kcal)
+2025-10-06 04:54:11,159 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 43/43 aliments conservés
+2025-10-06 04:54:11,159 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-06 04:54:11,190 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 550/557, Protéines: 40.5/41.1g, Portions pratiques: ON
+2025-10-06 04:54:11,190 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 550/557 kcal
+2025-10-06 04:54:11,190 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 1 - 550 kcal
+2025-10-06 04:54:11,190 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 2: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-06 04:54:11,190 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 42/42 aliments conservés
+2025-10-06 04:54:11,191 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-06 04:54:11,218 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 660/639, Protéines: 49.3/47.2g, Portions pratiques: ON
+2025-10-06 04:54:11,219 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 660/639 kcal
+2025-10-06 04:54:11,219 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 2 - 660 kcal
+2025-10-06 04:54:11,219 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 2: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 660 kcal)
+2025-10-06 04:54:11,219 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 40/40 aliments conservés
+2025-10-06 04:54:11,219 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-06 04:54:11,250 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 846/853, Protéines: 62.2/63.0g, Portions pratiques: ON
+2025-10-06 04:54:11,251 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 846/853 kcal
+2025-10-06 04:54:11,251 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 2 - 846 kcal
+2025-10-06 04:54:11,251 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 2: cible ajustée 524 kcal (objectif initial: 609 kcal, accumulé: 1506 kcal)
+2025-10-06 04:54:11,251 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 34/34 aliments conservés
+2025-10-06 04:54:11,251 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-06 04:54:11,280 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 531/524, Protéines: 38.1/38.7g, Portions pratiques: ON
+2025-10-06 04:54:11,280 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 531/524 kcal
+2025-10-06 04:54:11,280 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 2 - 531 kcal
+2025-10-06 04:54:11,280 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 3: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-06 04:54:11,280 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 56/56 aliments conservés
+2025-10-06 04:54:11,281 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-06 04:54:11,310 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 3 aliments, Calories: 629/639, Protéines: 46.5/47.2g, Portions pratiques: ON
+2025-10-06 04:54:11,311 - meal_planner.services.meal_generators - INFO - ILP optimal: 3 aliments, 629/639 kcal
+2025-10-06 04:54:11,311 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 3 - 629 kcal
+2025-10-06 04:54:11,311 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 3: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 629 kcal)
+2025-10-06 04:54:11,311 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 55/55 aliments conservés
+2025-10-06 04:54:11,312 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-06 04:54:11,344 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 815/853, Protéines: 59.3/63.0g, Portions pratiques: ON
+2025-10-06 04:54:11,345 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 815/853 kcal
+2025-10-06 04:54:11,345 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 3 - 815 kcal
+2025-10-06 04:54:11,345 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 3: cible ajustée 586 kcal (objectif initial: 609 kcal, accumulé: 1444 kcal)
+2025-10-06 04:54:11,345 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 45/45 aliments conservés
+2025-10-06 04:54:11,345 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-06 04:54:11,392 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 590/586, Protéines: 43.1/43.3g, Portions pratiques: ON
+2025-10-06 04:54:11,393 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 590/586 kcal
+2025-10-06 04:54:11,393 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 3 - 590 kcal
+2025-10-06 04:54:11,393 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 4: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-06 04:54:11,393 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 44/44 aliments conservés
+2025-10-06 04:54:11,393 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-06 04:54:11,428 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 626/639, Protéines: 46.0/47.2g, Portions pratiques: ON
+2025-10-06 04:54:11,428 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 626/639 kcal
+2025-10-06 04:54:11,429 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 4 - 626 kcal
+2025-10-06 04:54:11,429 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 4: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 626 kcal)
+2025-10-06 04:54:11,429 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 42/42 aliments conservés
+2025-10-06 04:54:11,429 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-06 04:54:11,459 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 827/853, Protéines: 60.2/63.0g, Portions pratiques: ON
+2025-10-06 04:54:11,459 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 827/853 kcal
+2025-10-06 04:54:11,460 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 4 - 827 kcal
+2025-10-06 04:54:11,460 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 4: cible ajustée 576 kcal (objectif initial: 609 kcal, accumulé: 1454 kcal)
+2025-10-06 04:54:11,460 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 33/33 aliments conservés
+2025-10-06 04:54:11,460 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-06 04:54:11,490 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 577/576, Protéines: 43.0/42.6g, Portions pratiques: ON
+2025-10-06 04:54:11,490 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 577/576 kcal
+2025-10-06 04:54:11,490 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 4 - 577 kcal
+2025-10-06 04:54:11,491 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 5: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-06 04:54:11,491 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 56/56 aliments conservés
+2025-10-06 04:54:11,491 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-06 04:54:11,520 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 638/639, Protéines: 47.2/47.2g, Portions pratiques: ON
+2025-10-06 04:54:11,520 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 638/639 kcal
+2025-10-06 04:54:11,520 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 5 - 638 kcal
+2025-10-06 04:54:11,520 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 5: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 638 kcal)
+2025-10-06 04:54:11,521 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 54/54 aliments conservés
+2025-10-06 04:54:11,521 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-06 04:54:11,555 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 819/853, Protéines: 59.7/63.0g, Portions pratiques: ON
+2025-10-06 04:54:11,555 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 819/853 kcal
+2025-10-06 04:54:11,555 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 5 - 819 kcal
+2025-10-06 04:54:11,555 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 5: cible ajustée 573 kcal (objectif initial: 609 kcal, accumulé: 1457 kcal)
+2025-10-06 04:54:11,555 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 43/43 aliments conservés
+2025-10-06 04:54:11,556 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-06 04:54:11,586 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 581/573, Protéines: 40.1/42.3g, Portions pratiques: ON
+2025-10-06 04:54:11,586 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 581/573 kcal
+2025-10-06 04:54:11,586 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 5 - 581 kcal
+2025-10-06 04:54:11,586 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 6: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-06 04:54:11,586 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 43/43 aliments conservés
+2025-10-06 04:54:11,587 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-06 04:54:11,615 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 642/639, Protéines: 47.8/47.2g, Portions pratiques: ON
+2025-10-06 04:54:11,616 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 642/639 kcal
+2025-10-06 04:54:11,616 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 6 - 642 kcal
+2025-10-06 04:54:11,616 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 6: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 642 kcal)
+2025-10-06 04:54:11,616 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 41/41 aliments conservés
+2025-10-06 04:54:11,616 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-06 04:54:11,649 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 824/853, Protéines: 61.9/63.0g, Portions pratiques: ON
+2025-10-06 04:54:11,649 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 824/853 kcal
+2025-10-06 04:54:11,649 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 6 - 824 kcal
+2025-10-06 04:54:11,649 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 6: cible ajustée 564 kcal (objectif initial: 609 kcal, accumulé: 1466 kcal)
+2025-10-06 04:54:11,650 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 33/33 aliments conservés
+2025-10-06 04:54:11,650 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-06 04:54:11,679 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 532/564, Protéines: 46.6/41.7g, Portions pratiques: ON
+2025-10-06 04:54:11,679 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 532/564 kcal
+2025-10-06 04:54:11,680 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 6 - 532 kcal
+2025-10-06 04:54:11,680 - meal_planner.services.meal_generators - INFO - Génération repas breakfast jour 7: cible ajustée 639 kcal (objectif initial: 609 kcal, accumulé: 0 kcal)
+2025-10-06 04:54:11,680 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 56/56 aliments conservés
+2025-10-06 04:54:11,680 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour breakfast
+2025-10-06 04:54:11,710 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 3 aliments, Calories: 642/639, Protéines: 44.5/47.2g, Portions pratiques: ON
+2025-10-06 04:54:11,711 - meal_planner.services.meal_generators - INFO - ILP optimal: 3 aliments, 642/639 kcal
+2025-10-06 04:54:11,711 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Petit-déjeuner - Jour 7 - 642 kcal
+2025-10-06 04:54:11,711 - meal_planner.services.meal_generators - INFO - Génération repas lunch jour 7: cible ajustée 853 kcal (objectif initial: 812 kcal, accumulé: 642 kcal)
+2025-10-06 04:54:11,711 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 55/55 aliments conservés
+2025-10-06 04:54:11,711 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour lunch
+2025-10-06 04:54:11,746 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 5 aliments, Calories: 813/853, Protéines: 58.6/63.0g, Portions pratiques: ON
+2025-10-06 04:54:11,746 - meal_planner.services.meal_generators - INFO - ILP optimal: 5 aliments, 813/853 kcal
+2025-10-06 04:54:11,747 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Déjeuner - Jour 7 - 813 kcal
+2025-10-06 04:54:11,747 - meal_planner.services.meal_generators - INFO - Génération repas dinner jour 7: cible ajustée 574 kcal (objectif initial: 609 kcal, accumulé: 1456 kcal)
+2025-10-06 04:54:11,747 - meal_planner.services.meal_generators - INFO - Filtrage low-carb: 44/44 aliments conservés
+2025-10-06 04:54:11,747 - meal_planner.services.meal_generators - INFO - Tentative d'optimisation ILP pour dinner
+2025-10-06 04:54:11,777 - meal_planner.services.ilp_optimizer - INFO - ILP Solution optimale trouvée: 4 aliments, Calories: 541/574, Protéines: 42.3/42.4g, Portions pratiques: ON
+2025-10-06 04:54:11,778 - meal_planner.services.meal_generators - INFO - ILP optimal: 4 aliments, 541/574 kcal
+2025-10-06 04:54:11,778 - meal_planner.controllers.meal_plan_controller - INFO - Repas ajouté: Dîner - Jour 7 - 541 kcal
+2025-10-06 04:54:11,782 - meal_planner.controllers.meal_plan_controller - INFO - Plan généré: Plan alimentaire 7 jour(s) - 21 repas - Objectif: 2030 kcal/jour
+2025-10-06 04:54:11,782 - meal_planner.controllers.meal_plan_controller - INFO - Validation: False
+2025-10-06 04:54:30,627 - meal_planner.views.main_window - INFO - Fermeture de l'application
+2025-10-06 04:54:30,639 - meal_planner - INFO - Application terminée avec le code: 0

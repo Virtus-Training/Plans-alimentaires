@@ -11,7 +11,11 @@
       "Bash(\".venv\\Scripts\\python.exe\" test_all_improvements.py)",
       "Bash(\".venv\\Scripts\\python.exe\" main.py)",
       "Bash(timeout:*)",
-      "Bash(\".venv\\Scripts\\python.exe\" -c \"from meal_planner.controllers.meal_plan_controller import MealPlanController; from meal_planner.models.database import DatabaseManager; print(''✓ Imports OK'')\")"
+      "Bash(\".venv\\Scripts\\python.exe\" -c \"from meal_planner.controllers.meal_plan_controller import MealPlanController; from meal_planner.models.database import DatabaseManager; print(''✓ Imports OK'')\")",
+      "Bash(del test_save_feature.py)",
+      "Bash(\".venv\\Scripts\\python.exe\" add_unit_weight_migration.py)",
+      "Bash(c:\\Users\\Eric\\Documents\\Plans-alimentaires\\.venv\\Scripts\\python.exe:*)",
+      "Bash(del test_starch_coherence.py)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,394 @@
+Base de données: 108 aliments disponibles
+
+
+################################################################################
+# PROFIL: Femme sédentaire - Perte de poids
+# Objectif: 1500 kcal/jour
+################################################################################
+
+================================================================================
+ANALYSE DU PLAN: 1500 kcal/jour
+================================================================================
+
+--- JOUR 1 ---
+
+Total jour: 1475 kcal | P: 87.2g | C: 154.3g | F: 53.0g | Fibres: 33.0g
+
+  Petit-déjeuner - Jour 1:
+    Aliments (4): 
+      - Yaourt grec: 125g
+      - Beurre d'amande: 10g
+      - Pain de mie complet: 80g
+      - Edamame: 20g
+    Macros: 412 kcal | P: 24.3g | C: 42.6g | F: 15.7g
+
+  Déjeuner - Jour 1:
+    Aliments (5): 
+      - Saumon: 100g
+      - Saumon fumé: 10g
+      - Pâtes complètes: 100g
+      - Patate douce: 10g
+      - Graines de sésame: 10g
+    Macros: 638 kcal | P: 36.8g | C: 68.3g | F: 20.9g
+
+  Goûter - Jour 1:
+    Aliments (3): 
+      - Courgette (cuite): 10g (250.0g/unité)
+      - Poivron rouge: 125g (150.0g/unité)
+      - Œufs: 20g (50.0g/unité)
+    Macros: 69 kcal | P: 3.9g | C: 8.0g | F: 2.4g
+
+  Dîner - Jour 1:
+    Aliments (4): 
+      - Thon (conserve): 10g
+      - Huile d'olive: 10g
+      - Fèves (cuits): 200g
+      - Saumon (cuit): 20g
+    Macros: 356 kcal | P: 22.2g | C: 35.4g | F: 14.1g
+
+================================================================================
+SCORES DE QUALITÉ
+================================================================================
+Score global: 92.0/100 (Grade: A+)
+  - Nutrition: 100.0/100
+  - Diversité: 90.0/100
+  - Palatabilité: 75.2/100
+  - Praticité: 100.0/100
+
+Recommandations:
+  - Excellent plan alimentaire, aucune amélioration majeure nécessaire!
+
+Validation: [OK] VALIDE
+
+================================================================================
+COMPARAISON AVEC STANDARDS PROFESSIONNELS
+================================================================================
+
+1. NOMBRE D'ALIMENTS PAR REPAS
+   Standard professionnel:
+   - Petit-déjeuner: 3-5 aliments
+   - Déjeuner/Dîner: 4-7 aliments
+   - Collations: 1-3 aliments
+
+   Notre génération:
+   [OK] Petit-déjeuner - Jour 1: 4 aliments
+   [OK] Déjeuner - Jour 1: 5 aliments
+   [OK] Dîner - Jour 1: 4 aliments
+
+2. RÉPARTITION DES MACRONUTRIMENTS
+   Standard professionnel:
+   - Protéines: 15-30% des calories
+   - Glucides: 45-65% des calories
+   - Lipides: 20-35% des calories
+
+   day_1:
+   - Proteines: 23.7% [OK]
+   - Glucides: 41.8% [X] (hors norme)
+   - Lipides: 32.4% [OK]
+
+3. APPORT EN FIBRES
+   Standard professionnel: 25-30g/jour minimum
+   day_1: 33.0g [OK]
+
+4. PORTIONS RÉALISTES
+   Standard professionnel:
+   - Pas de portions < 30g (sauf condiments/épices)
+   - Pas de portions > 300g (sauf légumes)
+
+   Portions problematiques trouvees:
+   [X] Beurre d'amande: 10g trop petit
+   [X] Edamame: 20g trop petit
+   [X] Saumon fumé: 10g trop petit
+   [X] Patate douce: 10g trop petit
+   [X] Graines de sésame: 10g trop petit
+   [X] Courgette (cuite): 10g trop petit
+   [X] Œufs: 20g trop petit
+   [X] Thon (conserve): 10g trop petit
+   [X] Saumon (cuit): 20g trop petit
+
+================================================================================
+RÉSUMÉ DE LA CONFORMITÉ
+================================================================================
+[X] 11 problemes detectes:
+   [X] Goûter - Jour 1: 3 aliments (hors norme 4-7)
+   day_1: Glucides 41.8% hors norme
+   [X] Beurre d'amande: 10g trop petit
+   [X] Edamame: 20g trop petit
+   [X] Saumon fumé: 10g trop petit
+   [X] Patate douce: 10g trop petit
+   [X] Graines de sésame: 10g trop petit
+   [X] Courgette (cuite): 10g trop petit
+   [X] Œufs: 20g trop petit
+   [X] Thon (conserve): 10g trop petit
+   [X] Saumon (cuit): 20g trop petit
+
+
+################################################################################
+# PROFIL: Homme actif - Maintien
+# Objectif: 2200 kcal/jour
+################################################################################
+
+================================================================================
+ANALYSE DU PLAN: 2200 kcal/jour
+================================================================================
+
+--- JOUR 1 ---
+
+Total jour: 2233 kcal | P: 140.2g | C: 254.1g | F: 74.9g | Fibres: 58.5g
+
+  Petit-déjeuner - Jour 1:
+    Aliments (4): 
+      - Flocons d'avoine: 60g
+      - Myrtilles: 175g
+      - Chocolat noir 85%: 20g
+      - Saumon fumé: 125g
+    Macros: 594 kcal | P: 35.8g | C: 68.5g | F: 20.2g
+
+  Déjeuner - Jour 1:
+    Aliments (5): 
+      - Sardines (en conserve, à l'huile): 15g
+      - Chou kale (cru): 500g
+      - Millet (cuit): 150g
+      - Huile d'olive: 10g
+      - Edamame: 250g
+    Macros: 906 kcal | P: 58.0g | C: 102.0g | F: 30.3g
+
+  Goûter - Jour 1:
+    Aliments (4): 
+      - Ananas: 10g
+      - Fromage mozzarella: 15g
+      - Quinoa (cuit): 40g
+      - Chou-fleur (cuit): 30g
+    Macros: 102 kcal | P: 6.6g | C: 11.3g | F: 3.5g
+
+  Dîner - Jour 1:
+    Aliments (4): 
+      - Saumon: 125g
+      - Quinoa: 50g
+      - Seitan: 20g
+      - Kiwi: 250g (80.0g/unité)
+    Macros: 631 kcal | P: 39.8g | C: 72.3g | F: 20.9g
+
+================================================================================
+SCORES DE QUALITÉ
+================================================================================
+Score global: 92.0/100 (Grade: A+)
+  - Nutrition: 100.0/100
+  - Diversité: 92.5/100
+  - Palatabilité: 71.2/100
+  - Praticité: 100.0/100
+
+Recommandations:
+  - Excellent plan alimentaire, aucune amélioration majeure nécessaire!
+
+Validation: [OK] VALIDE
+
+================================================================================
+COMPARAISON AVEC STANDARDS PROFESSIONNELS
+================================================================================
+
+1. NOMBRE D'ALIMENTS PAR REPAS
+   Standard professionnel:
+   - Petit-déjeuner: 3-5 aliments
+   - Déjeuner/Dîner: 4-7 aliments
+   - Collations: 1-3 aliments
+
+   Notre génération:
+   [OK] Petit-déjeuner - Jour 1: 4 aliments
+   [OK] Déjeuner - Jour 1: 5 aliments
+   [OK] Goûter - Jour 1: 4 aliments
+   [OK] Dîner - Jour 1: 4 aliments
+
+2. RÉPARTITION DES MACRONUTRIMENTS
+   Standard professionnel:
+   - Protéines: 15-30% des calories
+   - Glucides: 45-65% des calories
+   - Lipides: 20-35% des calories
+
+   day_1:
+   - Proteines: 25.1% [OK]
+   - Glucides: 45.5% [OK]
+   - Lipides: 30.2% [OK]
+
+3. APPORT EN FIBRES
+   Standard professionnel: 25-30g/jour minimum
+   day_1: 58.5g [OK]
+
+4. PORTIONS RÉALISTES
+   Standard professionnel:
+   - Pas de portions < 30g (sauf condiments/épices)
+   - Pas de portions > 300g (sauf légumes)
+
+   Portions problematiques trouvees:
+   [X] Chocolat noir 85%: 20g trop petit
+   [X] Chou kale (cru): 500g tres gros
+   [X] Ananas: 10g trop petit
+   [X] Fromage mozzarella: 15g trop petit
+   [X] Seitan: 20g trop petit
+
+================================================================================
+RÉSUMÉ DE LA CONFORMITÉ
+================================================================================
+[X] 5 problemes detectes:
+   [X] Chocolat noir 85%: 20g trop petit
+   [X] Chou kale (cru): 500g tres gros
+   [X] Ananas: 10g trop petit
+   [X] Fromage mozzarella: 15g trop petit
+   [X] Seitan: 20g trop petit
+
+
+################################################################################
+# PROFIL: Sportif - Prise de masse
+# Objectif: 3000 kcal/jour
+################################################################################
+
+================================================================================
+ANALYSE DU PLAN: 3000 kcal/jour
+================================================================================
+
+--- JOUR 1 ---
+
+Total jour: 2982 kcal | P: 204.4g | C: 371.8g | F: 97.3g | Fibres: 101.0g
+
+  Petit-déjeuner - Jour 1:
+    Aliments (5): 
+      - Framboises: 400g
+      - Œufs: 150g (50.0g/unité)
+      - Grenade (arilles): 175g
+      - Saumon fumé: 125g
+      - Concombre: 500g (300.0g/unité)
+    Macros: 789 kcal | P: 53.0g | C: 99.8g | F: 25.6g
+
+  Déjeuner - Jour 1:
+    Aliments (6): 
+      - Courge butternut (rôtie): 500g
+      - Épinards (cuits): 500g
+      - Patate douce: 300g
+      - Avocat: 50g
+      - Courgette (cuite): 500g (250.0g/unité)
+      - Saumon (cuit): 250g
+    Macros: 1278 kcal | P: 86.8g | C: 154.0g | F: 44.3g
+
+  Goûter - Jour 1:
+    Aliments (4): 
+      - Fraises: 30g
+      - Poivron rouge: 200g (150.0g/unité)
+      - Champignons (cuits): 40g
+      - Tofu: 80g
+    Macros: 144 kcal | P: 9.5g | C: 18.0g | F: 4.7g
+
+  Dîner - Jour 1:
+    Aliments (5): 
+      - Tomates: 350g (120.0g/unité)
+      - Betterave (cuite): 500g
+      - Huile d'olive: 20g
+      - Crevettes (cuites): 175g
+      - Raisin: 200g
+    Macros: 771 kcal | P: 55.0g | C: 100.0g | F: 22.6g
+
+================================================================================
+SCORES DE QUALITÉ
+================================================================================
+Score global: 93.8/100 (Grade: A+)
+  - Nutrition: 100.0/100
+  - Diversité: 100.0/100
+  - Palatabilité: 69.0/100
+  - Praticité: 100.0/100
+
+Recommandations:
+  - Améliorer les combinaisons d'aliments pour une meilleure compatibilité gustative
+
+Validation: [OK] VALIDE
+
+================================================================================
+COMPARAISON AVEC STANDARDS PROFESSIONNELS
+================================================================================
+
+1. NOMBRE D'ALIMENTS PAR REPAS
+   Standard professionnel:
+   - Petit-déjeuner: 3-5 aliments
+   - Déjeuner/Dîner: 4-7 aliments
+   - Collations: 1-3 aliments
+
+   Notre génération:
+   [OK] Petit-déjeuner - Jour 1: 5 aliments
+   [OK] Déjeuner - Jour 1: 6 aliments
+   [OK] Goûter - Jour 1: 4 aliments
+   [OK] Dîner - Jour 1: 5 aliments
+
+2. RÉPARTITION DES MACRONUTRIMENTS
+   Standard professionnel:
+   - Protéines: 15-30% des calories
+   - Glucides: 45-65% des calories
+   - Lipides: 20-35% des calories
+
+   day_1:
+   - Proteines: 27.4% [OK]
+   - Glucides: 49.9% [OK]
+   - Lipides: 29.4% [OK]
+
+3. APPORT EN FIBRES
+   Standard professionnel: 25-30g/jour minimum
+   day_1: 101.0g [OK]
+
+4. PORTIONS RÉALISTES
+   Standard professionnel:
+   - Pas de portions < 30g (sauf condiments/épices)
+   - Pas de portions > 300g (sauf légumes)
+
+   Portions problematiques trouvees:
+   [X] Framboises: 400g tres gros
+   [X] Concombre: 500g tres gros
+   [X] Courge butternut (rôtie): 500g tres gros
+   [X] Épinards (cuits): 500g tres gros
+   [X] Courgette (cuite): 500g tres gros
+   [X] Tomates: 350g tres gros
+   [X] Betterave (cuite): 500g tres gros
+
+================================================================================
+RÉSUMÉ DE LA CONFORMITÉ
+================================================================================
+[X] 7 problemes detectes:
+   [X] Framboises: 400g tres gros
+   [X] Concombre: 500g tres gros
+   [X] Courge butternut (rôtie): 500g tres gros
+   [X] Épinards (cuits): 500g tres gros
+   [X] Courgette (cuite): 500g tres gros
+   [X] Tomates: 350g tres gros
+   [X] Betterave (cuite): 500g tres gros
+
+
+################################################################################
+# SYNTHÈSE GLOBALE
+################################################################################
+
+Femme sédentaire - Perte de poids:
+  Score qualite: 92.0/100 (A+)
+  Problemes detectes: 11
+  Validation: [OK]
+
+Homme actif - Maintien:
+  Score qualite: 92.0/100 (A+)
+  Problemes detectes: 5
+  Validation: [OK]
+
+Sportif - Prise de masse:
+  Score qualite: 93.8/100 (A+)
+  Problemes detectes: 7
+  Validation: [OK]
+
+================================================================================
+AXES D'AMÉLIORATION PRIORITAIRES
+================================================================================
+
+Scores moyens (du plus faible au plus fort):
+  Palatabilité: 71.8/100 - [!] Moyen
+  Diversité: 94.2/100 - [OK] Bon
+  Nutrition: 100.0/100 - [OK] Bon
+  Praticité: 100.0/100 - [OK] Bon
+
+Recommandations prioritaires:
+  1. Ameliorer le score de Palatabilité (actuellement 71.8)
+
+
+Test terminé!

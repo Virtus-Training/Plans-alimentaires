@@ -30,6 +30,7 @@ class Food:
         price_per_100g: Prix pour 100g en euros (0.0 par défaut)
         health_index: Indice de santé de 1 à 10 (5 par défaut)
         variety_index: Indice de rareté de 1 à 10 (5 par défaut, 10=très rare, 1=très commun)
+        unit_weight: Poids d'une unité en grammes (ex: 150g pour une pomme, 50g pour un œuf)
     """
 
     name: str
@@ -43,6 +44,7 @@ class Food:
     price_per_100g: float = 0.0
     health_index: int = 5
     variety_index: int = 5
+    unit_weight: Optional[float] = None  # Poids unitaire en grammes
     id: Optional[int] = None
 
     def validate(self) -> Tuple[bool, str]:
@@ -182,7 +184,8 @@ class Food:
             "tags": self.tags,
             "price_per_100g": self.price_per_100g,
             "health_index": self.health_index,
-            "variety_index": self.variety_index
+            "variety_index": self.variety_index,
+            "unit_weight": self.unit_weight
         }
 
     @classmethod
@@ -216,7 +219,8 @@ class Food:
             tags=tags if isinstance(tags, list) else [],
             price_per_100g=float(data.get("price_per_100g", 0.0)),
             health_index=int(data.get("health_index", 5)),
-            variety_index=int(data.get("variety_index", 5))
+            variety_index=int(data.get("variety_index", 5)),
+            unit_weight=float(data["unit_weight"]) if data.get("unit_weight") else None
         )
 
     def __str__(self) -> str:

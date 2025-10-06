@@ -215,11 +215,24 @@ class MealPlanController(QObject):
                     # Déterminer si c'est le dernier repas de la journée
                     is_last_meal = (i == len(meal_types) - 1)
 
+                    # Définir le nombre d'aliments selon le type de repas pour la variabilité
+                    import random
+                    if meal_type in ["breakfast", "snack", "afternoon_snack", "morning_snack", "evening_snack"]:
+                        # Repas légers: 3-6 aliments
+                        min_foods = random.randint(3, 4)
+                        max_foods = random.randint(5, 6)
+                    else:  # lunch, dinner
+                        # Repas principaux: 4-8 aliments
+                        min_foods = random.randint(4, 5)
+                        max_foods = random.randint(6, 8)
+
                     meal = generator.generate_meal(
                         meal_type=meal_type,
                         day_number=day,
                         target_percentage=percentage,
-                        is_last_meal_of_day=is_last_meal
+                        is_last_meal_of_day=is_last_meal,
+                        min_foods=min_foods,
+                        max_foods=max_foods
                     )
                     meal_plan.add_meal(meal)
 

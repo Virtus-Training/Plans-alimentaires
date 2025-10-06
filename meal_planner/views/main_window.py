@@ -4,10 +4,12 @@ MainWindow - Fenêtre principale de l'application
 
 from PyQt6.QtWidgets import (
     QMainWindow, QWidget, QHBoxLayout, QVBoxLayout,
-    QMenuBar, QMenu, QStatusBar, QMessageBox, QSplitter
+    QMenuBar, QMenu, QStatusBar, QMessageBox, QSplitter, QFileDialog
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction
+from pathlib import Path
+from datetime import datetime
 
 from meal_planner.views.settings_panel import SettingsPanel
 from meal_planner.views.meal_plan_display import MealPlanDisplay
@@ -195,6 +197,9 @@ class MainWindow(QMainWindow):
         self.controller.error_occurred.connect(self.on_error)
         self.controller.status_updated.connect(self._update_status)
 
+        # Signaux de sauvegarde
+        self.meal_plan_display.save_requested.connect(self.on_save_plan)
+
     def on_generate_plan(self):
         """Gère la demande de génération de plan."""
         try:
@@ -293,6 +298,56 @@ class MainWindow(QMainWindow):
         dialog = CategoryRulesDialog(parent=self)
         dialog.exec()
         self._update_status("✓ Configuration des règles de catégories")
+
+    def on_save_plan(self):
+        """Gère la sauvegarde du plan alimentaire."""
+        try:
+            # Vérifier qu'il y a un plan à sauvegarder
+            current_plan = self.controller.get_current_plan()
+            if not current_plan:
+                self.show_error(
+                    "Aucun plan",
+                    "Aucun plan alimentaire à sauvegarder.\nVeuillez d'abord générer un plan."
+                )
+                return
+
+            # Créer un nom de fichier par défaut
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            default_filename = f"plan_alimentaire_{timestamp}.json"
+
+            # Ouvrir le dialogue de sauvegarde
+            file_path, _ = QFileDialog.getSaveFileName(
+                self,
+                "Sauvegarder le plan alimentaire",
+                default_filename,
+                "Fichiers JSON (*.json);;Tous les fichiers (*.*)"
+            )
+
+            if not file_path:
+                # L'utilisateur a annulé
+                return
+
+            # Sauvegarder le plan
+            self._update_status("Sauvegarde en cours...")
+            success = current_plan.save_to_json(file_path)
+
+            if success:
+                self._update_status(f"✓ Plan sauvegardé: {Path(file_path).name}")
+                QMessageBox.information(
+                    self,
+                    "Sauvegarde réussie",
+                    f"Le plan alimentaire a été sauvegardé avec succès dans:\n{file_path}"
+                )
+                logger.info(f"Plan sauvegardé: {file_path}")
+            else:
+                self.show_error(
+                    "Erreur de sauvegarde",
+                    "Une erreur est survenue lors de la sauvegarde du plan."
+                )
+
+        except Exception as e:
+            logger.error(f"Erreur lors de la sauvegarde: {e}", exc_info=True)
+            self.show_error("Erreur", f"Erreur lors de la sauvegarde: {str(e)}")
 
     def on_about(self):
         """Affiche la boîte de dialogue À propos."""

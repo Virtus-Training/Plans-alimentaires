@@ -38,6 +38,7 @@ class FoodDB(Base):
     price_per_100g = Column(Float, default=0.0)
     health_index = Column(Integer, default=5)
     variety_index = Column(Integer, default=5)
+    unit_weight = Column(Float, nullable=True)  # Poids unitaire en grammes
 
 
 class PresetMealDB(Base):
@@ -139,7 +140,8 @@ class DatabaseManager:
             tags=json.dumps(food.tags),
             price_per_100g=food.price_per_100g,
             health_index=food.health_index,
-            variety_index=food.variety_index
+            variety_index=food.variety_index,
+            unit_weight=food.unit_weight
         )
 
     def _db_to_food(self, food_db: FoodDB) -> Food:
@@ -158,7 +160,8 @@ class DatabaseManager:
             tags=tags,
             price_per_100g=getattr(food_db, 'price_per_100g', 0.0),
             health_index=getattr(food_db, 'health_index', 5),
-            variety_index=getattr(food_db, 'variety_index', 5)
+            variety_index=getattr(food_db, 'variety_index', 5),
+            unit_weight=getattr(food_db, 'unit_weight', None)
         )
 
     def add_food(self, food: Food) -> Food:

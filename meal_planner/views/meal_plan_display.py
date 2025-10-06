@@ -80,13 +80,16 @@ class MealPlanDisplay(QWidget):
 
     Signals:
         meal_regenerate_requested: Émis quand l'utilisateur veut régénérer un repas
+        save_requested: Émis quand l'utilisateur veut sauvegarder le plan
     """
 
     meal_regenerate_requested = pyqtSignal(int, int)  # day, meal_index
+    save_requested = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.current_plan: Optional[MealPlan] = None
+        self.save_button = None
         self.init_ui()
 
     def init_ui(self):
@@ -362,9 +365,39 @@ class MealPlanDisplay(QWidget):
         layout = QHBoxLayout(actions_container)
         layout.setSpacing(10)
 
-        # Boutons d'action (préparation pour futures fonctionnalités)
+        # Bouton Sauvegarder (activé)
+        self.save_button = QPushButton("💾 Sauvegarder")
+        self.save_button.setStyleSheet("""
+            QPushButton {
+                background-color: white;
+                color: #3498db;
+                border: 2px solid #3498db;
+                border-radius: 8px;
+                padding: 10px 20px;
+                font-weight: bold;
+                font-size: 13px;
+            }
+            QPushButton:hover {
+                background-color: #3498db;
+                color: white;
+            }
+            QPushButton:pressed {
+                background-color: #2c3e50;
+            }
+            QPushButton:disabled {
+                background-color: #ecf0f1;
+                color: #bdc3c7;
+                border-color: #bdc3c7;
+            }
+        """)
+        self.save_button.setGraphicsEffect(create_shadow_effect(6, 0.15))
+        self.save_button.setEnabled(True)
+        self.save_button.setToolTip("Sauvegarder le plan au format JSON")
+        self.save_button.clicked.connect(self._on_save_clicked)
+        layout.addWidget(self.save_button)
+
+        # Autres boutons (désactivés pour l'instant)
         buttons_data = [
-            ("💾", "Sauvegarder", "#3498db"),
             ("📊", "Exporter PDF", "#9b59b6"),
             ("📧", "Envoyer", "#1abc9c"),
             ("🔄", "Régénérer", "#e67e22"),
@@ -389,16 +422,21 @@ class MealPlanDisplay(QWidget):
                 QPushButton:pressed {{
                     background-color: #2c3e50;
                 }}
+                QPushButton:disabled {{
+                    background-color: #ecf0f1;
+                    color: #bdc3c7;
+                    border-color: #bdc3c7;
+                }}
             """)
             btn.setGraphicsEffect(create_shadow_effect(6, 0.15))
-            btn.setEnabled(False)  # Désactivé pour l'instant (Phase 1)
+            btn.setEnabled(False)
             btn.setToolTip(f"{text} (Disponible en Phase 2)")
             layout.addWidget(btn)
 
         layout.addStretch()
 
         # Badge "Bientôt disponible"
-        badge = QLabel("⏳ Fonctionnalités à venir")
+        badge = QLabel("⏳ Autres fonctionnalités à venir")
         badge.setStyleSheet("""
             color: #7f8c8d;
             font-size: 11px;
@@ -410,6 +448,10 @@ class MealPlanDisplay(QWidget):
         layout.addWidget(badge)
 
         return actions_container
+
+    def _on_save_clicked(self):
+        """Gère le clic sur le bouton Sauvegarder."""
+        self.save_requested.emit()
 
     def _create_conformity_badge(self, day_totals: dict) -> QLabel:
         """
